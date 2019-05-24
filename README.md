@@ -2,17 +2,15 @@
 
 ## MongoDB
 
-Start mongod process with 2 commands:
+Export MongoDB before pushing code:
 
 Substitute {PATH} with your absolute path.
 
-mongod --port 12345 --directoryperdb --dbpath {PATH}\subaccounting\src\main\resources\mongodb\data\db --logpath C:\data\log\mongo.log --logappend
+mongodump -d subaccounting -o {PATH}\subaccounting\src\main\resources\mongodb\data\db
 
-mongo --port 12345
+Import MongoDB after pull:
 
-Confirm correct directory and port number:
-
-db.serverCmdLineOpts()
+mongorestore -d subaccounting {PATH}\subaccounting\src\main\resources\mongodb\data\db
 
 ## Lombok
 

@@ -14,14 +14,11 @@ public class MongoDbConfig {
     @Value("${spring.data.mongodb.host}")
     private String host;
     
-    @Value("${spring.data.mongodb.port}")
-    private int port;
-
     @Value("${spring.data.mongodb.database}")
     private String database;
     
     public @Bean MongoDbFactory mongoDbFactory() {
-        return new SimpleMongoDbFactory(new MongoClient(host, port), database);
+        return new SimpleMongoDbFactory(new MongoClient(host), database);
     }
 
     public @Bean MongoTemplate mongoTemplate() {
