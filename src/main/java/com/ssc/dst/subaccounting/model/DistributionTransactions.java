@@ -10,21 +10,21 @@ public class DistributionTransactions {
 	@Field("aggregated")
 	private boolean aggregated;
 	
-	@Field("distributionEventType")
+	@Field("distributioneventtype")
 	private String distributionEventType;
 	
-	@Field("distributionRate")
+	@Field("distributionrate")
 	private String distributionRate;
 	
-	@Field("distributionRecordDate")
+	@Field("distributionrecorddate")
 	private String distributionRecordDate;
 	
-	@Field("eventId")
+	@Field("eventid")
 	private String[] eventId;
 	
-	@Field("excludedFromAggregation")
+	@Field("excludedfromaggregation")
 	private boolean excludedFromAggregation;
 	
-	@Field("omnibusTradeTransmitted")
+	@Field("omnibustradetransmitted")
 	private boolean omnibusTradeTransmitted;
 }

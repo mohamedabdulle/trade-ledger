@@ -10,7 +10,11 @@ mongodump -d subaccounting -o {PATH}\subaccounting\src\main\resources\mongodb\da
 
 Import MongoDB after pull:
 
-mongorestore -d subaccounting {PATH}\subaccounting\src\main\resources\mongodb\data\db
+mongorestore -d subaccounting {PATH}\subaccounting\src\main\resources\mongodb\data\db\subaccounting
+
+Confirm correct directory and port number:
+
+db.serverCmdLineOpts()
 
 ## Lombok
 
