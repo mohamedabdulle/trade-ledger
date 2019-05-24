@@ -13,9 +13,21 @@ public class MainDocument {
 	@Id
 	private String id;
 	
-	@Field("actualpostingdate")
+	@Field("actualPostingDate")
 	private String actualPostingDate;
 	
-	@Field("agentforfirm")
+	@Field("agentForFirm")
 	private String agentForFirm;
+	
+	@Field("anticipatedPostingDate")
+	private String anticipatedPostingDate;
+	
+	@Field("bin")
+	private String bin;
+	
+	@Field("clearingFirmNumber")
+	private int clearingFirmNumber;
+	
+	@Field("countryCode")
+	private String countryCode;
 }
