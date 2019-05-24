@@ -1,5 +1,9 @@
 package com.ssc.dst.subaccounting;
 
+import java.util.List;
+
 public interface MongoDbOperations {
-	<T> T findAll();
+	
+	<T> List<T> findAll();
+
 }
