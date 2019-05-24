@@ -11,15 +11,15 @@ import org.springframework.util.Assert;
 @Configuration
 public class RepositoryConfig {
 	
-	@Autowired
-	private DatabaseInstanceConfig mongoClient;
-	
+//	@Autowired
+//	private DatabaseInstanceConfig mongoClient;
+//
 //	@Autowired
 //	public @Bean MongoDbFactory mongoDbFactory(DatabaseInstanceConfig mongoClient) {
 //		Assert.notNull(mongoClient, "MongoClient must not be null");
 //		return new SimpleMongoDbFactory(mongoClient.mongoClient(), "database");
 //		}
-	
+//
 //	public @Bean MongoTemplate mongoTemplate() {
 //		return new MongoTemplate(mongoClient.mongoClient(), "database");
 //	 	}
