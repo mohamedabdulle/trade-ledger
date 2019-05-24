@@ -1,16 +1,15 @@
 package com.ssc.dst.subaccounting.config;
 
+import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
+import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
-
-import com.mongodb.MongoClient;
-import com.mongodb.ServerAddress;
+import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
 @Configuration
-public class MongoDBConfig extends AbstractMongoConfiguration {
+public class MongoDBConfig {
 
     @Value("${spring.data.mongodb.username}")
     private String userName;
@@ -31,19 +30,27 @@ public class MongoDBConfig extends AbstractMongoConfiguration {
     private String uri;
 
 
-    protected @Override
-    String getDatabaseName() {
-        return database;
+//    protected @Override
+//    String getDatabaseName() {
+//        return database;
+//    }
+//
+//    public @Override
+//    MongoClient mongoClient() {
+//        return new MongoClient(new ServerAddress(host, port));
+////        return new MongoClient(new MongoClientURI(uri));
+//    }
+//
+//    public @Bean
+//    MongoTemplate mongoTemplate() {
+//        return new MongoTemplate(mongoClient(), database);
+//    }
+
+    public @Bean MongoDbFactory mongoDbFactory() {
+        return new SimpleMongoDbFactory(new MongoClient(), database);
     }
 
-    public @Override
-    MongoClient mongoClient() {
-        return new MongoClient(new ServerAddress(host, port));
-//        return new MongoClient(new MongoClientURI(uri));
-    }
-
-    public @Bean
-    MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoClient(), database);
+    public @Bean MongoTemplate mongoTemplate() {
+        return new MongoTemplate(mongoDbFactory());
     }
 }
