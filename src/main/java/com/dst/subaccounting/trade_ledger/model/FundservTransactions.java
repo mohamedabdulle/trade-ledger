@@ -1,4 +1,4 @@
-package com.ssc.dst.subaccounting.model;
+package com.dst.subaccounting.trade_ledger.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
