@@ -1,12 +1,12 @@
-package com.ssc.dst.subaccounting;
+package com.dst.subaccounting.trade_ledger;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SubaccountingApplication {
+public class TradeLedgerApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SubaccountingApplication.class, args);
+		SpringApplication.run(TradeLedgerApplication.class, args);
 	}
 }

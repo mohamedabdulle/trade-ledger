@@ -1,4 +1,4 @@
-package com.ssc.dst.subaccounting;
+package com.dst.subaccounting.trade_ledger;
 
 import java.util.List;
 

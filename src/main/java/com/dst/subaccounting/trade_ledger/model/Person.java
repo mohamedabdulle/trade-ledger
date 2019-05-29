@@ -1,4 +1,4 @@
-package com.ssc.dst.subaccounting.model;
+package com.dst.subaccounting.trade_ledger.model;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;

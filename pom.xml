@@ -8,11 +8,11 @@
 		<version>2.1.5.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.ssc.dst</groupId>
-	<artifactId>subaccounting</artifactId>
+	<groupId>com.dst.subaccounting.trade_ledger</groupId>
+	<artifactId>trade-ledger</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Subaccounting</name>
-	<description>Demo subaccounting implementing Mongodb and Kafka</description>
+	<name>Trade Ledger</name>
+	<description>Trade ledger POC</description>
 
 	<properties>
 		<java.version>1.8</java.version>

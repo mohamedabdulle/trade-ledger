@@ -1,4 +1,4 @@
-package com.ssc.dst.subaccounting.config;
+package com.dst.subaccounting.trade_ledger.config;
 
 import com.mongodb.MongoClient;
 import org.springframework.beans.factory.annotation.Value;

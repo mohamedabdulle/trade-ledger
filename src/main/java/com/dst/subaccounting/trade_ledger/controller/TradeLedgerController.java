@@ -1,20 +1,20 @@
-package com.ssc.dst.subaccounting.controller;
+package com.dst.subaccounting.trade_ledger.controller;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.ssc.dst.subaccounting.model.MainDocument;
-import com.ssc.dst.subaccounting.model.Person;
-import com.ssc.dst.subaccounting.service.SubaccountingService;
+import com.dst.subaccounting.trade_ledger.model.MainDocument;
+import com.dst.subaccounting.trade_ledger.model.Person;
+import com.dst.subaccounting.trade_ledger.service.TradeLedgerService;
 
 @RestController
 @RequestMapping("/subaccounting")
-public class SubaccountingController {
+public class TradeLedgerController {
 	
 	@Autowired
-	SubaccountingService subaccountingService;
+	TradeLedgerService tradeLedgerService;
 
 	@DeleteMapping("/entry")
 	public String deleteEntry(@RequestParam String name) {
@@ -28,7 +28,7 @@ public class SubaccountingController {
 
 	@GetMapping("/entry")
 	public List<MainDocument> getEntry() {
-		return subaccountingService.findAll();
+		return tradeLedgerService.findAll();
 	}
 
 	@GetMapping("/document")

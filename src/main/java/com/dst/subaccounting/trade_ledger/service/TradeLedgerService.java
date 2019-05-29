@@ -1,21 +1,22 @@
-package com.ssc.dst.subaccounting.service;
+package com.dst.subaccounting.trade_ledger.service;
 
-import com.ssc.dst.subaccounting.MongoDbOperations;
-import com.ssc.dst.subaccounting.config.MongoDbConfig;
-import com.ssc.dst.subaccounting.model.MainDocument;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Service;
 
+import com.dst.subaccounting.trade_ledger.MongoDbOperations;
+import com.dst.subaccounting.trade_ledger.config.MongoDbConfig;
+import com.dst.subaccounting.trade_ledger.model.MainDocument;
+
 @Service
-public class SubaccountingService implements MongoDbOperations {
+public class TradeLedgerService implements MongoDbOperations {
   
     private MongoOperations mongoOperations;
     
     @Autowired
-    public SubaccountingService(MongoDbConfig mongoClient) {
+    public TradeLedgerService(MongoDbConfig mongoClient) {
     	mongoOperations = mongoClient.mongoTemplate();
     }
      
