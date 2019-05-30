@@ -5,5 +5,12 @@ import java.util.List;
 public interface MongoDbOperations {
 	
 	<T> List<T> findAll();
+	
+	
+	
+	
+	
+	
+	
 
 }
