@@ -32,68 +32,68 @@ public class MainDocument {
 	private String countryCode;
 	
 	@Field("currencyindicator")
-	public String currencyIndicator;
+	private String currencyIndicator;
 	
 	@Field("dealerfirmnumber")
-	public int dealerFirmNumber;
+	private int dealerFirmNumber;
 	
 	@Field("effectonbalancer")
-	public String effectOnBalance;
+	private String effectOnBalance;
 	
 	@Field("fund_id")
-	public String fund_id; //Reference to _id field within security master document
+	private String fund_id; //Reference to _id field within security master document
 	
 	@Field("moneyamount")
-	public String moneyAmount;
+	private String moneyAmount;
 	
 	@Field("omnibustransaction_Id")
-	public String omnibusTransaction_Id; //Reference to "_id" from omnibus
+	private String omnibusTransaction_Id; //Reference to "_id" from omnibus
 	
 	@Field("price")
-	public double price;
+	private double price;
 	
 	@Field("representativename")
-	public String representativeName;
+	private String representativeName;
 	
 	@Field("representativenumber")
-	public int representativeNumber;
+	private int representativeNumber;
 	
 	@Field("securityid")
-	public String securityId;
+	private String securityId;
 	
 	@Field("sequenceid")
-	public String sequenceId;
+	private String sequenceId;
 	
 	@Field("sharequantity")
-	public String shareQuantity;
+	private String shareQuantity;
 	
 	@Field("stateofsale")
-	public String stateOfSale;
+	private String stateOfSale;
 	
 	@Field("submissiondate")
-	public String submissionDate;
+	private String submissionDate;
 	
 	@Field("symbol")
-	public String symbol;
+	private String symbol;
 	
 	@Field("tradedate")
-	public String tradeDate; //Would be date field
+	private String tradeDate; //Would be date field
 	
 	@Field("transactioncategory")
-	public String transactionCategory;
+	private String transactionCategory;
 	
 	@Field("transactionsource")
-	public String transactionSource;
+	private String transactionSource;
 	
 	@Field("transactionstatus")
-	public String transactionStatus;
+	private String transactionStatus;
 	
 	@Field("transactionsubtype")
-	public String transactionSubType;
+	private String transactionSubType;
 	
 	@Field("transactiontype")
-	public String transactionType;
+	private String transactionType;
 	
 	@Field("transactionuserid")
-	public String transactionUserId;
+	private String transactionUserId;
 }

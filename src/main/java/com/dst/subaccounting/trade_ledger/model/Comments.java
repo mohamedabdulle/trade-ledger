@@ -9,11 +9,11 @@ import lombok.Data;
 @Document(collection = "clienttransactions")
 public class Comments {
 	@Field("comment")
-	public String comment;
+	private String comment;
 	
 	@Field("commentdatetime")
-	public String commentDateTime; //Should be date
+	private String commentDateTime; //Should be date
 	
 	@Field("commentuserid")
-	public String commentUserId;
+	private String commentUserId;
 }

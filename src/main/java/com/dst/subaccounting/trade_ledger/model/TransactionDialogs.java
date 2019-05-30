@@ -9,95 +9,95 @@ import lombok.Data;
 @Document(collection = "clienttransactions")
 public class TransactionDialogs {
 	@Field("anticipatedsettlementdate")
-	public String anticipatedSettlementDate;//Should be date
+	private String anticipatedSettlementDate;//Should be date
 	
 	@Field("contingentdeferredsaleschargemoneyamount") 
-	public double contingentDeferredSalesChargeMoneyAmount;
+	private double contingentDeferredSalesChargeMoneyAmount;
 
 	@Field("createddatetime")
-	public String createdDateTime;
+	private String createdDateTime;
 	
 	@Field("dialogdirection")
-	public String dialogDirection;
+	private String dialogDirection;
 	
 	@Field("exchangetogrossmoneyamount")
-	public double exchangeToGrossMoneyAmount;
+	private double exchangeToGrossMoneyAmount;
 
 	@Field("exchangetonetmoneyamount")
-	public double exchangeToNetMoneyAmount;
+	private double exchangeToNetMoneyAmount;
 	
 	@Field("exchangetoprice") 
-	public double exchangeToPrice;
+	private double exchangeToPrice;
 
 	@Field("exchangetosharequantity")
-	public String exchangeToShareQuantity;
+	private String exchangeToShareQuantity;
 	
 	@Field("firmcommissionamount")
-	public double firmCommissionAmount;
+	private double firmCommissionAmount;
 	
 	@Field("grossmoneyamount")
-	public double grossMoneyAmount;
+	private double grossMoneyAmount;
 	
 	@Field("netmoneyamount")
-	public double netMoneyAmount;
+	private double netMoneyAmount;
 	
 	@Field("nsccrecordtype")
-	public String nsccRecordType;
+	private String nsccRecordType;
 	
 	@Field("price")
-	public double price;
+	private double price;
 	
 	@Field("redemptionfeeindicator") 
-	public String redemptionFeeIndicator;
+	private String redemptionFeeIndicator;
 
 	@Field("redemptionfeemoneyamount")
-	public double redemptionFeeMoneyAmount;
+	private double redemptionFeeMoneyAmount;
 	
 	@Field("redemptionfeerate")
-	public double redemptionFeeRate;
+	private double redemptionFeeRate;
 	
 	@Field("saleschargerate")
-	public double salesChargeRate;
+	private double salesChargeRate;
 
 	@Field("sharequantity")
-	public String shareQuantity;
+	private String shareQuantity;
 	
 	@Field("shorttermredemptionfeesharequantity") 
-	public String shortTermRedemptionFeeShareQuantity;
+	private String shortTermRedemptionFeeShareQuantity;
 
 	@Field("transmissionid1")
-	public String transmissionId1;
+	private String transmissionId1;
 	
 	@Field("transmissionid2")
-	public String transmissionId2;
+	private String transmissionId2;
 	
 	@Field("transmissionreceiveddatetime")
-	public String transmissionReceivedDateTime;
+	private String transmissionReceivedDateTime;
 	
 	@Field("transmissionrecordtype")
-	public String transmissionRecordType;
+	private String transmissionRecordType;
 	
 	@Field("transmissiontransactionid")
-	public String transmissionTransactionId;
+	private String transmissionTransactionId;
 	
 	//I dont know whether we need to put these into their seperate class
 	//Rejectinfo
 	@Field("internalrejectcode") 
-	public String internalRejectCode;
+	private String internalRejectCode;
 
 	@Field("nsccrejectcode")
-	public String nsccRejectCode;
+	private String nsccRejectCode;
 	
 	@Field("rejectdescription")
-	public String rejectDescription;
+	private String rejectDescription;
 	
 	@Field("rejectid")
-	public String rejectId;
+	private String rejectId;
 	
 	//UnformattedData
 	@Field("dialogsequencenumber")
-	public String dialogSequenceNumber;
+	private String dialogSequenceNumber;
 	
 	@Field("unformattedrecordtext")
-	public String unformattedRecordText;
+	private String unformattedRecordText;
 }

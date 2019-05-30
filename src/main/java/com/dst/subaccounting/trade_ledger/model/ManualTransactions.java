@@ -9,143 +9,143 @@ import lombok.Data;
 @Document(collection = "clienttransactions")
 public class ManualTransactions {
 	@Field("529liquidationindicator")
-	public String liquidationIndicator529;
+	private String liquidationIndicator529;
 	
 	@Field("accrualearningsstartstopdate")
-	public String accrualEarningsStartStopDate;//Should be date
+	private String accrualEarningsStartStopDate;//Should be date
 	
 	@Field("actualroavalue") 
-	public String actualRoaValue;
+	private String actualRoaValue;
 
 	@Field("actualroavaluesource")
-	public String actualRoaValueSource;
+	private String actualRoaValueSource;
 	
 	@Field("advancedcommissionamount")
-	public String advancedCommissionAmount;
+	private String advancedCommissionAmount;
 
 	@Field("aggregated")
-	public boolean aggregated;
+	private boolean aggregated;
 	
 	@Field("allsharetransaction")
-	public boolean allShareTransaction;
+	private boolean allShareTransaction;
 	
 	@Field("anticipatedsettlementdate") 
-	public String anticipatedSettlementDate;
+	private String anticipatedSettlementDate;
 
 	@Field("asofpaymentdate")
-	public String asofPaymentDate;//Should be date
+	private String asofPaymentDate;//Should be date
 	
 	@Field("asofreasoncode")
-	public String asofReasonCode;
+	private String asofReasonCode;
 	
 	@Field("assettypeindicator")
-	public String assetTypeIndicator;
+	private String assetTypeIndicator;
 	
 	@Field("associatedoperationsaccount")
-	public String associatedOperationsAccount;
+	private String associatedOperationsAccount;
 	
 	@Field("associatedreconciliationadjustmenttype") 
-	public String associatedReconciliationAdjustmentType;
+	private String associatedReconciliationAdjustmentType;
 
 	@Field("contingentdeferredsaleschargeliquidationindicator")
-	public String contingentDeferredSalesChargeLiquidationIndicator;
+	private String contingentDeferredSalesChargeLiquidationIndicator;
 	
 	@Field("contingentdeferredsaleschargemoneyamount")
-	public double contingentDeferredSalesChargeMoneyAmount;
+	private double contingentDeferredSalesChargeMoneyAmount;
 
 	@Field("cumulativediscountnumber")
-	public String cumulativeDiscountNumber;
+	private String cumulativeDiscountNumber;
 	
 	@Field("discountcategory")
-	public String discountCategory;
+	private String discountCategory;
 	
 	@Field("eventid") 
-	public String eventId;
+	private String eventId;
 
 	@Field("excessivetraderviolation")
-	public boolean excessiveTraderViolation;
+	private boolean excessiveTraderViolation;
 	
 	@Field("exchangetofund_id")
-	public String ExchangeToFund_id;
+	private String ExchangeToFund_id;
 	
 	@Field("exchangetosecurityid")
-	public String ExchangeToSecurityId;
+	private String ExchangeToSecurityId;
 	
 	@Field("exchangetosymbol")
-	public String ExchangeToSymbol;
+	private String ExchangeToSymbol;
 	
 	@Field("excludedfromaggregation")
-	public boolean excludedFromAggregation;
+	private boolean excludedFromAggregation;
 	
 	@Field("firmcommissionamount") 
-	public double firmCommissionAmount;
+	private double firmCommissionAmount;
 
 	@Field("firmcommissionrate")
-	public double firmCommissionRate;
+	private double firmCommissionRate;
 	
 	@Field("frontendcommissionamount")
-	public double frontEndCommissionAmount;
+	private double frontEndCommissionAmount;
 
 	@Field("grossnetsettlementindicator")
-	public String grossNetSettlementIndicator;
+	private String grossNetSettlementIndicator;
 	
 	@Field("loinumber")
-	public String loiNumber;
+	private String loiNumber;
 	
 	@Field("manualtradeacceptancestatus") 
-	public String manualTradeAcceptanceStatus;
+	private String manualTradeAcceptanceStatus;
 
 	@Field("moneymarketaggregatedorderindicator")
-	public String moneyMarketAggregatedOrderIndicator;
+	private String moneyMarketAggregatedOrderIndicator;
 	
 	@Field("moneymarketliquidityfeerate")
-	public double moneyMarketLiquidityFeeRate;
+	private double moneyMarketLiquidityFeeRate;
 	
 	@Field("moneymarketliquidityfeeredemptiongateindicator")
-	public String moneyMarketLiquidityFeeRedemptionGateIndicator;
+	private String moneyMarketLiquidityFeeRedemptionGateIndicator;
 	
 	@Field("moneymarketliquidtyfeemoneyamount") 
-	public double moneyMarketLiquidtyFeeMoneyAmount;
+	private double moneyMarketLiquidtyFeeMoneyAmount;
 
 	@Field("navreasoncode")
-	public String navReasonCode;
+	private String navReasonCode;
 	
 	@Field("omnibustradetransmitted")
-	public boolean omnibusTradeTransmitted;
+	private boolean omnibusTradeTransmitted;
 
 	@Field("redemptionfeeindicator")
-	public String redemptionFeeIndicator;
+	private String redemptionFeeIndicator;
 	
 	@Field("roaloivalue")
-	public String roaLoiValue;
+	private String roaLoiValue;
 	
 	@Field("saleschargerate") 
-	public double salesChargeRate;
+	private double salesChargeRate;
 
 	@Field("sendeaprecordtobrokersystem")
-	public String sendEapRecordToBrokerSystem;
+	private String sendEapRecordToBrokerSystem;
 	
 	@Field("sendshareholdertradebrokernotification")
-	public String sendShareholderTradeBrokerNotification;
+	private String sendShareholderTradeBrokerNotification;
 	
 	@Field("shorttermredemptionfeemoneyamount")
-	public double shortTermRedemptionFeeMoneyAmount;
+	private double shortTermRedemptionFeeMoneyAmount;
 
 	@Field("shorttermredemptionfeerate")
-	public double shortTermRedemptionFeeRate;
+	private double shortTermRedemptionFeeRate;
 	
 	@Field("shorttermredemptionfeeshareamount")
-	public double shortTermRedemptionFeeShareAmount;
+	private double shortTermRedemptionFeeShareAmount;
 	
 	@Field("shorttermredemptionfeewaiverreasoncode") 
-	public String shortTermRedemptionFeeWaiverReasonCode;
+	private String shortTermRedemptionFeeWaiverReasonCode;
 
 	@Field("transactionreceiveddate")
-	public String transactionReceivedDate;//Should be date
+	private String transactionReceivedDate;//Should be date
 	
 	@Field("transactionreceivedtime")
-	public String transactionReceivedTime;//Should be Time
+	private String transactionReceivedTime;//Should be Time
 	
 	@Field("underwritercommissionamount")
-	public double underwriterCommissionAmount;
+	private double underwriterCommissionAmount;
 }
