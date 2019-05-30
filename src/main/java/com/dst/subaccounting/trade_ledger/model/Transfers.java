@@ -9,47 +9,47 @@ import lombok.Data;
 @Document(collection = "clienttransactions")
 public class Transfers {
 	@Field("accrualmoneyamount")
-	public double accrualMoneyAmount;
+	private double accrualMoneyAmount;
 	
 	@Field("destinationaccountomnibusindicator") 
-	public String destinationAccountOmnibusIndicator;
+	private String destinationAccountOmnibusIndicator;
 
 	@Field("destinationomnibusbin")
-	public String destinationOmnibusBIN;
+	private String destinationOmnibusBIN;
 	
 	@Field("destinatioshareownerbin")
-	public String destinatioShareownerBIN;
+	private String destinatioShareownerBIN;
 	
 	@Field("firmroleintransfer")
-	public String firmRoleInTransfer;
+	private String firmRoleInTransfer;
 	
 	@Field("nsccacatsassetssequenceid")
-	public String nsccAcatsAssetsSequenceId;
+	private String nsccAcatsAssetsSequenceId;
 	
 	@Field("nsccacatscontrolnumber")
-	public String nsccAcatsControlNumber;
+	private String nsccAcatsControlNumber;
 	
 	@Field("nsccfundparticipantnumber")
-	public String nsccFundParticipantNumber;
+	private String nsccFundParticipantNumber;
 	
 	@Field("nsccregistrationstatuscode") 
-	public String nsccRegistrationStatusCode;
+	private String nsccRegistrationStatusCode;
 
 	@Field("originatingaccountomnibusindicator")
-	public String originatingAccountOmnibusIndicator;
+	private String originatingAccountOmnibusIndicator;
 	
 	@Field("originatingagentforfirm")
-	public String originatingAgentForFirm;
+	private String originatingAgentForFirm;
 	
 	@Field("originatingfirmnumber")
-	public String originatingFirmNumber;
+	private String originatingFirmNumber;
 	
 	@Field("originatingomnibusbin")
-	public String originatingOmnibusBIN;
+	private String originatingOmnibusBIN;
 	
 	@Field("originatingshareownerbin")
-	public String originatingShareownerBIN;
+	private String originatingShareownerBIN;
 	
 	@Field("socialcode")
-	public String socialCode;
+	private String socialCode;
 }

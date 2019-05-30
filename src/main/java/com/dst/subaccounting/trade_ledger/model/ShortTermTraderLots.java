@@ -9,38 +9,38 @@ import lombok.Data;
 @Document(collection = "clienttransactions")
 public class ShortTermTraderLots {
 	@Field("crossshareclassexchange")
-	public boolean crossShareClassExchange;
+	private boolean crossShareClassExchange;
 	
 	@Field("frombin") 
-	public String fromBin;
+	private String fromBin;
 
 	@Field("fromfund_id")
-	public String fromFund_id;
+	private String fromFund_id;
 	
 	@Field("lotid")
-	public String lotId;
+	private String lotId;
 	
 	@Field("lottype")
-	public String lotType;
+	private String lotType;
 
 	@Field("releasedate")
-	public String releaseDate;//Should be date
+	private String releaseDate;//Should be date
 	
 	@Field("shareamount") 
-	public double shareAmount;
+	private double shareAmount;
 
 	@Field("shareeligibleforfee")
-	public double shareEligibleForFee;
+	private double shareEligibleForFee;
 	
 	@Field("updatedintraday")
-	public String updatedIntraday;
+	private String updatedIntraday;
 	
 	@Field("waiveramount")
-	public double waiverAmount;
+	private double waiverAmount;
 	
 	@Field("waiverrate")
-	public double waiverRate;
+	private double waiverRate;
 	
 	@Field("waiverreasoncode")
-	public String waiverReasonCode;
+	private String waiverReasonCode;
 }
