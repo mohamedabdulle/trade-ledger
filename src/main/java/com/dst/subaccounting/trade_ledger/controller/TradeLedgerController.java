@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.*;
 
 import com.dst.subaccounting.trade_ledger.model.MainDocument;
@@ -17,10 +20,16 @@ public class TradeLedgerController {
 	
 	@Autowired
 	TradeLedgerService tradeLedgerService;
-
+	
+	@Autowired
+	KafkaTemplate<String, String> kafkaTemplate;
+	
+    @Value(value = "${mongoRequestTopicName}")
+    private String topicName;
+	
 	@DeleteMapping("/document/{id}")
 	public void deleteOne(@PathVariable ObjectId id) {
-		tradeLedgerService.removeOne(id);
+		tradeLedgerService.removeOne(id);	
 	}
 
 	@DeleteMapping("/document/")
@@ -29,8 +38,10 @@ public class TradeLedgerController {
 	}
 
 	@GetMapping("/document")
-	public List<MainDocument> getAll() {
-		return tradeLedgerService.findAll();
+	public List<MainDocument> getAll() {    
+		List<MainDocument> docs =  tradeLedgerService.findAll();
+		kafkaTemplate.send(topicName, "getting all docs");
+		return docs;
 	}
 
 	//@GetMapping("/document")
