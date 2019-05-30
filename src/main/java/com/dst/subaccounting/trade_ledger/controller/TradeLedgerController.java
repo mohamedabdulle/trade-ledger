@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import com.dst.subaccounting.trade_ledger.model.MainDocument;
-import com.dst.subaccounting.trade_ledger.model.Person;
 import com.dst.subaccounting.trade_ledger.service.TradeLedgerService;
 
 @RestController
@@ -19,12 +18,13 @@ public class TradeLedgerController {
 	TradeLedgerService tradeLedgerService;
 
 	@DeleteMapping("/document/{id}")
-	public void deleteOne(@PathVariable ObjectId id) {
+	public List<MainDocument> deleteOne(@PathVariable ObjectId id) {
 		tradeLedgerService.removeOne(id);
+		return tradeLedgerService.findAll();
 	}
 
 	@DeleteMapping("/document/")
-	public String deleteDocument(@RequestBody Person person) {
+	public String deleteDocument(@RequestBody MainDocument mainDocument) {
 		return "";
 	}
 
@@ -39,17 +39,18 @@ public class TradeLedgerController {
 	}
 
 	@PostMapping("/document/create")
-	public void CreateDocument(@RequestBody MainDocument test) {
-		tradeLedgerService.insertOne(test);
+	public List<MainDocument> CreateDocument(@RequestBody MainDocument mainDocument) {
+		tradeLedgerService.insert(mainDocument);
+		return tradeLedgerService.findAll();
 	}
 
 	@PostMapping("/document/{id}/{updateKey}")
-	public void UpdateDocument(@PathVariable ObjectId id, @PathVariable String updateKey, @RequestBody MainDocument update) {
+	public List<MainDocument> UpdateDocument(@PathVariable ObjectId id, @PathVariable String updateKey, @RequestBody MainDocument update) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		  map.put("actualpostingdate",update.getActualPostingDate());
 		  map.put("agentforfirm",update.getAgentForFirm());
 		  Object updateValue = map.get(updateKey);
-		  
 		  tradeLedgerService.update(id, updateValue, updateKey);
+		  return tradeLedgerService.findAll();
 	}
 }

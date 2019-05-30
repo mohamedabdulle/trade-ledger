@@ -16,37 +16,37 @@ import com.dst.subaccounting.trade_ledger.model.MainDocument;
 
 @Service
 public class TradeLedgerService implements MongoDbOperations {
-  
-    private MongoOperations mongoOperations;
-    
-    @Autowired
-    public TradeLedgerService(MongoDbConfig mongoClient) {
-    	mongoOperations = mongoClient.mongoTemplate();
-    }
-     
+
+	private MongoOperations mongoOperations;
+
+	@Autowired
+	public TradeLedgerService(MongoDbConfig mongoClient) {
+		mongoOperations = mongoClient.mongoTemplate();
+	}
+
 	@Override
-	public List<MainDocument> findAll(){
+	public List<MainDocument> findAll() {
 		return mongoOperations.findAll(MainDocument.class);
 	}
-	
+
 	public void removeOne(ObjectId id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
-		
-		mongoOperations.remove(query,MainDocument.class);
+
+		mongoOperations.remove(query, MainDocument.class);
 	}
-	
-	public void insertOne(MainDocument test) {
-		mongoOperations.insert(test);
+
+	public void insert(MainDocument mainDocument) {
+		mongoOperations.insert(mainDocument);
 	}
-	
+
 	public void update(ObjectId id, Object updateValue, String updateKey) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
-		
+
 		Update update = new Update();
-		update.set(updateKey,updateValue);
-		
+		update.set(updateKey, updateValue);
+
 		mongoOperations.updateFirst(query, update, MainDocument.class);
-	}	
+	}
 }

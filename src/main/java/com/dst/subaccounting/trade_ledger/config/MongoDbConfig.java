@@ -11,17 +11,17 @@ import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 @Configuration
 public class MongoDbConfig {
 
-    @Value("${spring.data.mongodb.host}")
-    private String host;
-    
-    @Value("${spring.data.mongodb.database}")
-    private String database;
-    
-    public @Bean MongoDbFactory mongoDbFactory() {
-        return new SimpleMongoDbFactory(new MongoClient(host), database);
-    }
+	@Value("${spring.data.mongodb.host}")
+	private String host;
 
-    public @Bean MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoDbFactory());
-    }
+	@Value("${spring.data.mongodb.database}")
+	private String database;
+
+	public @Bean MongoDbFactory mongoDbFactory() {
+		return new SimpleMongoDbFactory(new MongoClient(host), database);
+	}
+
+	public @Bean MongoTemplate mongoTemplate() {
+		return new MongoTemplate(mongoDbFactory());
+	}
 }

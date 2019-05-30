@@ -10,10 +10,10 @@ import lombok.Data;
 public class Comments {
 	@Field("comment")
 	private String comment;
-	
+
 	@Field("commentdatetime")
-	private String commentDateTime; //Should be date
-	
+	private String commentDateTime; // Should be date
+
 	@Field("commentuserid")
 	private String commentUserId;
 }
