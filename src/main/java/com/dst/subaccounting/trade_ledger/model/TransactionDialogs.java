@@ -6,10 +6,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "clienttransactions")
+@Document(collection = "clientTransactions")
 public class TransactionDialogs {
+	
 	@Field("anticipatedsettlementdate")
-	private String anticipatedSettlementDate;// Should be date
+	private String anticipatedSettlementDate; // Should be date
 
 	@Field("contingentdeferredsaleschargemoneyamount")
 	private double contingentDeferredSalesChargeMoneyAmount;

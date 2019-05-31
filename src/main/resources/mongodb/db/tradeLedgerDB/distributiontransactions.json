@@ -1,0 +1,9 @@
+{
+	"aggregated" : true,
+	"distributioneventtype" : "random",
+	"distributionrate" : "5",
+	"distributionrecorddate" : "January",
+	"eventid" : [ "1", "2", "3", "4", "98595949"],
+	"excludedfromaggregation" : false,
+	"omnibustradetransmitted" : true
+}

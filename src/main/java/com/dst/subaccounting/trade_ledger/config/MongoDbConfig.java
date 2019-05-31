@@ -16,12 +16,22 @@ public class MongoDbConfig {
 
 	@Value("${spring.data.mongodb.database}")
 	private String database;
+	
+	@Value("${spring.data.mongodb.collection}")
+	private String collection;
 
 	public @Bean MongoDbFactory mongoDbFactory() {
 		return new SimpleMongoDbFactory(new MongoClient(host), database);
 	}
 
 	public @Bean MongoTemplate mongoTemplate() {
-		return new MongoTemplate(mongoDbFactory());
+		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+		if (mongoTemplate.getCollectionNames().contains(collection)) {
+			mongoTemplate.dropCollection(collection);
+			mongoTemplate.createCollection(collection);
+		} else {
+			mongoTemplate.createCollection(collection);
+		}
+		return mongoTemplate; 
 	}
 }

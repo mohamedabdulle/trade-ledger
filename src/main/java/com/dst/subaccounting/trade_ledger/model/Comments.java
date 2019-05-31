@@ -6,8 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "clienttransactions")
+@Document(collection = "clientTransactions")
 public class Comments {
+	
 	@Field("comment")
 	private String comment;
 

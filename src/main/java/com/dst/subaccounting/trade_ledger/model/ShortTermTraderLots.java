@@ -6,8 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "clienttransactions")
+@Document(collection = "clientTransactions")
 public class ShortTermTraderLots {
+	
 	@Field("crossshareclassexchange")
 	private boolean crossShareClassExchange;
 
@@ -24,7 +25,7 @@ public class ShortTermTraderLots {
 	private String lotType;
 
 	@Field("releasedate")
-	private String releaseDate;// Should be date
+	private String releaseDate; // Should be date
 
 	@Field("shareamount")
 	private double shareAmount;

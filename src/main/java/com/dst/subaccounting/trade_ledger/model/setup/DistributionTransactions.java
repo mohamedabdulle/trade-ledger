@@ -1,4 +1,4 @@
-package com.dst.subaccounting.trade_ledger.model;
+package com.dst.subaccounting.trade_ledger.model.setup;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -11,24 +11,31 @@ import lombok.Data;
 @Document(collection = "clientTransactions")
 public class DistributionTransactions {
 	
+	@JsonAlias("aggregated")
 	@Field("aggregated")
 	private boolean aggregated;
 
+	@JsonAlias("distributioneventtype")
 	@Field("distributioneventtype")
 	private String distributionEventType;
 
+	@JsonAlias("distributionrate")
 	@Field("distributionrate")
 	private String distributionRate;
 
+	@JsonAlias("distributionrecorddate")
 	@Field("distributionrecorddate")
 	private String distributionRecordDate;
 
+	@JsonAlias("eventid")
 	@Field("eventid")
 	private String[] eventId;
 
+	@JsonAlias("excludedfromaggregation")
 	@Field("excludedfromaggregation")
 	private boolean excludedFromAggregation;
 
+	@JsonAlias("omnibustradetransmitted")
 	@Field("omnibustradetransmitted")
 	private boolean omnibusTradeTransmitted;
 }

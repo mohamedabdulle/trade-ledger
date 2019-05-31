@@ -6,9 +6,9 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "clienttransactions")
-
+@Document(collection = "clientTransactions")
 public class FundservTransactions {
+	
 	@Field("529liquidationindicator")
 	private String LiquidationIndicator529;
 
@@ -52,9 +52,7 @@ public class FundservTransactions {
 	private String contingentDeferredSalesChargeLiquidationIndicator;
 
 	@Field("contingentdeferredsaleschargemoneyamount")
-	private String contingentDeferredSalesChargeMoneyAmount; // Idk whether this
-																// should be
-																// string
+	private String contingentDeferredSalesChargeMoneyAmount; // Idk whether this should be string
 
 	@Field("cumulativediscountnumber")
 	private int cumulativeDiscountNumber;
@@ -201,10 +199,10 @@ public class FundservTransactions {
 	private String socialCode;
 
 	@Field("transactionreceiveddate")
-	private String transactionReceivedDate;// should be date
+	private String transactionReceivedDate; // should be date
 
 	@Field("transactionreceivedtime")
-	private String transactionReceivedTime;// Should be time
+	private String transactionReceivedTime; // Should be time
 
 	@Field("underwritercommissionamount")
 	private double underwriterCommissionAmount;

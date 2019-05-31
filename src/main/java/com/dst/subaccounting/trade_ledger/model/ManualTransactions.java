@@ -6,13 +6,14 @@ import org.springframework.data.mongodb.core.mapping.Field;
 import lombok.Data;
 
 @Data
-@Document(collection = "clienttransactions")
+@Document(collection = "clientTransactions")
 public class ManualTransactions {
+	
 	@Field("529liquidationindicator")
 	private String liquidationIndicator529;
 
 	@Field("accrualearningsstartstopdate")
-	private String accrualEarningsStartStopDate;// Should be date
+	private String accrualEarningsStartStopDate; // Should be date
 
 	@Field("actualroavalue")
 	private String actualRoaValue;
@@ -33,7 +34,7 @@ public class ManualTransactions {
 	private String anticipatedSettlementDate;
 
 	@Field("asofpaymentdate")
-	private String asofPaymentDate;// Should be date
+	private String asofPaymentDate; // Should be date
 
 	@Field("asofreasoncode")
 	private String asofReasonCode;
