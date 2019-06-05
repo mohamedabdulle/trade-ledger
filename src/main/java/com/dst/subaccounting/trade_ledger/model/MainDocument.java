@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 @Data
-@Document(collection = "clientTransactions")
+@Document(collection = "mainDocument")
 public class MainDocument {
 
 	@Id

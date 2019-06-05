@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 @Data
-@Document(collection = "clientTransactions")
+@Document(collection = "distributionTransactions")
 public class DistributionTransactions {
 	
 	@JsonAlias("aggregated")
