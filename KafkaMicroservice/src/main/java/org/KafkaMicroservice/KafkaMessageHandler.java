@@ -1,5 +1,6 @@
 package org.KafkaMicroservice;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,14 +20,14 @@ public class KafkaMessageHandler {
             switch(messageString) {
                 case("get all"): {
                     @SuppressWarnings("unchecked")
-                    List<Object> documents = restTemplate.getForObject("http://mongo-service/document/", List.class);
+                    List<Object> documents = restTemplate.getForObject("http://localhost:8400/subaccounting/document/", List.class);
                     System.out.println(documents);
                 }
             }            
         }
         catch(Exception error) {
             System.out.println("couldn't handle kafka message");
-            System.out.println(error);
+            error.printStackTrace();
         }
 
     }

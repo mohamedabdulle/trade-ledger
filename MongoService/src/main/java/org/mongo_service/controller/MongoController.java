@@ -23,7 +23,7 @@ public class MongoController {
 	@Autowired
 	KafkaTemplate<String, String> kafkaTemplate;
 	
-    @Value(value = "${mongoRequestTopicName}")
+    @Value(value = "${loggingTopicName}")
     private String topicName;
 	
 	@DeleteMapping("/document/{id}")
