@@ -28,9 +28,7 @@ public class MongoDbConfig {
 
 	public @Bean MongoTemplate mongoTemplate() {
 		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-		System.out.println(collectionList);
 		for (String collection: collectionList){
-			System.out.println(collection +"\n");
 			if (mongoTemplate.getCollectionNames().contains(collection)) {
 				mongoTemplate.dropCollection(collection);
 				mongoTemplate.createCollection(collection);

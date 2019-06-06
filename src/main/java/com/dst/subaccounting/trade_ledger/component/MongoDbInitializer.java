@@ -23,34 +23,33 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Component
 public class MongoDbInitializer implements ApplicationRunner {
 
-	@Value("${spring.data.mongodb.collection}")
-	private String collection;
+    @Value("${spring.data.mongodb.collection}")
+    private String collection;
 
-	@Value("${spring.data.mongodb.stub-file-location}")
-	private String stubFileLocation;
+    @Value("${spring.data.mongodb.stub-file-location}")
+    private String stubFileLocation;
 
-	@Autowired
-	private MongoOperations mongoOperations;
+    @Autowired
+    private MongoOperations mongoOperations;
 
-	@Override
-	public void run(ApplicationArguments args) throws Exception {
+    @Override
+    public void run(ApplicationArguments args) throws Exception {
 
-		ClassLoader cl = this.getClass().getClassLoader();
-		ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
-		Resource[] resources = resolver.getResources(stubFileLocation);
+        ClassLoader cl = this.getClass().getClassLoader();
+        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver(cl);
+        Resource[] resources = resolver.getResources(stubFileLocation);
 
-		Map<String, Class<?>> map = new HashMap<>();
-		map.put("distributiontransactions.json", DistributionTransactions.class);
-		map.put("maindocument.json", MainDocument.class);
+        Map<String, Class<?>> map = new HashMap<>();
+        map.put("distributiontransactions.json", DistributionTransactions.class);
+        map.put("maindocument.json", MainDocument.class);
 
-		for (Resource resource : resources) {
-			if (resource.getFile().isFile()) {
-				if (map.containsKey(resource.getFilename())) {
-					mongoOperations
-							.insert(new ObjectMapper().readValue(resource.getFile(), map.get(resource.getFilename())));
-				}
-			}
-		}
-	}
-
+        for (Resource resource : resources) {
+            if (resource.getFile().isFile()) {
+                if (map.containsKey(resource.getFilename())) {
+                    mongoOperations
+                            .insert(new ObjectMapper().readValue(resource.getFile(), map.get(resource.getFilename())));
+                }
+            }
+        }
+    }
 }
