@@ -33,8 +33,8 @@ public class KafkaTopicConfig {
          return new NewTopic(this.topicName, 1, (short) 1);
     }
     
-    @Bean
-    public KafkaMessageHandler getMessageInterpretter() {
-        return new KafkaMessageHandler();
-    }
+//    @Bean
+//    public KafkaMessageHandler getMessageInterpretter() {
+//        return new KafkaMessageHandler();
+//    }
 }
