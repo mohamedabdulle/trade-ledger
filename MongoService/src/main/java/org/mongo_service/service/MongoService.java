@@ -25,28 +25,28 @@ public class MongoService implements MongoDbOperations {
     }
      
 	@Override
-	public List<MainDocument> findAll(){
+	public List<MainDocument> findAll() {
 		return mongoOperations.findAll(MainDocument.class);
 	}
-	
+
 	public void removeOne(ObjectId id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
-		
-		mongoOperations.remove(query,MainDocument.class);
+
+		mongoOperations.remove(query, MainDocument.class);
 	}
-	
-	public void insertOne(MainDocument test) {
-		mongoOperations.insert(test);
+
+	public void insertOne(MainDocument mainDocument) {
+		mongoOperations.insert(mainDocument);
 	}
-	
+
 	public void update(ObjectId id, Object updateValue, String updateKey) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
-		
+
 		Update update = new Update();
-		update.set(updateKey,updateValue);
-		
+		update.set(updateKey, updateValue);
+
 		mongoOperations.updateFirst(query, update, MainDocument.class);
-	}	
+	}
 }

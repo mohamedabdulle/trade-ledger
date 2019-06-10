@@ -27,8 +27,14 @@ public class MongoController {
     private String topicName;
 	
 	@DeleteMapping("/document/{id}")
-	public void deleteOne(@PathVariable ObjectId id) {
-		tradeLedgerService.removeOne(id);	
+	public List<MainDocument> deleteOne(@PathVariable ObjectId id) {
+		tradeLedgerService.removeOne(id);
+		return tradeLedgerService.findAll();
+	}
+
+	@DeleteMapping("/document/")
+	public String deleteDocument(@RequestBody MainDocument mainDocument) {
+		return "";
 	}
 
 	@GetMapping("/document")
@@ -44,17 +50,18 @@ public class MongoController {
 	}
 
 	@PostMapping("/document/create")
-	public void CreateDocument(@RequestBody MainDocument test) {
-		tradeLedgerService.insertOne(test);
+	public List<MainDocument> CreateDocument(@RequestBody MainDocument mainDocument) {
+		tradeLedgerService.insertOne(mainDocument);
+		return tradeLedgerService.findAll();
 	}
 
 	@PostMapping("/document/{id}/{updateKey}")
-	public void UpdateDocument(@PathVariable ObjectId id, @PathVariable String updateKey, @RequestBody MainDocument update) {
+	public List<MainDocument> UpdateDocument(@PathVariable ObjectId id, @PathVariable String updateKey, @RequestBody MainDocument update) {
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		  map.put("actualpostingdate",update.getActualPostingDate());
 		  map.put("agentforfirm",update.getAgentForFirm());
 		  Object updateValue = map.get(updateKey);
-		  
 		  tradeLedgerService.update(id, updateValue, updateKey);
+		  return tradeLedgerService.findAll();
 	}
 }

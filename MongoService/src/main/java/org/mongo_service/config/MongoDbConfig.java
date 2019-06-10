@@ -8,20 +8,32 @@ import org.springframework.data.mongodb.MongoDbFactory;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.SimpleMongoDbFactory;
 
+import java.util.List;
+
 @Configuration
 public class MongoDbConfig {
 
     @Value("${spring.data.mongodb.host}")
     private String host;
-    
+
     @Value("${spring.data.mongodb.database}")
     private String database;
-    
+
+    @Value("#{'${spring.data.mongodb.collection}'.split(',')}")
+    private List<String> collectionList;
+
     public @Bean MongoDbFactory mongoDbFactory() {
         return new SimpleMongoDbFactory(new MongoClient(host), database);
     }
 
     public @Bean MongoTemplate mongoTemplate() {
-        return new MongoTemplate(mongoDbFactory());
+        MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
+        for (String collection : collectionList) {
+            if (mongoTemplate.getCollectionNames().contains(collection)) {
+                mongoTemplate.dropCollection(collection);
+            }
+            mongoTemplate.createCollection(collection);
+        }
+        return mongoTemplate;
     }
 }
