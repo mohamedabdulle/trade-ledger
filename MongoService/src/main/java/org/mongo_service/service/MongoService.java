@@ -46,6 +46,25 @@ public class MongoService implements MongoDbOperations {
 		return mongoOperations.find(query,MainDocument.class);
 		
 	}
+	
+	   public List<MainDocument> queryByDateRange(long start, long end) {
+	        return this.queryByRangeWithField((int)start, (int)end, "actualpostingdate");
+	    }
+	    
+	    /*To DO: ADD ASSERTION THAT FIELD IS VALID*/
+	    private List<MainDocument> queryByRangeWithField(Object start, Object end, String fieldName) {
+	        Query query = new Query();
+	        
+	        query.addCriteria(
+//	                new Criteria().andOperator(
+	                        Criteria.where(fieldName).gte(start)//, 
+//	                        Criteria.where(fieldName).lt(end)
+//	                )
+	        );
+	        System.out.println(query);
+	        
+	        return mongoOperations.find(query, MainDocument.class);    
+	    }
 
 	public void update(ObjectId id, Object updateValue, String updateKey) {
 		Query query = new Query();

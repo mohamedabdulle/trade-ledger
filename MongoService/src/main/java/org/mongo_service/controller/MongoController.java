@@ -15,7 +15,7 @@ import org.mongo_service.model.MainDocument;
 import org.mongo_service.service.MongoService;
 
 @RestController
-@RequestMapping("/subaccounting")
+@RequestMapping("/document/")
 public class MongoController {
 	
 	@Autowired
@@ -27,42 +27,61 @@ public class MongoController {
     @Value(value = "${loggingTopicName}")
     private String topicName;
 	
-	@DeleteMapping("/document/{id}")
+	@DeleteMapping("/{id}")
 	public List<MainDocument> deleteOne(@PathVariable ObjectId id) {
 		tradeLedgerService.removeOne(id);
 		return tradeLedgerService.findAll();
 	}
 
-	@DeleteMapping("/document/")
+	@DeleteMapping("/")
 	public String deleteDocument(@RequestBody MainDocument mainDocument) {
 		return "";
 	}
 
-	@GetMapping("/document")
-	public List<MainDocument> getAll() {    
-		List<MainDocument> docs =  tradeLedgerService.findAll();
-		kafkaTemplate.send(topicName, "getting all docs");
-		return docs;
-	}
+    @GetMapping("/")
+    public List<MainDocument> getDocuments(@RequestParam(required = false) Long startDate, @RequestParam(required = false) Long endDate) throws Exception {
+        if(startDate == null) {
+            return getAllDocuments();
+        }
+        return getDocumentsInDateRange(startDate, endDate);
+    }
+    
+    private List<MainDocument> getAllDocuments() {
+        List<MainDocument> docs =  tradeLedgerService.findAll();
+        kafkaTemplate.send(topicName, "getting all docs");
+        return docs;
+    }
+        
+    private List<MainDocument> getDocumentsInDateRange(Long startDate, Long endDate) throws Exception {
+        if(startDate == null ) {
+            throw new Exception("startDate can't be null");
+        }
+        if(endDate == null) {
+            endDate = System.currentTimeMillis();
+        }
+        List<MainDocument> docs = tradeLedgerService.queryByDateRange(startDate.longValue(), endDate.longValue());
+        kafkaTemplate.send(topicName, "got " + docs.size() + " docs between [" + startDate + ", " + endDate + ")");
+        return docs;
+    }
 
-	@GetMapping("/document/getDocWithQuery")
+	@GetMapping("/getDocWithQuery")
 	public List<MainDocument> getDocuments(@RequestParam String key, @RequestParam String value) throws Exception{
 		List<MainDocument> docs = tradeLedgerService.findAll(key,value); //To find nested fields, simply put field.nestedField
 		return docs;
 	}
 
-	@PostMapping("/document/create")
+	@PostMapping("/create")
 	public List<MainDocument> CreateDocument(@RequestBody MainDocument mainDocument) {
 		tradeLedgerService.insertOne(mainDocument);
 		return tradeLedgerService.findAll();
 	}
 
-	@PostMapping("/document/{id}")
+	@PostMapping("/{id}")
 	public void UpdateDocument(@PathVariable ObjectId id, @RequestParam String updateKey, @RequestParam String updateValue) {
 				  
 		tradeLedgerService.update(id, updateValue, updateKey);
 	}
-	@PostMapping("/document/MultiFields/{id}")
+	@PostMapping("/MultiFields/{id}")
 	public void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam List<String> updateKey, @RequestParam List<Object> updateValue) {
 				  
 		tradeLedgerService.updateFields(id, updateKey, updateValue);
