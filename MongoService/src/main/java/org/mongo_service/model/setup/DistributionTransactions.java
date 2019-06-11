@@ -1,5 +1,6 @@
 package org.mongo_service.model.setup;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -8,7 +9,6 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.Data;
 
 @Data
-@Document(collection = "distributionTransactions")
 public class DistributionTransactions {
 	
 	@JsonAlias("aggregated")

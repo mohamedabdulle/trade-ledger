@@ -1,19 +1,14 @@
 package org.mongo_service.model.setup;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-
-import lombok.Data;
-
 @Data
-@Document(collection = "mainDocument")
 public class MainDocument {
-
-	@Id
-	private String id;
 
 	@JsonAlias("actualpostingdate")
 	@Field("actualpostingdate")
@@ -26,15 +21,15 @@ public class MainDocument {
 	@JsonAlias("anticipatedpostingdate")
 	@Field("anticipatedpostingdate")
 	private String anticipatedPostingDate;
-	
+
 	@JsonAlias("bin")
 	@Field("bin")
 	private String bin;
-	
+
 	@JsonAlias("clearingfirmnumber")
 	@Field("clearingfirmnumber")
 	private int clearingFirmNumber;
-	
+
 	@JsonAlias("countrycode")
 	@Field("countrycode")
 	private String countryCode;
@@ -119,11 +114,11 @@ public class MainDocument {
 	@JsonAlias("transactionsubtype")
 	@Field("transactionsubtype")
 	private String transactionSubType;
-	
+
 	@JsonAlias("transactiontype")
 	@Field("transactiontype")
 	private String transactionType;
-	
+
 	@JsonAlias("transactionuserid")
 	@Field("transactionuserid")
 	private String transactionUserId;
