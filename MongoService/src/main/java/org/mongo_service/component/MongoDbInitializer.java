@@ -1,4 +1,4 @@
-package com.dst.subaccounting.trade_ledger.component;
+package org.mongo_service.component;
 
 import java.util.HashMap;
 import java.util.Map;
