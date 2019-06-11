@@ -14,8 +14,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.stereotype.Component;
 
-import com.dst.subaccounting.trade_ledger.model.setup.DistributionTransactions;
-import com.dst.subaccounting.trade_ledger.model.setup.ClientTransactionsDocument;
+import org.mongo_service.model.setup.DistributionTransactions;
+import org.mongo_service.model.setup.ClientTransactionsDocument;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
