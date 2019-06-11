@@ -3,11 +3,13 @@ package com.dst.subaccounting.trade_ledger;
 import com.dst.subaccounting.trade_ledger.model.*;
 
 import java.util.List;
+
+import com.dst.subaccounting.trade_ledger.model.setup.ClientTransactionsDocument;
 import org.bson.types.ObjectId;
 
 public interface MongoDbOperations {
 
-	List<MainDocument> findAll();
+	List<ClientTransactionsDocument> findAll();
 
 	void removeOne(ObjectId id);
 

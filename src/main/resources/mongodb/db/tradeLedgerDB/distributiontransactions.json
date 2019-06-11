@@ -1,9 +1,17 @@
 {
-	"aggregated" : true,
-	"distributioneventtype" : "random",
-	"distributionrate" : "5",
-	"distributionrecorddate" : "January",
-	"eventid" : [ "1", "2", "3", "4", "98595949"],
-	"excludedfromaggregation" : false,
-	"omnibustradetransmitted" : true
+	"distributiontransactions" : {
+		"aggregated": false
+		"distributioneventtype": " not random",
+		"distributionrate": "15",
+		"distributionrecorddate": " not January",
+		"eventid": [
+			"11",
+			"12",
+			"13",
+			"14",
+			"198595949"
+		],
+		"excludedfromaggregation": true,
+		"omnibustradetransmitted": false
+	}
 }

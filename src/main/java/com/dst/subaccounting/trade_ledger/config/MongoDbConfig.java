@@ -19,8 +19,11 @@ public class MongoDbConfig {
 	@Value("${spring.data.mongodb.database}")
 	private String database;
 	
-	@Value("#{'${spring.data.mongodb.collection}'.split(',')}")
-	private List<String> collectionList;
+//	@Value("#{'${spring.data.mongodb.collection-list}'.split(',')}")
+//	private List<String> collectionList;
+
+	@Value("${spring.data.mongodb.collection}")
+	private String collection;
 
 	public @Bean MongoDbFactory mongoDbFactory() {
 		return new SimpleMongoDbFactory(new MongoClient(host), database);
@@ -28,14 +31,14 @@ public class MongoDbConfig {
 
 	public @Bean MongoTemplate mongoTemplate() {
 		MongoTemplate mongoTemplate = new MongoTemplate(mongoDbFactory());
-		for (String collection: collectionList){
+//		for (String collection: collectionList){
 			if (mongoTemplate.getCollectionNames().contains(collection)) {
 				mongoTemplate.dropCollection(collection);
 				mongoTemplate.createCollection(collection);
 			} else {
 				mongoTemplate.createCollection(collection);
 			}
-		}
+//		}
 		return mongoTemplate;
 	}
 }

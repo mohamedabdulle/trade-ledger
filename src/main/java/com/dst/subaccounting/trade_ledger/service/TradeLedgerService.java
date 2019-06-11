@@ -2,6 +2,7 @@ package com.dst.subaccounting.trade_ledger.service;
 
 import java.util.List;
 
+import com.dst.subaccounting.trade_ledger.model.setup.ClientTransactionsDocument;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoOperations;
@@ -25,8 +26,8 @@ public class TradeLedgerService implements MongoDbOperations {
 	}
 
 	@Override
-	public List<MainDocument> findAll() {
-		return mongoOperations.findAll(MainDocument.class);
+	public List<ClientTransactionsDocument> findAll() {
+			return mongoOperations.findAll(ClientTransactionsDocument.class);
 	}
 
 	public void removeOne(ObjectId id) {
