@@ -50,6 +50,8 @@ public class MongoService implements MongoDbOperations {
 	}
 
     public List<MainDocument> findAll(String key, String value) {
+//        MainDocument doc = new MainDocument();
+//        insertOne(doc);
         Query query = new Query();
         query.addCriteria(Criteria.where(key).is(value));
         return mongoOperations.find(query, MainDocument.class);
@@ -57,7 +59,7 @@ public class MongoService implements MongoDbOperations {
     }
 
     public List<MainDocument> queryByDateRange(long start, long end) {
-        return this.queryByRangeWithField((int) start, (int) end, "actualpostingdate");
+        return this.queryByRangeWithField(start, end, "actualpostingdate");
     }
 
     /* To DO: ADD ASSERTION THAT FIELD IS VALID */
@@ -86,26 +88,6 @@ public class MongoService implements MongoDbOperations {
 
     }
 
-    public void update(ObjectId id, List<String> updateKey, List<Object> updateValue) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(id));
-
-        Update update = new Update();
-        int i = 0;
-        int lastIndex = updateKey.size();
-        while (i < lastIndex) {
-            update.set(updateKey.get(i), updateValue.get(i));
-            i++;
-        }
-
-        mongoOperations.updateFirst(query, update, MainDocument.class);
-    }
-<<<<<<< Updated upstream
-=======
-     
-	
-	
-	
 	
 	public List<MainDocument> findAll(String key, Object value){
 		Query query = new Query();
@@ -128,5 +110,4 @@ public class MongoService implements MongoDbOperations {
 		
 		mongoOperations.updateFirst(query, update, MainDocument.class);
 	}
->>>>>>> Stashed changes
 }
