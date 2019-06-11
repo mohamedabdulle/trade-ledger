@@ -39,6 +39,13 @@ public class MongoService implements MongoDbOperations {
 	public void insertOne(MainDocument mainDocument) {
 		mongoOperations.insert(mainDocument);
 	}
+	
+	public List<MainDocument> findAll(String key, String value){
+		Query query = new Query();
+		query.addCriteria(Criteria.where(key).is(value));
+		return mongoOperations.find(query,MainDocument.class);
+		
+	}
 
 	public void update(ObjectId id, Object updateValue, String updateKey) {
 		Query query = new Query();
@@ -47,6 +54,21 @@ public class MongoService implements MongoDbOperations {
 		Update update = new Update();
 		update.set(updateKey, updateValue);
 
+		mongoOperations.updateFirst(query, update, MainDocument.class);
+
+	}	
+	
+	public void updateFields(ObjectId id, List<String> updateKey, List<Object> updateValue) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		
+		Update update = new Update();
+		int i = 0;
+		int lastIndex = updateKey.size();
+		while (i < lastIndex ) {
+			update.set(updateKey.get(i),updateValue.get(i));
+		}
+		
 		mongoOperations.updateFirst(query, update, MainDocument.class);
 	}
 }

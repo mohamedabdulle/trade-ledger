@@ -2,6 +2,7 @@ package org.mongo_service.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,9 +45,10 @@ public class MongoController {
 		return docs;
 	}
 
-	//@GetMapping("/document")
-	public String getDocument() throws Exception {
-		return "";
+	@GetMapping("/document/getDocWithQuery")
+	public List<MainDocument> getDocuments(@RequestParam String key, @RequestParam String value) throws Exception{
+		List<MainDocument> docs = tradeLedgerService.findAll(key,value); //To find nested fields, simply put field.nestedField
+		return docs;
 	}
 
 	@PostMapping("/document/create")
@@ -55,13 +57,14 @@ public class MongoController {
 		return tradeLedgerService.findAll();
 	}
 
-	@PostMapping("/document/{id}/{updateKey}")
-	public List<MainDocument> UpdateDocument(@PathVariable ObjectId id, @PathVariable String updateKey, @RequestBody MainDocument update) {
-		HashMap<String,Object> map = new HashMap<String,Object>();
-		  map.put("actualpostingdate",update.getActualPostingDate());
-		  map.put("agentforfirm",update.getAgentForFirm());
-		  Object updateValue = map.get(updateKey);
-		  tradeLedgerService.update(id, updateValue, updateKey);
-		  return tradeLedgerService.findAll();
+	@PostMapping("/document/{id}")
+	public void UpdateDocument(@PathVariable ObjectId id, @RequestParam String updateKey, @RequestParam String updateValue) {
+				  
+		tradeLedgerService.update(id, updateValue, updateKey);
+	}
+	@PostMapping("/document/MultiFields/{id}")
+	public void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam List<String> updateKey, @RequestParam List<Object> updateValue) {
+				  
+		tradeLedgerService.updateFields(id, updateKey, updateValue);
 	}
 }
