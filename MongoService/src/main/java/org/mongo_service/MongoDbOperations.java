@@ -13,7 +13,7 @@ public interface MongoDbOperations {
 
 	void insertOne(MainDocument test);
 
-	List<MainDocument> findAll(String key, String value);
+	List<MainDocument> findAll(String key, Object value);
 	
 	void update(ObjectId id, List<String> updateKey, List<Object> updateValue);
 	

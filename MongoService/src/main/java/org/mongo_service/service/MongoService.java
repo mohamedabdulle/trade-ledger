@@ -25,29 +25,29 @@ public class MongoService implements MongoDbOperations {
     }
 
     @Override
-    public List<MainDocument> findAll() {
-        return mongoOperations.findAll(MainDocument.class);
-    }
+	public List<MainDocument> findAll() {
+		return mongoOperations.findAll(MainDocument.class);
+	}
 
-    public void removeField(ObjectId id, String deleteKey) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(id));
-        Update update = new Update();
-        update.set(deleteKey, null);
+	public void removeField(ObjectId id, String deleteKey) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		Update update = new Update();
+		update.set(deleteKey,null);
+		
+		mongoOperations.updateFirst(query, update, MainDocument.class);
+	}
 
-        mongoOperations.updateFirst(query, update, MainDocument.class);
-    }
+	public void removeOne(ObjectId id) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
 
-    public void removeOne(ObjectId id) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("_id").is(id));
+		mongoOperations.remove(query, MainDocument.class);
+	}
 
-        mongoOperations.remove(query, MainDocument.class);
-    }
-
-    public void insertOne(MainDocument mainDocument) {
-        mongoOperations.insert(mainDocument);
-    }
+	public void insertOne(MainDocument mainDocument) {
+		mongoOperations.insert(mainDocument);
+	}
 
     public List<MainDocument> findAll(String key, String value) {
         Query query = new Query();
@@ -100,4 +100,33 @@ public class MongoService implements MongoDbOperations {
 
         mongoOperations.updateFirst(query, update, MainDocument.class);
     }
+<<<<<<< Updated upstream
+=======
+     
+	
+	
+	
+	
+	public List<MainDocument> findAll(String key, Object value){
+		Query query = new Query();
+		query.addCriteria(Criteria.where(key).is(value));
+		return mongoOperations.find(query,MainDocument.class);
+		
+	}
+	
+	public void update(ObjectId id, List<String> updateKey, List<Object> updateValue) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		
+		Update update = new Update();
+		int i = 0;
+		int lastIndex = updateKey.size();
+		while (i < lastIndex ) {
+			update.set(updateKey.get(i),updateValue.get(i));
+			i++;
+		}
+		
+		mongoOperations.updateFirst(query, update, MainDocument.class);
+	}
+>>>>>>> Stashed changes
 }

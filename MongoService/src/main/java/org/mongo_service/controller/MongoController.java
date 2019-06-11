@@ -66,10 +66,11 @@ public class MongoController {
     }
 
 	//Problem with int/numbers/booleans. 
-	@GetMapping("/getDocWithQuery")
-	public List<MainDocument> getDocuments(@RequestParam String key, @RequestParam String value) throws Exception{
-		//To find nested fields, simply put field.nestedField
-	    List<MainDocument> docs = tradeLedgerService.findAll(key,value); 
+
+	@GetMapping("/document/getDocWithQuery")
+	public List<MainDocument> getDocuments(@RequestParam String key, @RequestParam Integer value) throws Exception{
+		Object passedValue = (Object) value;
+		List<MainDocument> docs = tradeLedgerService.findAll(key,passedValue); //To find nested fields, simply put field.nestedField
 		return docs;
 	}
 
