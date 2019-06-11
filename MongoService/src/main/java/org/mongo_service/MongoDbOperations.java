@@ -13,9 +13,9 @@ public interface MongoDbOperations {
 
 	void insertOne(MainDocument test);
 
-	void update(ObjectId id, Object updateValue, String updateKey);
-
 	List<MainDocument> findAll(String key, String value);
 	
-	void updateFields(ObjectId id, List<String> updateKey, List<Object> updateValue);
+	void update(ObjectId id, List<String> updateKey, List<Object> updateValue);
+	
+	void removeField(ObjectId id, String deleteKey);
 }
