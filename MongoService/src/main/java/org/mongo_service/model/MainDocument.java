@@ -16,7 +16,7 @@ public class MainDocument {
 	private String id;
 
 	@Field("actualpostingdate")
-	private String actualPostingDate;
+	private Long actualPostingDate;
 
 	@Field("agentforfirm")
 	private String agentForFirm;

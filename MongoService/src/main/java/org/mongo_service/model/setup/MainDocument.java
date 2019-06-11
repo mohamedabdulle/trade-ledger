@@ -17,7 +17,7 @@ public class MainDocument {
 
 	@JsonAlias("actualpostingdate")
 	@Field("actualpostingdate")
-	private String actualPostingDate;
+	private Long actualPostingDate;
 
 	@JsonAlias("agentforfirm")
 	@Field("agentforfirm")

@@ -50,6 +50,8 @@ public class MongoService implements MongoDbOperations {
     }
 
     public List<MainDocument> findAll(String key, String value) {
+//        MainDocument doc = new MainDocument();
+//        insertOne(doc);
         Query query = new Query();
         query.addCriteria(Criteria.where(key).is(value));
         return mongoOperations.find(query, MainDocument.class);
@@ -57,7 +59,7 @@ public class MongoService implements MongoDbOperations {
     }
 
     public List<MainDocument> queryByDateRange(long start, long end) {
-        return this.queryByRangeWithField((int) start, (int) end, "actualpostingdate");
+        return this.queryByRangeWithField(start, end, "actualpostingdate");
     }
 
     /* To DO: ADD ASSERTION THAT FIELD IS VALID */
