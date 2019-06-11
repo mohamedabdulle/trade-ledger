@@ -1,5 +1,6 @@
 package org.mongo_service.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,9 +34,9 @@ public class MongoController {
 		return tradeLedgerService.findAll();
 	}
 
-	@DeleteMapping("/document/")
-	public String deleteDocument(@RequestBody MainDocument mainDocument) {
-		return "";
+	@DeleteMapping("/document/field/{id}")
+	public void deleteField(@PathVariable ObjectId id, @RequestParam String deleteKey) {
+		tradeLedgerService.removeField(id, deleteKey);
 	}
 
 	@GetMapping("/document")
@@ -45,6 +46,7 @@ public class MongoController {
 		return docs;
 	}
 
+	//Problem with int/numbers/booleans. 
 	@GetMapping("/document/getDocWithQuery")
 	public List<MainDocument> getDocuments(@RequestParam String key, @RequestParam String value) throws Exception{
 		List<MainDocument> docs = tradeLedgerService.findAll(key,value); //To find nested fields, simply put field.nestedField
@@ -57,14 +59,11 @@ public class MongoController {
 		return tradeLedgerService.findAll();
 	}
 
+		
+	//Doesnt deal with integers/numbers/booleans yet. I need to find a way to get this working with them
 	@PostMapping("/document/{id}")
-	public void UpdateDocument(@PathVariable ObjectId id, @RequestParam String updateKey, @RequestParam String updateValue) {
-				  
-		tradeLedgerService.update(id, updateValue, updateKey);
-	}
-	@PostMapping("/document/MultiFields/{id}")
-	public void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam List<String> updateKey, @RequestParam List<Object> updateValue) {
-				  
-		tradeLedgerService.updateFields(id, updateKey, updateValue);
+	public void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam("updateKey") List<String> updateKey, @RequestParam("updateValue") List<String> updateValue) {
+		List<Object> objectUpdateValue = new ArrayList<Object>(updateValue);
+		tradeLedgerService.update(id, updateKey, objectUpdateValue);
 	}
 }

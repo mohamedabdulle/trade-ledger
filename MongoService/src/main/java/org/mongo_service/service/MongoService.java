@@ -29,6 +29,15 @@ public class MongoService implements MongoDbOperations {
 		return mongoOperations.findAll(MainDocument.class);
 	}
 
+	public void removeField(ObjectId id, String deleteKey) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		Update update = new Update();
+		update.set(deleteKey,null);
+		
+		mongoOperations.updateFirst(query, update, MainDocument.class);
+	}
+	
 	public void removeOne(ObjectId id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
@@ -46,19 +55,8 @@ public class MongoService implements MongoDbOperations {
 		return mongoOperations.find(query,MainDocument.class);
 		
 	}
-
-	public void update(ObjectId id, Object updateValue, String updateKey) {
-		Query query = new Query();
-		query.addCriteria(Criteria.where("_id").is(id));
-
-		Update update = new Update();
-		update.set(updateKey, updateValue);
-
-		mongoOperations.updateFirst(query, update, MainDocument.class);
-
-	}	
 	
-	public void updateFields(ObjectId id, List<String> updateKey, List<Object> updateValue) {
+	public void update(ObjectId id, List<String> updateKey, List<Object> updateValue) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 		
@@ -67,6 +65,7 @@ public class MongoService implements MongoDbOperations {
 		int lastIndex = updateKey.size();
 		while (i < lastIndex ) {
 			update.set(updateKey.get(i),updateValue.get(i));
+			i++;
 		}
 		
 		mongoOperations.updateFirst(query, update, MainDocument.class);
