@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.mongo_service.MongoDbOperations;
 import org.mongo_service.config.MongoDbConfig;
 import org.mongo_service.model.MainDocument;
+import org.mongo_service.model.setup.ClientTransactionsDocument;
 
 @Service
 public class MongoService implements MongoDbOperations {
@@ -25,8 +26,8 @@ public class MongoService implements MongoDbOperations {
     }
 
     @Override
-	public List<MainDocument> findAll() {
-		return mongoOperations.findAll(MainDocument.class);
+	public List<ClientTransactionsDocument> findAll() {
+		return mongoOperations.findAll(ClientTransactionsDocument.class);
 	}
 
 	public void removeField(ObjectId id, String deleteKey) {
@@ -35,35 +36,35 @@ public class MongoService implements MongoDbOperations {
 		Update update = new Update();
 		update.set(deleteKey,null);
 		
-		mongoOperations.updateFirst(query, update, MainDocument.class);
+		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 	}
 
 	public void removeOne(ObjectId id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 
-		mongoOperations.remove(query, MainDocument.class);
+		mongoOperations.remove(query, ClientTransactionsDocument.class);
 	}
 
-	public void insertOne(MainDocument mainDocument) {
+	public void insertOne(ClientTransactionsDocument mainDocument) {
 		mongoOperations.insert(mainDocument);
 	}
 
-    public List<MainDocument> findAll(String key, String value) {
+    public List<ClientTransactionsDocument> findAll(String key, String value) {
 //        MainDocument doc = new MainDocument();
 //        insertOne(doc);
         Query query = new Query();
         query.addCriteria(Criteria.where(key).is(value));
-        return mongoOperations.find(query, MainDocument.class);
+        return mongoOperations.find(query, ClientTransactionsDocument.class);
 
     }
 
-    public List<MainDocument> queryByDateRange(long start, long end) {
+    public List<ClientTransactionsDocument> queryByDateRange(long start, long end) {
         return this.queryByRangeWithField(start, end, "actualpostingdate");
     }
 
     /* To DO: ADD ASSERTION THAT FIELD IS VALID */
-    private List<MainDocument> queryByRangeWithField(Object start, Object end, String fieldName) {
+    private List<ClientTransactionsDocument> queryByRangeWithField(Object start, Object end, String fieldName) {
         Query query = new Query();
 
         query.addCriteria(
@@ -74,7 +75,7 @@ public class MongoService implements MongoDbOperations {
         );
         System.out.println(query);
 
-        return mongoOperations.find(query, MainDocument.class);
+        return mongoOperations.find(query, ClientTransactionsDocument.class);
     }
 
     public void update(ObjectId id, Object updateValue, String updateKey) {
@@ -84,15 +85,15 @@ public class MongoService implements MongoDbOperations {
         Update update = new Update();
         update.set(updateKey, updateValue);
 
-        mongoOperations.updateFirst(query, update, MainDocument.class);
+        mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 
     }
 
 	
-	public List<MainDocument> findAll(String key, Object value){
+	public List<ClientTransactionsDocument> findAll(String key, Object value){
 		Query query = new Query();
 		query.addCriteria(Criteria.where(key).is(value));
-		return mongoOperations.find(query,MainDocument.class);
+		return mongoOperations.find(query,ClientTransactionsDocument.class);
 		
 	}
 	
@@ -108,6 +109,6 @@ public class MongoService implements MongoDbOperations {
 			i++;
 		}
 		
-		mongoOperations.updateFirst(query, update, MainDocument.class);
+		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 	}
 }

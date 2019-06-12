@@ -4,16 +4,17 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongo_service.model.MainDocument;
+import org.mongo_service.model.setup.ClientTransactionsDocument;
 
 public interface MongoDbOperations {
 
-	List<MainDocument> findAll();
+	List<ClientTransactionsDocument> findAll();
 
 	void removeOne(ObjectId id);
 
-	void insertOne(MainDocument test);
+	void insertOne(ClientTransactionsDocument test);
 
-	List<MainDocument> findAll(String key, Object value);
+	List<ClientTransactionsDocument> findAll(String key, Object value);
 	
 	void update(ObjectId id, List<String> updateKey, List<Object> updateValue);
 	
