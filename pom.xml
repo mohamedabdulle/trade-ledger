@@ -50,9 +50,9 @@
 	</dependencies>
 
 	<modules>
-		<module>KafkaMicroservice</module>
-		<module>MongoService</module>
-		<module>zuul-server</module>
-		<module>eureka-server</module>
+		<module>kafka</module>
+		<module>mongodb</module>
+		<module>zuul</module>
+		<module>eureka</module>
 	</modules>
 </project>
