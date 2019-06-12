@@ -1,0 +1,17 @@
+{
+	"distributiontransactions" : {
+		"aggregated": false
+		"distributioneventtype": " not random",
+		"distributionrate": "15",
+		"distributionrecorddate": " not January",
+		"eventid": [
+			"11",
+			"12",
+			"13",
+			"14",
+			"198595949"
+		],
+		"excludedfromaggregation": true,
+		"omnibustradetransmitted": false
+	}
+}

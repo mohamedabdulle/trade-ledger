@@ -1,0 +1,32 @@
+{
+	"maindocument" : {
+		"actualpostingdate": 10,
+		"agentforfirm": "IFDS",
+		"anticipatedpostingdate": "Saturday",
+		"bin": "garbage",
+		"clearingfirmnumber": 15,
+		"countrycode": "002",
+		"currencyindicator": "003",
+		"dealerfirmnumber": 13,
+		"effectonbalancer": "Yang",
+		"fund_id": "11000",
+		"moneyamount": "11 Zillion",
+		"omnibustransaction_Id": "11001",
+		"price": 19494,
+		"representativename": "Trump",
+		"representativenumber": 45,
+		"securityid": "045",
+		"sequenceid": "0045",
+		"sharequantity": "17",
+		"stateofsale": "not listed",
+		"submissiondate": "April",
+		"symbol": "Aquarius",
+		"tradedate": "March",
+		"transactioncategory": "mutual",
+		"transactionsource": "IFDS",
+		"transactionstatus": "Not Completed",
+		"transactionsubtype": "Toonies",
+		"transactiontype": "No Money",
+		"transactionuserid": "King"
+	}
+}
