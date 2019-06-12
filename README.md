@@ -1,23 +1,45 @@
-# subaccounting
+# Trade Ledger
 
-## MongoDB
+A POC to test out listening to a Kafka topic to send requests to a MongoDB using a Microservice Architecture with Spring Boot.
 
-Export MongoDB before pushing code:
+## Quick Start
 
-Substitute {PATH} with your absolute path.
+1. Run Kafka
 
-mongodump -d subaccounting -o {PATH}\subaccounting\src\main\resources\mongodb\data\db
+Refer to https://kafka.apache.org/quickstart.
 
-Import MongoDB after pull:
+a) Start Zookeeper for Kafka 
+```
+bin/windows/zookeeper-server-start.bat config/zookeeper.properties
+```
 
-mongorestore -d subaccounting {PATH}\subaccounting\src\main\resources\mongodb\data\db\subaccounting
+b) Start Kafka server
+```
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+```
 
-Confirm correct directory and port number:
+c) Create Kakfa topics
+This only needs to be done once
+```
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic mongoRequests
+bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic logging
+```
 
-db.serverCmdLineOpts()
+2. Start Eureka server by running EurekaServerApplication.java as a Java Application
 
-## Lombok
+3. Start Zuul server by running ZuulApplication.java as a Java Application
+
+4. Start MongoServiceApplication.java as a Java Application
+
+5. (Optional) Start KafkaServiceApplication.java as a Java Application to listen to requests from the mongoRequests kafka topic
+
+### Lombok
 
 Setting up Lombok:
 
 https://www.baeldung.com/lombok-ide
+
+## Authors
+Sahan De Almeida
+Stephen Lin
+Mohamed Abdulle
