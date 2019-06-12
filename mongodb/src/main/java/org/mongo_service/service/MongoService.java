@@ -68,10 +68,10 @@ public class MongoService implements MongoDbOperations {
         Query query = new Query();
 
         query.addCriteria(
-                // new Criteria().andOperator(
-                Criteria.where(fieldName).gte(start)// ,
-        // Criteria.where(fieldName).lt(end)
-        // )
+                 new Criteria().andOperator(
+                Criteria.where(fieldName).gte(start),
+         Criteria.where(fieldName).lt(end)
+         )
         );
         System.out.println(query);
 
