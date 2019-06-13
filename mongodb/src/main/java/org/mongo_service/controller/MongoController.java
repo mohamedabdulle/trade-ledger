@@ -5,9 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 import org.mongo_service.model.MainDocument;
 import org.mongo_service.model.setup.ClientTransactionsDocument;
 import org.mongo_service.service.MongoService;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.*;
 
 @RestController
 @RequestMapping("/document/")
@@ -68,10 +73,10 @@ public class MongoController {
 
 	//Problem with int/numbers/booleans. 
 
-	@GetMapping("/document/getDocWithQuery")
-	public List<ClientTransactionsDocument> getDocuments(@RequestParam String key, @RequestParam Integer value) throws Exception{
+	@GetMapping("/getDocWithQuery")
+	public <T> List<ClientTransactionsDocument> getDocuments(@RequestParam String key, @RequestParam T value) throws Exception{
 		Object passedValue = (Object) value;
-		List<ClientTransactionsDocument> docs = tradeLedgerService.findAll(key,passedValue); //To find nested fields, simply put field.nestedField
+		List<ClientTransactionsDocument> docs = tradeLedgerService.findAll(key, value); //To find nested fields, simply put field.nestedField
 		return docs;
 	}
 
@@ -84,8 +89,18 @@ public class MongoController {
 	
 	//Doesnt deal with integers/numbers/booleans yet. I need to find a way to get this working with them
 	@PostMapping("/{id}")
-	public void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam("updateKey") List<String> updateKey, @RequestParam("updateValue") List<String> updateValue) {
-		List<Object> objectUpdateValue = new ArrayList<Object>(updateValue);
-		tradeLedgerService.update(id, updateKey, objectUpdateValue);
+	public <T> void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam String updateKey, @RequestParam T updateValue) {
+		tradeLedgerService.update(id, updateKey, updateValue);
 	}
+	
+	@PostMapping("/BodyRequest/{id}")
+	public String updateDocumentWithBody(@PathVariable ObjectId id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
+		Document doc = new Document();
+		return "";
+		
+		
+		
+	}
+	
+	
 }

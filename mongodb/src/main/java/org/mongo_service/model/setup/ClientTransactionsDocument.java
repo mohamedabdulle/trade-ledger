@@ -2,6 +2,8 @@ package org.mongo_service.model.setup;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -17,7 +19,7 @@ public class ClientTransactionsDocument {
 
     @JsonAlias("_id")
     @Id
-    private int id;
+    private ObjectId id;
 
     @JsonAlias("actualpostingdate")
     @Field("actualpostingdate")

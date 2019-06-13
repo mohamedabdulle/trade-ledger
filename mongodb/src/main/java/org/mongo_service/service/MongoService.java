@@ -90,25 +90,29 @@ public class MongoService implements MongoDbOperations {
     }
 
 	
-	public List<ClientTransactionsDocument> findAll(String key, Object value){
+	public <T> List<ClientTransactionsDocument> findAll(String key, T value){
 		Query query = new Query();
 		query.addCriteria(Criteria.where(key).is(value));
 		return mongoOperations.find(query,ClientTransactionsDocument.class);
 		
 	}
 	
-	public void update(ObjectId id, List<String> updateKey, List<Object> updateValue) {
+	public <T> void update(ObjectId id, String updateKey, T updateValue) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 		
 		Update update = new Update();
-		int i = 0;
-		int lastIndex = updateKey.size();
-		while (i < lastIndex ) {
-			update.set(updateKey.get(i),updateValue.get(i));
-			i++;
-		}
+		update.set(updateKey, updateValue);
 		
 		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
+	}
+	
+	public void update(ObjectId id, ClientTransactionsDocument cTD) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(id));
+		
+		Update update = new Update();
+		//update.fromDocument(cTD);
+		
 	}
 }
