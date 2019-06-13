@@ -45,8 +45,8 @@ public class MongoService implements MongoDbOperations {
 		mongoOperations.remove(query, ClientTransactionsDocument.class);
 	}
 
-	public void insertOne(ClientTransactionsDocument mainDocument) {
-		mongoOperations.insert(mainDocument);
+	public ClientTransactionsDocument insertOne(ClientTransactionsDocument mainDocument) {
+		return mongoOperations.insert(mainDocument);
 	}
 
     public List<ClientTransactionsDocument> findAll(String key, String value) {
