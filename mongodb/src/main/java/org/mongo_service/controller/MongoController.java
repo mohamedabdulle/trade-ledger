@@ -1,25 +1,16 @@
 package org.mongo_service.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.jackson.JsonObjectSerializer;
 import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.*;
 
-import org.mongo_service.model.MainDocument;
-import org.mongo_service.model.setup.ClientTransactionsDocument;
+import org.mongo_service.model.ClientTransactionsDocument;
 import org.mongo_service.service.MongoService;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsontype.*;
 
 @RestController
 @RequestMapping("/document/")
