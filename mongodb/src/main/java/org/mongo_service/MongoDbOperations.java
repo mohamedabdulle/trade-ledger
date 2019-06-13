@@ -3,7 +3,6 @@ package org.mongo_service;
 import java.util.List;
 
 import org.bson.types.ObjectId;
-import org.mongo_service.model.MainDocument;
 import org.mongo_service.model.setup.ClientTransactionsDocument;
 
 public interface MongoDbOperations {

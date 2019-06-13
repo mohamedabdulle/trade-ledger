@@ -14,7 +14,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.messaging.support.GenericMessage;
 import org.springframework.web.bind.annotation.*;
 
-import org.mongo_service.model.MainDocument;
 import org.mongo_service.model.setup.ClientTransactionsDocument;
 import org.mongo_service.service.MongoService;
 

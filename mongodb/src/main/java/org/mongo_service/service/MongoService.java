@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import org.mongo_service.MongoDbOperations;
 import org.mongo_service.config.MongoDbConfig;
-import org.mongo_service.model.MainDocument;
 import org.mongo_service.model.setup.ClientTransactionsDocument;
 
 @Service
