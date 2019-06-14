@@ -1,5 +1,6 @@
 package org.mongo_service.component;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -10,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import org.mongo_service.model.ClientTransactionsDocument;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.util.List;
 
 @Component
 public class MongoDbInitializer implements ApplicationRunner {
@@ -46,6 +49,6 @@ public class MongoDbInitializer implements ApplicationRunner {
 //            }
 //        }
         mongoOperations
-                .insert(new ObjectMapper().readValue(new ClassPathResource(stubFileLocation + collection + ".json").getFile(), ClientTransactionsDocument.class));
+                .insert(new ObjectMapper().readValue(new ClassPathResource(stubFileLocation + collection + ".json").getFile(), new TypeReference<List<ClientTransactionsDocument>>(){}), ClientTransactionsDocument.class);
     }
 }
