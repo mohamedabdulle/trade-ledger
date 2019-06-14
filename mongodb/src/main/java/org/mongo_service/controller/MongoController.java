@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import com.google.gson.Gson;
+
 import org.mongo_service.model.ClientTransactionsDocument;
 import org.mongo_service.service.MongoService;
 
@@ -85,11 +87,11 @@ public class MongoController {
 	}
 	
 	@PostMapping("/BodyRequest/{id}")
-	public String updateDocumentWithBody(@PathVariable ObjectId id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
-		Document doc = new Document();
-		return "";
-		
-		
+	public Document updateDocumentWithBody(@PathVariable ObjectId id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
+		Gson gson = new Gson();
+		Document doc = Document.parse(gson.toJson(ClientTransactionsDocument));
+		tradeLedgerService.update(id, doc);
+		return doc;
 		
 	}
 	

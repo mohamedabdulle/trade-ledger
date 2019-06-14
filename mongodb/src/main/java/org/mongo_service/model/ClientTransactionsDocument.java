@@ -28,7 +28,7 @@ public class ClientTransactionsDocument {
     private String fund_id; // Reference to _id field within security master
     private String moneyAmount;
     private String omnibusTransaction_Id; // Reference to "_id" from omnibus
-    private int price;
+    private double price;
     private String representativeName;
     private int representativeNumber;
     private String securityId;
