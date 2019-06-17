@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,7 +17,10 @@ import org.mongo_service.model.setup.ClientTransactionsDocument;
 
 @Service
 public class MongoService implements MongoDbOperations {
-
+ 
+    @Value(value = "${spring.data.mongodb.collection}")
+    private String collectionName;
+ 
     private MongoOperations mongoOperations;
 
     @Autowired
@@ -114,4 +118,9 @@ public class MongoService implements MongoDbOperations {
 		//update.fromDocument(cTD);
 		
 	}
+	
+    public void removeAll() {
+        Query query = new Query();
+        mongoOperations.findAllAndRemove(query, collectionName); 
+    }
 }

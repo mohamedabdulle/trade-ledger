@@ -31,8 +31,13 @@ public class MongoController {
 	KafkaTemplate<String, String> kafkaTemplate;
 	
     @Value(value = "${loggingTopicName}")
-    private String topicName;
-	
+    private String topicName;	
+   
+    @DeleteMapping("/deleteAll")
+    public void deleteAll() {
+        tradeLedgerService.removeAll();
+    }
+    
 	@DeleteMapping("/{id}")
 	public List<ClientTransactionsDocument> deleteOne(@PathVariable ObjectId id) {
 		tradeLedgerService.removeOne(id);
@@ -91,13 +96,13 @@ public class MongoController {
 		tradeLedgerService.update(id, updateKey, updateValue);
 	}
 	
+	
+	    
+	
 	@PostMapping("/BodyRequest/{id}")
 	public String updateDocumentWithBody(@PathVariable ObjectId id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
 		Document doc = new Document();
 		return "";
-		
-		
-		
 	}
 	
 	
