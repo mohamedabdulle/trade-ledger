@@ -12,7 +12,7 @@ public interface MongoDbOperations {
 
 	void removeOne(ObjectId id);
 
-	void insertOne(ClientTransactionsDocument test);
+	ClientTransactionsDocument insertOne(ClientTransactionsDocument test);
 
 	<T> List<ClientTransactionsDocument> findAll(String key, T value);
 	

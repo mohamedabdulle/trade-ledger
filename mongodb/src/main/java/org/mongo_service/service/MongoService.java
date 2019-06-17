@@ -7,6 +7,7 @@ import java.util.List;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.mongodb.core.MongoOperations;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -21,7 +22,6 @@ import org.mongo_service.model.ClientTransactionsDocument;
 public class MongoService implements MongoDbOperations {
 
 	private MongoOperations mongoOperations;
-
 	@Autowired
 	public MongoService(MongoDbConfig mongoClient) {
 		mongoOperations = mongoClient.mongoTemplate();
@@ -48,8 +48,8 @@ public class MongoService implements MongoDbOperations {
 		mongoOperations.remove(query, ClientTransactionsDocument.class);
 	}
 
-	public void insertOne(ClientTransactionsDocument mainDocument) {
-		mongoOperations.insert(mainDocument);
+	public ClientTransactionsDocument insertOne(ClientTransactionsDocument mainDocument) {
+		return mongoOperations.insert(mainDocument);
 	}
 
 	public List<ClientTransactionsDocument> findAll(String key, String value) {
@@ -132,4 +132,9 @@ public class MongoService implements MongoDbOperations {
 		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 
 	}
+	
+    public void removeAll() {
+        Query query = new Query();
+        mongoOperations.findAllAndRemove(query, collectionName); 
+    }
 }
