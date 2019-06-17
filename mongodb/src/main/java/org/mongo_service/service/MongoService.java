@@ -22,6 +22,10 @@ import org.mongo_service.model.ClientTransactionsDocument;
 public class MongoService implements MongoDbOperations {
 
 	private MongoOperations mongoOperations;
+	@Value(value = "${spring.data.mongodb.collection}")
+    private String collectionName;
+	
+	
 	@Autowired
 	public MongoService(MongoDbConfig mongoClient) {
 		mongoOperations = mongoClient.mongoTemplate();
