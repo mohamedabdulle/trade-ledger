@@ -48,7 +48,8 @@ public class MongoDbInitializer implements ApplicationRunner {
 //                }
 //            }
 //        }
-        mongoOperations
-                .insert(new ObjectMapper().readValue(new ClassPathResource(stubFileLocation + collection + ".json").getFile(), new TypeReference<List<ClientTransactionsDocument>>(){}), ClientTransactionsDocument.class);
+    	List<ClientTransactionsDocument> docs = new ObjectMapper().readValue(new ClassPathResource(stubFileLocation + collection + ".json").getFile(), new TypeReference<List<ClientTransactionsDocument>>(){});
+		System.out.println(docs);
+		mongoOperations.insert(docs ,ClientTransactionsDocument.class);
     }
 }
