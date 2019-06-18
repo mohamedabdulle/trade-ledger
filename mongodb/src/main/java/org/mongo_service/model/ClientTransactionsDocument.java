@@ -2,6 +2,7 @@ package org.mongo_service.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -46,4 +47,8 @@ public class ClientTransactionsDocument {
     private String transactionUserId;
     private DistributionTransactions distributionTransactions;
     private Comments comments;
+    
+    public String toString() {
+    	return ReflectionToStringBuilder.toString(this);
+    }
 }

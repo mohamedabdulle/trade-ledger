@@ -79,8 +79,10 @@ public class MongoController {
 	}
 
 	@PostMapping("/create")
-	public ClientTransactionsDocument CreateDocument(@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
-		return tradeLedgerService.insertOne(ClientTransactionsDocument);
+	public ClientTransactionsDocument CreateDocument(@RequestBody ClientTransactionsDocument clientTransactionsDocument) {
+		System.out.println("doc in");
+		System.out.println(clientTransactionsDocument.toString());
+		return tradeLedgerService.insertOne(clientTransactionsDocument);
 	}
 
 	
