@@ -68,7 +68,7 @@ public class MongoService implements MongoDbOperations {
 	}
 
 	public List<ClientTransactionsDocument> queryByDateRange(long start, long end) {
-		return this.queryByRangeWithField(start, end, "actualpostingdate");
+		return this.queryByRangeWithField(start, end, "actualPostingDate");
 	}
 
 	/* To DO: ADD ASSERTION THAT FIELD IS VALID */
