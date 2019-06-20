@@ -10,15 +10,15 @@ public interface MongoDbOperations {
 
 	List<ClientTransactionsDocument> findAll();
 
-	void removeOne(ObjectId id);
+	void removeOne(String id);
 
 	ClientTransactionsDocument insertOne(ClientTransactionsDocument test);
 
 	<T> List<ClientTransactionsDocument> findAll(String key, T value);
 	
-	<T> void update(ObjectId id, String updateKey, T updateValue);
+	<T> void update(String id, String updateKey, T updateValue);
 	
-	void removeField(ObjectId id, String deleteKey);
+	void removeField(String id, String deleteKey);
 	
-	void update(ObjectId id, Document doc);
+	void update(String id, Document doc);
 }

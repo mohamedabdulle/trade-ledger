@@ -3,7 +3,6 @@ package org.mongo_service.controller;
 import java.util.List;
 
 import org.bson.Document;
-import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -33,13 +32,13 @@ public class MongoController {
     }
     
 	@DeleteMapping("/{id}")
-	public List<ClientTransactionsDocument> deleteOne(@PathVariable ObjectId id) {
+	public List<ClientTransactionsDocument> deleteOne(@PathVariable String id) {
 		tradeLedgerService.removeOne(id);
 		return tradeLedgerService.findAll();
 	}
 
 	@DeleteMapping("/field/{id}")
-	public void deleteField(@PathVariable ObjectId id, @RequestParam String deleteKey) {
+	public void deleteField(@PathVariable String id, @RequestParam String deleteKey) {
 		tradeLedgerService.removeField(id, deleteKey);
 	}
 
@@ -88,7 +87,7 @@ public class MongoController {
 	
 	//Doesnt deal with integers/numbers/booleans yet. I need to find a way to get this working with them
 	@PostMapping("/{id}")
-	public <T> void UpdateDocumentFields(@PathVariable ObjectId id, @RequestParam String updateKey, @RequestParam T updateValue) {
+	public <T> void UpdateDocumentFields(@PathVariable String id, @RequestParam String updateKey, @RequestParam T updateValue) {
 		tradeLedgerService.update(id, updateKey, updateValue);
 	}
 	
@@ -96,7 +95,7 @@ public class MongoController {
 	    
 	
 	@PostMapping("/BodyRequest/{id}")
-	public Document updateDocumentWithBody(@PathVariable ObjectId id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
+	public Document updateDocumentWithBody(@PathVariable String id,@RequestBody ClientTransactionsDocument ClientTransactionsDocument) {
 		Gson gson = new Gson();
 		Document doc = Document.parse(gson.toJson(ClientTransactionsDocument));
 		tradeLedgerService.update(id, doc);

@@ -36,7 +36,7 @@ public class MongoService implements MongoDbOperations {
 		return mongoOperations.findAll(ClientTransactionsDocument.class);
 	}
 
-	public void removeField(ObjectId id, String deleteKey) {
+	public void removeField(String id, String deleteKey) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 		Update update = new Update();
@@ -45,7 +45,7 @@ public class MongoService implements MongoDbOperations {
 		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 	}
 
-	public void removeOne(ObjectId id) {
+	public void removeOne(String id) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 
@@ -82,7 +82,7 @@ public class MongoService implements MongoDbOperations {
 		return mongoOperations.find(query, ClientTransactionsDocument.class);
 	}
 
-	public void update(ObjectId id, Object updateValue, String updateKey) {
+	public void update(String id, Object updateValue, String updateKey) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 
@@ -100,7 +100,7 @@ public class MongoService implements MongoDbOperations {
 
 	}
 
-	public <T> void update(ObjectId id, String updateKey, T updateValue) {
+	public <T> void update(String id, String updateKey, T updateValue) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 
@@ -110,7 +110,7 @@ public class MongoService implements MongoDbOperations {
 		mongoOperations.updateFirst(query, update, ClientTransactionsDocument.class);
 	}
 
-	public void update(ObjectId id, Document doc) {
+	public void update(String id, Document doc) {
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(id));
 

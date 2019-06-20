@@ -15,8 +15,8 @@ import lombok.Data;
 public class ClientTransactionsDocument {
     
     @Id
-    private ObjectId id;
-    private Long actualPostingDate;
+    private String id;
+    private String actualPostingDate;
     private String agentForFirm;
     private String anticipatedPostingDate;
     private String bin;
