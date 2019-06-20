@@ -23,17 +23,20 @@
 					"script": {
 						"id": "7fca0a85-4ea9-4e39-9956-8b1ecd0cbda6",
 						"exec": [
-							"pm.test(\"Your test name\", function () {",
+							"pm.test(\"Successful request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});",
+							"",
+							"pm.test(\"check initial document count\", function () {",
 							"    var jsonData = pm.response.json();",
 							"    console.log(\"response is\", jsonData);",
 							"    ",
 							"    let numDocs = jsonData.length;",
 							"    console.log(\"numdocs is \" + numDocs)",
 							"    pm.expect(numDocs >= 1).to.be.true;",
-							"    // if((numDocs %20) === 0) {",
-							"    //     ++numDocs;",
-							"    // }",
 							"    pm.environment.set(\"counter\", numDocs)",
+							"    ",
+							"    pm.environment.set(\"firstDocumentId\", jsonData[0].id);",
 							"});"
 						],
 						"type": "text/javascript"
@@ -68,7 +71,11 @@
 						"exec": [
 							"let newCounter = Number.parseInt(pm.environment.get(\"counter\")) + 1;",
 							"pm.environment.set(\"counter\", newCounter);",
-							""
+							"",
+							"let factor = pm.environment.get(\"counter\") % 2;",
+							"let fundIdValue = (1000 * (1 + factor)).toString();",
+							"",
+							"pm.environment.set(\"fundIdValue\", fundIdValue);"
 						],
 						"type": "text/javascript"
 					}
@@ -103,7 +110,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"actualPostingDate\": {{counter}},\n        \"agentForFirm\": \"DST\",\n        \"anticipatedPostingDate\": {{$timestamp}},\n        \"bin\": \"garbage\",\n        \"clearingFirmNumber\": 5,\n        \"countryCode\": \"001\",\n        \"currencyIndicator\": \"002\",\n        \"dealerFirmNumber\": 3,\n        \"effectOnBalance\": \"Yin\",\n        \"fund_id\": \"1000\",\n        \"moneyAmount\": \"1 Zillion\",\n        \"omnibusTransaction_Id\": \"1001\",\n        \"price\": 9494,\n        \"representativeName\": \"Obama\",\n        \"representativeNumber\": 44,\n        \"securityId\": \"044\",\n        \"sequenceId\": \"0044\",\n        \"shareQuantity\": \"7\",\n        \"stateOfSale\": \"listed\",\n        \"submissionDate\": \"May\",\n        \"symbol\": \"Capricorn\",\n        \"tradeDate\": \"February\",\n        \"transactionCategory\": \"Fund\",\n        \"transactionSource\": \"DST\",\n        \"transactionStatus\": \"Completed\",\n        \"transactionSubType\": \"Loonies\",\n        \"transactionType\": \"Money\",\n        \"transactionUserId\": \"Queen\",\n        \"distributionTransactions\": {\n            \"aggregated\": true,\n            \"distributionEventType\": \"random\",\n            \"distributionRate\": \"5\",\n            \"distributionRecordDate\": \"January\",\n            \"eventId\": [\n                \"1\",\n                \"2\",\n                \"3\",\n                \"4\",\n                \"98595949\"\n            ],\n            \"excludedFromAggregation\": false,\n            \"omnibusTradeTransmitted\": true\n        },\n        \"comments\": {\n            \"comment\": \"no comment\",\n            \"commentDateTime\": \"never\",\n            \"commentUserId\": \"lawyer\"\n        }\n    }"
+					"raw": "    {\n        \"actualPostingDate\": {{counter}},\n        \"agentForFirm\": \"DST\",\n        \"anticipatedPostingDate\": {{$timestamp}},\n        \"bin\": \"garbage\",\n        \"clearingFirmNumber\": 5,\n        \"countryCode\": \"001\",\n        \"currencyIndicator\": \"002\",\n        \"dealerFirmNumber\": 3,\n        \"effectOnBalance\": \"Yin\",\n        \"fund_id\": {{fundIdValue}},\n        \"moneyAmount\": \"1 Zillion\",\n        \"omnibusTransaction_Id\": \"1001\",\n        \"price\": 9494,\n        \"representativeName\": \"Obama\",\n        \"representativeNumber\": 44,\n        \"securityId\": \"044\",\n        \"sequenceId\": \"0044\",\n        \"shareQuantity\": \"7\",\n        \"stateOfSale\": \"listed\",\n        \"submissionDate\": \"May\",\n        \"symbol\": \"Capricorn\",\n        \"tradeDate\": \"February\",\n        \"transactionCategory\": \"Fund\",\n        \"transactionSource\": \"DST\",\n        \"transactionStatus\": \"Completed\",\n        \"transactionSubType\": \"Loonies\",\n        \"transactionType\": \"Money\",\n        \"transactionUserId\": \"Queen\",\n        \"distributionTransactions\": {\n            \"aggregated\": true,\n            \"distributionEventType\": \"random\",\n            \"distributionRate\": \"5\",\n            \"distributionRecordDate\": \"January\",\n            \"eventId\": [\n                \"1\",\n                \"2\",\n                \"3\",\n                \"4\",\n                \"98595949\"\n            ],\n            \"excludedFromAggregation\": false,\n            \"omnibusTradeTransmitted\": true\n        },\n        \"comments\": {\n            \"comment\": \"no comment\",\n            \"commentDateTime\": \"never\",\n            \"commentUserId\": \"lawyer\"\n        }\n    }"
 				},
 				"url": {
 					"raw": "localhost:8762/subaccounting/document/create",
@@ -128,19 +135,25 @@
 					"script": {
 						"id": "8c7a4b45-0b24-4559-a7fe-c0f35f47cee3",
 						"exec": [
-							"pm.test(\"Response time is less than 200ms\", function () {",
+							"pm.test(\"Successful request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});",
+							"",
+							"pm.test(\"check if docs inserted\", function () {",
 							"    let jsonData = pm.response.json();",
 							"    let numDocs = jsonData.length;",
 							"    pm.expect(numDocs);",
 							"    pm.expect(numDocs).to.eql(pm.environment.get(\"counter\"));",
 							"    ",
 							"    let docToDelete = jsonData[numDocs - 1].id;",
+							"    let docToFindWithId = jsonData[numDocs -2].id;",
 							"    ",
 							"    console.log(jsonData)",
 							"    console.log(docToDelete);",
 							"    ",
 							"    // pm.expect(!!docToDelete).to.be.true;",
 							"    ",
+							"    pm.environment.set(\"docToFindWithId\", docToFindWithId);",
 							"    pm.environment.set(\"docToDelete\", docToDelete);",
 							"});"
 						],
@@ -184,7 +197,7 @@
 					"script": {
 						"id": "3afa187d-ecea-43f5-8aed-678b3361f38e",
 						"exec": [
-							"pm.test(\"Successful POST request\", function () {",
+							"pm.test(\"Successful request\", function () {",
 							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
 							"    ",
 							"    let jsonData = pm.response.json();",
@@ -197,11 +210,25 @@
 						],
 						"type": "text/javascript"
 					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "23b356b0-d7de-4ad5-a1b3-e23155843e11",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
 				}
 			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"url": {
 					"raw": "localhost:8762/subaccounting/document/{{docToDelete}}",
 					"host": [
@@ -212,6 +239,160 @@
 						"subaccounting",
 						"document",
 						"{{docToDelete}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "look for document with id",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "99a2c99d-dd37-4038-a22f-34d4cf0c66cc",
+						"exec": [
+							"pm.test(\"Successful request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});",
+							"",
+							"pm.test(\"check 1 document found\", function () {",
+							"    let docsFound = pm.response.json();",
+							"    pm.expect(docsFound.length).to.eql(1);",
+							"    ",
+							"    let docFound = docsFound[0];",
+							"    pm.expect(docFound.id).to.eql(pm.environment.get(\"docToFindWithId\"));",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8762/subaccounting/document/getDocWithQuery/?key=id&value={{docToFindWithId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"subaccounting",
+						"document",
+						"getDocWithQuery",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "id"
+						},
+						{
+							"key": "value",
+							"value": "{{docToFindWithId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "look for document with fund_id = 2000",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "003bef34-3cf3-4294-97d2-8b074751349d",
+						"exec": [
+							"pm.test(\"Successful request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});",
+							"",
+							"pm.test(\"check docs found with specified fund_id\", function () {",
+							"    let docsFound = pm.response.json();",
+							"    // pm.expect(docsFound.length).to.eql(10);",
+							"    ",
+							"    docsFound.forEach( docFound => {",
+							"        pm.expect(docFound.fund_id.toString()).to.eql(\"2000\");        ",
+							"    });",
+							"",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8762/subaccounting/document/getDocWithQuery/?key=fund_id&value=2000",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"subaccounting",
+						"document",
+						"getDocWithQuery",
+						""
+					],
+					"query": [
+						{
+							"key": "key",
+							"value": "fund_id"
+						},
+						{
+							"key": "value",
+							"value": "2000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update first document",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a330ddb9-849b-4402-9df6-511226044473",
+						"exec": [
+							"pm.test(\"Successful request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"bin\": \"newbin\",\n    \"countryCode\": \"new country code\"\n}"
+				},
+				"url": {
+					"raw": "localhost:8762/subaccounting/document/BodyRequest/{{firstDocumentId}}",
+					"host": [
+						"localhost"
+					],
+					"port": "8762",
+					"path": [
+						"subaccounting",
+						"document",
+						"BodyRequest",
+						"{{firstDocumentId}}"
 					]
 				}
 			},
