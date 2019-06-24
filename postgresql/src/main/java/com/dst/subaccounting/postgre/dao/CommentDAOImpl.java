@@ -6,7 +6,9 @@ import com.dst.subaccounting.postgre.mapper.CommentMapper;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -15,18 +17,19 @@ import java.util.List;
 public class CommentDAOImpl implements CommentDAO {
 
     @Autowired
-    NamedParameterJdbcTemplate postgreSQLJdbcTemplate;
+    NamedParameterJdbcTemplate jdbcTemplate;
 
     private static String TABLE_NAME = "Comment";
-    private static String INSERT_STATEMENT = "insert into " + TABLE_NAME + "(commentId, commentText, commentDateTime, commentUserId) values(?,?,?,?)";
+    private static String INSERT_STATEMENT = "insert into " + TABLE_NAME + "(commentId, commentText, commentDateTime, commentUserId) values(:commentId, :commentText, :commentDateTime, :commentUserId)";
     
     @Override
     public void insert(Comment comment) {
-    	//postgreSQLJdbcTemplate.update(INSERT_STATEMENT, comment.getCommentId(), comment.getCommentText(), comment.getCommentDateTime(), comment.getCommentUserId());
+    	SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(comment);
+    	jdbcTemplate.update(INSERT_STATEMENT, namedParameters);
     }
 
     @Override
     public List<Comment> getAllComments() {
-        return postgreSQLJdbcTemplate.query("select * from Comment", new CommentMapper());
+        return jdbcTemplate.query("select * from Comment", new CommentMapper());
     }
 }
