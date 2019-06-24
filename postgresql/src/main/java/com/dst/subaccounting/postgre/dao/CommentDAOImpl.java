@@ -6,6 +6,7 @@ import com.dst.subaccounting.postgre.mapper.CommentMapper;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
 public class CommentDAOImpl implements CommentDAO {
 
     @Autowired
-    JdbcTemplate postgreSQLJdbcTemplate;
+    NamedParameterJdbcTemplate postgreSQLJdbcTemplate;
 
     @Override
     public void insert(Comment comment) {

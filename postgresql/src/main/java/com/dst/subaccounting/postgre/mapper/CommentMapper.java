@@ -11,11 +11,11 @@ public class CommentMapper implements RowMapper<Comment> {
 
     @Override
     public Comment mapRow(ResultSet resultSet, int i) throws SQLException {
-        return new Comment(
-                resultSet.getInt("CommentId"),
-                resultSet.getString("CommentText"),
-                resultSet.getDate("CommentDateTime"),
-                resultSet.getString("CommentUserId")
-        );
+        Comment comment = new Comment();
+        comment.setCommentId(resultSet.getInt("CommentId"));
+        comment.setCommentText(resultSet.getString("CommentText"));
+        comment.setCommentDateTime(resultSet.getDate("CommentDateTime"));
+        comment.setCommentUserId(resultSet.getString("CommentUserId"));
+        return comment;
     }
 }

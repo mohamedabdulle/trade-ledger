@@ -11,11 +11,4 @@ public class Comment {
 	private String commentText;
 	private Date commentDateTime; // Should be date
 	private String commentUserId;
-
-	public Comment(int commentId, String commentText, Date commentDateTime, String commentUserId) {
-		this.commentId = commentId;
-		this.commentText = commentText;
-		this.commentDateTime = commentDateTime;
-		this.commentUserId = commentUserId;
-	}
 }
