@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -25,7 +26,15 @@ public class CommentDAOImpl implements CommentDAO {
     	SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(comment);
     	jdbcTemplate.update(INSERT_STATEMENT, namedParameters);
     }
-
+    
+    public void bulkInsert(ArrayList<Comment> comments) {
+    	//TO DO
+    }
+    
+    public void bulkDelete() {
+    	//TO DO
+    }
+    
     @Override
     public List<Comment> getAllComments() {
         return jdbcTemplate.query("select * from Comment", new CommentMapper());
