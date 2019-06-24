@@ -1,11 +1,9 @@
 package com.dst.subaccounting.postgre.dao;
 
 import com.dst.subaccounting.postgre.CommentDAO;
-import com.dst.subaccounting.postgre.config.AppConfig;
 import com.dst.subaccounting.postgre.mapper.CommentMapper;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
