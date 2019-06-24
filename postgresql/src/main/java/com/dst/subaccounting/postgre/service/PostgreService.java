@@ -1,6 +1,5 @@
 package com.dst.subaccounting.postgre.service;
 
-import com.dst.subaccounting.postgre.CommentDAO;
 import com.dst.subaccounting.postgre.dao.CommentDAOImpl;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,5 +15,9 @@ public class PostgreService {
 
     public List<Comment> getAll() {
        return commentDAO.getAllComments();
+    }
+    
+    public void insert(Comment comment) {
+    	commentDAO.insert(comment);
     }
 }

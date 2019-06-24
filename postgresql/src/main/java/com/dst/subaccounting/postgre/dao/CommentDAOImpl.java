@@ -17,8 +17,12 @@ public class CommentDAOImpl implements CommentDAO {
     @Autowired
     NamedParameterJdbcTemplate postgreSQLJdbcTemplate;
 
+    private static String TABLE_NAME = "Comment";
+    private static String INSERT_STATEMENT = "insert into " + TABLE_NAME + "(commentId, commentText, commentDateTime, commentUserId) values(?,?,?,?)";
+    
     @Override
     public void insert(Comment comment) {
+    	//postgreSQLJdbcTemplate.update(INSERT_STATEMENT, comment.getCommentId(), comment.getCommentText(), comment.getCommentDateTime(), comment.getCommentUserId());
     }
 
     @Override

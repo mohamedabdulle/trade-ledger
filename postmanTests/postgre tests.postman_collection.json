@@ -1,0 +1,74 @@
+{
+	"info": {
+		"_postman_id": "95ca9586-d48c-4c5a-bd91-e27c9cfdd269",
+		"name": "postgre tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

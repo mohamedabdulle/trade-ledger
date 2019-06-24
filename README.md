@@ -15,7 +15,7 @@ bin/windows/zookeeper-server-start.bat config/zookeeper.properties
 
 b) Start Kafka server
 ```
-bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+bin/kafka-server-start.sh config/server.properties
 ```
 
 c) Create Kakfa topics
