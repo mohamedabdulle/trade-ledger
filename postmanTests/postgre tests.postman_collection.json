@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "create",
+			"name": "insert",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -31,6 +31,39 @@
 					"path": [
 						"postgre",
 						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert bulk",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"bulk",
+						""
 					]
 				}
 			},
