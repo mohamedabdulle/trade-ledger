@@ -14,10 +14,22 @@ public class PostgreService {
     CommentDAOImpl commentDAO;
 
     public List<Comment> getAll() {
-       return commentDAO.getAllComments();
+       return commentDAO.getAll();
     }
     
-    public void insert(Comment comment) {
+    public void insertComment(Comment comment) {
     	commentDAO.insert(comment);
+    }
+    
+    public void insertManyComment(List<Comment> comments) {
+    	commentDAO.bulkInsert(comments);
+    }
+    
+    public void deleteComment(int commentId) {
+    	commentDAO.delete(commentId);
+    }
+    
+    public void deleteManyComment() {
+    	// TO DO
     }
 }
