@@ -6,5 +6,3 @@ CREATE TABLE Comment
     CommentDateTime timestamptz,
     CommentUserId varchar(50)
 );
-INSERT INTO Comment (CommentText, CommentDateTime, CommentUserId)
-VALUES ('text', now(),'DST');
