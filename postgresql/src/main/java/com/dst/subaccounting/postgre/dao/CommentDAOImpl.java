@@ -45,6 +45,6 @@ public class CommentDAOImpl implements CommentDAO {
     
     @Override
     public List<Comment> getAllComments() {
-        return jdbcTemplate.query("select * from Comment", new CommentMapper());
+        return jdbcTemplate.query("select * from " + TABLE_NAME, new CommentMapper());
     }
 }
