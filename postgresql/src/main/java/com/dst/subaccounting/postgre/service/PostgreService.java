@@ -18,16 +18,12 @@ public class PostgreService {
        return commentDAO.getAllComments();
     }
     
-    public void insert(Comment comment) {
+    public void insertComment(Comment comment) {
     	commentDAO.insert(comment);
     }
     
-    public void insertComment(Comment comment) {
-    	//TO DO: rename regular insert to this
-    }
-    
-    public void insertManyComment(ArrayList<Comment> commentList) {
-    	//TO DO
+    public void insertManyComment(List<Comment> comments) {
+    	commentDAO.bulkInsert(comments);
     }
     
     public void deleteManyComment() {

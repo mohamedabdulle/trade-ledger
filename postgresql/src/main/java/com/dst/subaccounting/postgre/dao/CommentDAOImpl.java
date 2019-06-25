@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CommentDAOImpl implements CommentDAO {
@@ -27,8 +29,8 @@ public class CommentDAOImpl implements CommentDAO {
     	jdbcTemplate.update(INSERT_STATEMENT, namedParameters);
     }
     
-    public void bulkInsert(ArrayList<Comment> comments) {
-    	//TO DO
+    public void bulkInsert(List<Comment> comments) {
+    	this.jdbcTemplate.batchUpdate(INSERT_STATEMENT, SqlParameterSourceUtils.createBatch(comments));
     }
     
     public void bulkDelete() {

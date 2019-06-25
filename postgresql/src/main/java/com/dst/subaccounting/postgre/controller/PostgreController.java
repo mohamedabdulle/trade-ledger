@@ -27,12 +27,12 @@ public class PostgreController {
     
     @PostMapping("/comment")
     public void insert(@RequestBody Comment comment) {
-    	postgreService.insert(comment);
+    	postgreService.insertComment(comment);
     }
     
     @PostMapping("/comment/bulk")
     public void bulkInsert(@RequestBody ArrayList<Comment> comments) {
-    	//TO DO
+    	postgreService.insertManyComment(comments);
     }
     
     @DeleteMapping("/comment/")
