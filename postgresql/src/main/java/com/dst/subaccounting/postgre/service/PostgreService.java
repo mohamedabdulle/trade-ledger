@@ -14,7 +14,7 @@ public class PostgreService {
     CommentDAOImpl commentDAO;
 
     public List<Comment> getAll() {
-       return commentDAO.getAllComments();
+       return commentDAO.getAll();
     }
     
     public void insertComment(Comment comment) {

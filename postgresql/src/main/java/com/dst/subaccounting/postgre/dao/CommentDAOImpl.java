@@ -1,6 +1,6 @@
 package com.dst.subaccounting.postgre.dao;
 
-import com.dst.subaccounting.postgre.CommentDAO;
+import com.dst.subaccounting.postgre.DAO;
 import com.dst.subaccounting.postgre.mapper.CommentMapper;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +14,9 @@ import java.util.HashMap;
 import java.util.List;
 
 @Repository
-public class CommentDAOImpl implements CommentDAO {
+public class CommentDAOImpl implements DAO<Comment> {
 
+	
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
@@ -44,7 +45,7 @@ public class CommentDAOImpl implements CommentDAO {
     }
     
     @Override
-    public List<Comment> getAllComments() {
+    public List<Comment> getAll() {
         return jdbcTemplate.query("select * from " + TABLE_NAME, new CommentMapper());
     }
 }

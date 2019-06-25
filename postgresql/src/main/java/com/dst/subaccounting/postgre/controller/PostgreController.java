@@ -2,8 +2,6 @@ package com.dst.subaccounting.postgre.controller;
 
 import com.dst.subaccounting.postgre.model.Comment;
 import com.dst.subaccounting.postgre.service.PostgreService;
-import com.dstsystems.brokerage.sa.ingester.services.Bson;
-import com.dstsystems.brokerage.sa.ingester.services.Document;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -50,7 +47,7 @@ public class PostgreController {
     	//TO DO
     }
     
-    public List<Integer> getTransactionsToProcess() {
+    public void getTransactionsToProcess() {
 //    	List<Bson> filters = Arrays.asList(
 //    			new Document("$match",
 //    					new Document("transactionRecievedDate", "0001-01-01")
