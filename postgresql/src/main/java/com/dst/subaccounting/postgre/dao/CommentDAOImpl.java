@@ -55,7 +55,13 @@ public class CommentDAOImpl implements DAO<Comment> {
         HashMap<String,Object> map = new HashMap<String,Object>();
         jdbcTemplate.update(DELETE_ALL_STATEMENT,map);
     }
-    
+
+    public List<Comment> getTransactionToProcess(){
+        //Need to change hard coded sql statement to something that is not hardcoded
+         return jdbcTemplate.query("select * from "+TABLE_NAME +" WHERE CommentDateTime = '2019-06-23' ORDER BY CommentId DESC",new CommentMapper());
+    }
+
+
     @Override
     public List<Comment> getAll() {
         return jdbcTemplate.query("select * from " + TABLE_NAME, new CommentMapper());

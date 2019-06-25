@@ -36,4 +36,8 @@ public class PostgreService {
     public void deleteAll(){
         commentDAO.deleteAll();
     }
+
+    public List<Comment> getTransactionToProcess(){
+        return commentDAO.getTransactionToProcess();
+    }
 }

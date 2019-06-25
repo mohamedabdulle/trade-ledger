@@ -46,8 +46,12 @@ public class PostgreController {
     public void bulkDelete(@RequestParam int[] commentId ) {
     	postgreService.deleteManyComment(commentId);
     }
-    
-    public void getTransactionsToProcess() {
+
+    @GetMapping("/comment/getTransactions")
+    public List<Comment> getTransactionsToProcess() {
+        //Get documents on a certain date then sorted in descending order by comment id
+        return postgreService.getTransactionToProcess();
+
 //    	List<Bson> filters = Arrays.asList(
 //    			new Document("$match",
 //    					new Document("transactionRecievedDate", "0001-01-01")
