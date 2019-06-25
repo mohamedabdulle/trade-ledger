@@ -34,7 +34,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     	tableName = _tableName;
     	rowMapper = _rowMapper;
     	
-    	List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).collect(Collectors.toList());
+    	List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).filter(f -> f != tableId).collect(Collectors.toList());
     	generateInsertStatement(fieldNames);
     	generateDeleteStatement();
     }
@@ -44,6 +44,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     			"(" + fieldNames.stream().collect(Collectors.joining(", ")) + 
     			") values(" + fieldNames.stream().map(f -> ":" + f).collect(Collectors.joining(", ")) + ")";
     }
+    
     private void generateDeleteStatement() {
     	deleteStatement = "DELETE FROM " + tableName + " WHERE " + tableName + "." + tableId + " = :" + tableId;
     }
