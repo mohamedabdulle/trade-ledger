@@ -1,103 +1,12 @@
 {
 	"info": {
-		"_postman_id": "5ed296be-ee9f-4578-a816-eeb89e3b9e9b",
-		"name": "MongoService test scripts",
+		"_postman_id": "be7aa986-ba79-48de-8f1a-3699062cd344",
+		"name": "postgre tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "get first document",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "d8016cd8-23c2-4e9d-a28c-4cc8051872f6",
-						"exec": [
-							"pm.environment.set(\"counter\", \"1\");"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "7fca0a85-4ea9-4e39-9956-8b1ecd0cbda6",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});",
-							"",
-							"pm.test(\"check initial document count\", function () {",
-							"    var jsonData = pm.response.json();",
-							"    console.log(\"response is\", jsonData);",
-							"    ",
-							"    let numDocs = jsonData.length;",
-							"    console.log(\"numdocs is \" + numDocs)",
-							"    pm.expect(numDocs >= 1).to.be.true;",
-							"    pm.environment.set(\"counter\", numDocs)",
-							"    ",
-							"    pm.environment.set(\"firstDocumentId\", jsonData[0].id);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8762/subaccounting/document/",
-					"host": [
-						"localhost"
-					],
-					"port": "8762",
-					"path": [
-						"subaccounting",
-						"document",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "create document",
-			"event": [
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "960010d5-7f6a-451f-a8fa-f8ae5b8f2bbb",
-						"exec": [
-							"let newCounter = Number.parseInt(pm.environment.get(\"counter\")) + 1;",
-							"pm.environment.set(\"counter\", newCounter);",
-							"",
-							"let factor = pm.environment.get(\"counter\") % 2;",
-							"let fundIdValue = (1000 * (1 + factor)).toString();",
-							"",
-							"pm.environment.set(\"fundIdValue\", fundIdValue);"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "test",
-					"script": {
-						"id": "a9880fff-79a2-4c85-ae0d-86b52bf06520",
-						"exec": [
-							"if(parseInt((pm.environment.get(\"counter\")) % 20) !== 0) {",
-							"    postman.setNextRequest('create document');    ",
-							"}",
-							"",
-							"",
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"name": "insert",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -110,18 +19,51 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"actualPostingDate\": {{counter}},\n        \"agentForFirm\": \"DST\",\n        \"anticipatedPostingDate\": {{$timestamp}},\n        \"bin\": \"garbage\",\n        \"clearingFirmNumber\": 5,\n        \"countryCode\": \"001\",\n        \"currencyIndicator\": \"002\",\n        \"dealerFirmNumber\": 3,\n        \"effectOnBalance\": \"Yin\",\n        \"fund_id\": {{fundIdValue}},\n        \"moneyAmount\": \"1 Zillion\",\n        \"omnibusTransaction_Id\": \"1001\",\n        \"price\": 9494,\n        \"representativeName\": \"Obama\",\n        \"representativeNumber\": 44,\n        \"securityId\": \"044\",\n        \"sequenceId\": \"0044\",\n        \"shareQuantity\": \"7\",\n        \"stateOfSale\": \"listed\",\n        \"submissionDate\": \"May\",\n        \"symbol\": \"Capricorn\",\n        \"tradeDate\": \"February\",\n        \"transactionCategory\": \"Fund\",\n        \"transactionSource\": \"DST\",\n        \"transactionStatus\": \"Completed\",\n        \"transactionSubType\": \"Loonies\",\n        \"transactionType\": \"Money\",\n        \"transactionUserId\": \"Queen\",\n        \"distributionTransactions\": {\n            \"aggregated\": true,\n            \"distributionEventType\": \"random\",\n            \"distributionRate\": \"5\",\n            \"distributionRecordDate\": \"January\",\n            \"eventId\": [\n                \"1\",\n                \"2\",\n                \"3\",\n                \"4\",\n                \"98595949\"\n            ],\n            \"excludedFromAggregation\": false,\n            \"omnibusTradeTransmitted\": true\n        },\n        \"comments\": {\n            \"comment\": \"no comment\",\n            \"commentDateTime\": \"never\",\n            \"commentUserId\": \"lawyer\"\n        }\n    }"
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
 				},
 				"url": {
-					"raw": "localhost:8762/subaccounting/document/create",
+					"raw": "http://localhost:{{port}}/postgre/comment",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8762",
+					"port": "{{port}}",
 					"path": [
-						"subaccounting",
-						"document",
-						"create"
+						"postgre",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "insert bulk",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"bulk",
+						""
 					]
 				}
 			},
@@ -129,247 +71,11 @@
 		},
 		{
 			"name": "get all",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8c7a4b45-0b24-4559-a7fe-c0f35f47cee3",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});",
-							"",
-							"pm.test(\"check if docs inserted\", function () {",
-							"    let jsonData = pm.response.json();",
-							"    let numDocs = jsonData.length;",
-							"    pm.expect(numDocs);",
-							"    pm.expect(numDocs).to.eql(pm.environment.get(\"counter\"));",
-							"    ",
-							"    let docToDelete = jsonData[numDocs - 1].id;",
-							"    let docToFindWithId = jsonData[numDocs -2].id;",
-							"    ",
-							"    console.log(jsonData)",
-							"    console.log(docToDelete);",
-							"    ",
-							"    // pm.expect(!!docToDelete).to.be.true;",
-							"    ",
-							"    pm.environment.set(\"docToFindWithId\", docToFindWithId);",
-							"    pm.environment.set(\"docToDelete\", docToDelete);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "643e829d-eb47-43cf-92f6-cfce5e5d60ca",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8762/subaccounting/document/",
-					"host": [
-						"localhost"
-					],
-					"port": "8762",
-					"path": [
-						"subaccounting",
-						"document",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete last document",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "3afa187d-ecea-43f5-8aed-678b3361f38e",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"    ",
-							"    let jsonData = pm.response.json();",
-							"    console.log(jsonData)",
-							"    // let numDocs = jsonData.length;",
-							"    // pm.expect(numDocs);",
-							"    // pm.expect(numDocs).to.eql(pm.environment.get(\"counter\") - 1); ",
-							"    ",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				},
-				{
-					"listen": "prerequest",
-					"script": {
-						"id": "23b356b0-d7de-4ad5-a1b3-e23155843e11",
-						"exec": [
-							""
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "localhost:8762/subaccounting/document/{{docToDelete}}",
-					"host": [
-						"localhost"
-					],
-					"port": "8762",
-					"path": [
-						"subaccounting",
-						"document",
-						"{{docToDelete}}"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "look for document with id",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "99a2c99d-dd37-4038-a22f-34d4cf0c66cc",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});",
-							"",
-							"pm.test(\"check 1 document found\", function () {",
-							"    let docsFound = pm.response.json();",
-							"    pm.expect(docsFound.length).to.eql(1);",
-							"    ",
-							"    let docFound = docsFound[0];",
-							"    pm.expect(docFound.id).to.eql(pm.environment.get(\"docToFindWithId\"));",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8762/subaccounting/document/getDocWithQuery/?key=id&value={{docToFindWithId}}",
-					"host": [
-						"localhost"
-					],
-					"port": "8762",
-					"path": [
-						"subaccounting",
-						"document",
-						"getDocWithQuery",
-						""
-					],
-					"query": [
-						{
-							"key": "key",
-							"value": "id"
-						},
-						{
-							"key": "value",
-							"value": "{{docToFindWithId}}"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "look for document with fund_id = 2000",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "003bef34-3cf3-4294-97d2-8b074751349d",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});",
-							"",
-							"pm.test(\"check docs found with specified fund_id\", function () {",
-							"    let docsFound = pm.response.json();",
-							"    // pm.expect(docsFound.length).to.eql(10);",
-							"    ",
-							"    docsFound.forEach( docFound => {",
-							"        pm.expect(docFound.fund_id.toString()).to.eql(\"2000\");        ",
-							"    });",
-							"",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "localhost:8762/subaccounting/document/getDocWithQuery/?key=fund_id&value=2000",
-					"host": [
-						"localhost"
-					],
-					"port": "8762",
-					"path": [
-						"subaccounting",
-						"document",
-						"getDocWithQuery",
-						""
-					],
-					"query": [
-						{
-							"key": "key",
-							"value": "fund_id"
-						},
-						{
-							"key": "value",
-							"value": "2000"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "update first document",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a330ddb9-849b-4402-9df6-511226044473",
-						"exec": [
-							"pm.test(\"Successful request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([200, 201,202]);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
@@ -380,45 +86,133 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"bin\": \"newbin\",\n    \"countryCode\": \"new country code\"\n}"
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
 				},
 				"url": {
-					"raw": "localhost:8762/subaccounting/document/BodyRequest/{{firstDocumentId}}",
+					"raw": "http://localhost:{{port}}/postgre/comment",
+					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "8762",
+					"port": "{{port}}",
 					"path": [
-						"subaccounting",
-						"document",
-						"BodyRequest",
-						"{{firstDocumentId}}"
+						"postgre",
+						"comment"
 					]
 				}
 			},
 			"response": []
-		}
-	],
-	"event": [
-		{
-			"listen": "prerequest",
-			"script": {
-				"id": "27244a12-6755-459d-bc9d-6d1dd463e60c",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
 		},
 		{
-			"listen": "test",
-			"script": {
-				"id": "2f33360b-4763-4680-9129-656f05b161e6",
-				"type": "text/javascript",
-				"exec": [
-					""
-				]
-			}
+			"name": "delete",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "commentId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete Bulk",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/deleteMany?commentId=3&commentId=4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"deleteMany"
+					],
+					"query": [
+						{
+							"key": "commentId",
+							"value": "3"
+						},
+						{
+							"key": "commentId",
+							"value": "4"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAll",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/deleteAll",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"deleteAll"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Transactions",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/getTransactions",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"getTransactions"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
