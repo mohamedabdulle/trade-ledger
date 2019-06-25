@@ -26,6 +26,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     private String tableId;
     private String insertStatement;
     private String deleteStatement;
+    private String deleteAllStatement;
     
     private RowMapper<T> rowMapper;
     
@@ -37,6 +38,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     	List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).filter(f -> f != tableId).collect(Collectors.toList());
     	generateInsertStatement(fieldNames);
     	generateDeleteStatement();
+    	generateDeleteAllStatement();
     }
     
     private void generateInsertStatement(List<String> fieldNames) {
@@ -47,6 +49,10 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     
     private void generateDeleteStatement() {
     	deleteStatement = "DELETE FROM " + tableName + " WHERE " + tableName + "." + tableId + " = :" + tableId;
+    }
+    
+    private void generateDeleteAllStatement( ) {
+    	deleteAllStatement = "DELETE FROM " + tableName;
     }
     
     @Override
@@ -65,8 +71,24 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     	jdbcTemplate.update(deleteStatement, map);
     }
     
-    public void bulkDelete(String[] tIds) {
-    	
+    
+    public void bulkDelete(int[] tIds) {
+    	HashMap<String,Integer>[] map = new HashMap[tIds.length];
+    	for(int i = 0; i < tIds.length;i++){
+    	    map[i] = new HashMap<String,Integer>();
+    	    map[i].put("commentId", tIds[i]);
+        }
+    	jdbcTemplate.batchUpdate(deleteStatement, map);
+    }
+
+    public void deleteAll(){
+        HashMap<String,Object> map = new HashMap<String,Object>();
+        jdbcTemplate.update(deleteAllStatement,map);
+    }
+
+    public List<T> getTransactionToProcess(){
+        //Need to change hard coded sql statement to something that is not hardcoded
+         return jdbcTemplate.query("select * from "+ tableName +" WHERE CommentDateTime = '2019-06-23' ORDER BY CommentId DESC", rowMapper);
     }
     
     @Override

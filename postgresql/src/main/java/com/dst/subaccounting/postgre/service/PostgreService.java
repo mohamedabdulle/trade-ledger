@@ -29,7 +29,15 @@ public class PostgreService {
     	commentDAO.delete(commentId);
     }
     
-    public void deleteManyComment() {
-    	// TO DO
+    public void deleteManyComment(int[] commentIds) {
+    	commentDAO.bulkDelete(commentIds);
+    }
+
+    public void deleteAll(){
+        commentDAO.deleteAll();
+    }
+
+    public List<Comment> getTransactionToProcess(){
+        return commentDAO.getTransactionToProcess();
     }
 }
