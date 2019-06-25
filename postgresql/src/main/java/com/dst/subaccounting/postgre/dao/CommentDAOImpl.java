@@ -10,9 +10,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Repository
 public class CommentDAOImpl implements CommentDAO {
@@ -21,7 +20,8 @@ public class CommentDAOImpl implements CommentDAO {
     NamedParameterJdbcTemplate jdbcTemplate;
 
     private static String TABLE_NAME = "Comment";
-    private static String INSERT_STATEMENT = "insert into " + TABLE_NAME + "(commentId, commentText, commentDateTime, commentUserId) values(:commentId, :commentText, :commentDateTime, :commentUserId)";
+    private static String INSERT_STATEMENT = "INSERT INTO " + TABLE_NAME + "(commentId, commentText, commentDateTime, commentUserId) values(:commentId, :commentText, :commentDateTime, :commentUserId)";
+    private static String DELETE_STATEMENT = "DELETE FROM " + TABLE_NAME + " WHERE " + TABLE_NAME + ".commentId = :commentId";
     
     @Override
     public void insert(Comment comment) {
@@ -33,8 +33,14 @@ public class CommentDAOImpl implements CommentDAO {
     	this.jdbcTemplate.batchUpdate(INSERT_STATEMENT, SqlParameterSourceUtils.createBatch(comments));
     }
     
-    public void bulkDelete() {
-    	//TO DO
+    public void delete(int commentId) {
+    	HashMap<String, Object> map = new HashMap<String, Object>();
+    	map.put("commentId", commentId);
+    	jdbcTemplate.update(DELETE_STATEMENT, map);
+    }
+    
+    public void bulkDelete(String[] commentIds) {
+    	
     }
     
     @Override

@@ -5,7 +5,6 @@ import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -24,6 +23,10 @@ public class PostgreService {
     
     public void insertManyComment(List<Comment> comments) {
     	commentDAO.bulkInsert(comments);
+    }
+    
+    public void deleteComment(int commentId) {
+    	commentDAO.delete(commentId);
     }
     
     public void deleteManyComment() {

@@ -102,6 +102,44 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "delete",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "{{port}}",
+					"path": [
+						"postgre",
+						"comment",
+						"delete"
+					],
+					"query": [
+						{
+							"key": "commentId",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
