@@ -17,7 +17,6 @@ import java.util.List;
 @Repository
 public class CommentDAOImpl implements DAO<Comment> {
 
-	
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
