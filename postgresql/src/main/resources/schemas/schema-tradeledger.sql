@@ -1,5 +1,4 @@
-DROP DATABASE IF EXISTS tradeledger;
-CREATE DATABASE tradeledger;
+DROP TABLE IF EXISTS ClientTransaction;
 CREATE TABLE ClientTransaction
 (
     ClientTransactionId SERIAL PRIMARY KEY,
@@ -33,6 +32,8 @@ CREATE TABLE ClientTransaction
     TransactionType varchar(50),
     TransactionUserId varchar(50)
 );
+
+DROP TABLE IF EXISTS Comment;
 CREATE TABLE Comment
 (
     CommendId SERIAL PRIMARY KEY,
@@ -40,6 +41,8 @@ CREATE TABLE Comment
     CommentDateTime timestamptz,
     CommentUserId varchar(50)
 );
+
+DROP TABLE IF EXISTS DistributionTransaction;
 CREATE TABLE DistributionTransaction
 (
     DistributionTransactionId SERIAL PRIMARY KEY,
@@ -51,6 +54,8 @@ CREATE TABLE DistributionTransaction
     ExcludedFromAggregation boolean,
     OmnibusTradeTransmitted boolean
 );
+
+DROP TABLE IF EXISTS Event;
 CREATE TABLE Event
 (
     EventRowId SERIAL PRIMARY KEY,
