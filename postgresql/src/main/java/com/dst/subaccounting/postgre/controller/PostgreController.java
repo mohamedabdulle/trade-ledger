@@ -43,9 +43,13 @@ public class PostgreController {
     
     
     @DeleteMapping("/comment/deleteMany")
-    public void bulkDelete( ) {
-    	//TO DO
+    public void bulkDelete(@RequestParam int[] commentId ) {
+    	postgreService.deleteManyComment(commentId);
     }
     
 
+    @DeleteMapping("/comment/deleteAll")
+    public void deleteAll(){
+        postgreService.deleteAll();
+    }
 }
