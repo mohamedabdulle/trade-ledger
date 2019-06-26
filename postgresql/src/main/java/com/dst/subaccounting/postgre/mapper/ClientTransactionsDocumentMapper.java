@@ -14,7 +14,7 @@ public class ClientTransactionsDocumentMapper implements RowMapper<ClientTransac
 		 
 	    doc.setActualPostingDate(resultSet.getDate("actualPostingDate"));
 	    doc.setAgentForFirm(resultSet.getString("agentForFirm"));
-	    doc.setAnticipatedPostingDate(resultSet.getString("anticipatedPostingDate"));
+	    doc.setAnticipatedPostingDate(resultSet.getDate("anticipatedPostingDate"));
 	    doc.setBin(resultSet.getString("bin"));
 	    doc.setBranch(resultSet.getString("branch"));
 	    doc.setClearingFirmNumber(resultSet.getInt("clearingFirmNumber"));
