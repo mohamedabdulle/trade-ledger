@@ -10,7 +10,7 @@ public class ClientTransactionsDocument {
     private String id;
     private Date actualPostingDate;
     private String agentForFirm;
-    private String anticipatedPostingDate;
+    private Date anticipatedPostingDate;
     private String bin;
     private String branch;
     private int clearingFirmNumber;
