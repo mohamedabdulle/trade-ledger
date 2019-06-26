@@ -365,7 +365,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/postgre/clientTransaction/deleteMany?id=3&id=4",
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/deleteMany?ids=3&ids=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -378,11 +378,11 @@
 							],
 							"query": [
 								{
-									"key": "id",
+									"key": "ids",
 									"value": "3"
 								},
 								{
-									"key": "id",
+									"key": "ids",
 									"value": "4"
 								}
 							]
