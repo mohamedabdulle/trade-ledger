@@ -14,7 +14,7 @@ public class ClientTransactionsDocumentMapper implements RowMapper<ClientTransac
 		 
 	    doc.setActualPostingDate(resultSet.getDate("actualPostingDate"));
 	    doc.setAgentForFirm(resultSet.getString("agentForFirm"));
-	    doc.setAnticipatedPostingDate(resultSet.getString("anticipatedPostingDate"));
+	    doc.setAnticipatedPostingDate(resultSet.getDate("anticipatedPostingDate"));
 	    doc.setBin(resultSet.getString("bin"));
 	    doc.setBranch(resultSet.getString("branch"));
 	    doc.setClearingFirmNumber(resultSet.getInt("clearingFirmNumber"));
@@ -32,9 +32,9 @@ public class ClientTransactionsDocumentMapper implements RowMapper<ClientTransac
 	    doc.setSequenceId(resultSet.getString("sequenceId"));
 	    doc.setShareQuantity(resultSet.getString("shareQuantity"));
 	    doc.setStateOfSale(resultSet.getString("stateOfSale"));
-	    doc.setSubmissionDate(resultSet.getString("submissionDate"));
+	    doc.setSubmissionDate(resultSet.getDate("submissionDate"));
 	    doc.setSymbol(resultSet.getString("symbol"));
-	    doc.setTradeDate(resultSet.getString("tradeDate")); // Would be date field
+	    doc.setTradeDate(resultSet.getDate("tradeDate")); // Would be date field
 	    doc.setTransactionCategory(resultSet.getString("transactionCategory"));
 	    doc.setTransactionSource(resultSet.getString("transactionSource"));
 	    doc.setTransactionStatus(resultSet.getString("transactionStatus"));
