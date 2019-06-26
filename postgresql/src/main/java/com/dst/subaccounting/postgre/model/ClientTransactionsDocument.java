@@ -37,6 +37,6 @@ public class ClientTransactionsDocument {
     private String transactionSubType;
     private String transactionType;
     private String transactionUserId;
-    private DistributionTransactions distributionTransactions;
-    private Comment comment;
+//    private DistributionTransactions distributionTransactions;
+//    private Comment comment;
 }

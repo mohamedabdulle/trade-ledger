@@ -1,5 +1,6 @@
 package com.dst.subaccounting.postgre.controller;
 
+import com.dst.subaccounting.postgre.model.ClientTransactionsDocument;
 import com.dst.subaccounting.postgre.model.Comment;
 import com.dst.subaccounting.postgre.service.PostgreService;
 
@@ -23,34 +24,69 @@ public class PostgreController {
     PostgreService postgreService;
 
     @GetMapping("/comment")
-    public List<Comment> getAll() {
-        return postgreService.getAll();
+    public List<Comment> getAllComments() {
+        return postgreService.getAllComments();
     }
     
     @PostMapping("/comment")
-    public void insert(@RequestBody Comment comment) {
+    public void insertComment(@RequestBody Comment comment) {
     	postgreService.insertComment(comment);
     }
     
     @PostMapping("/comment/bulk")
-    public void bulkInsert(@RequestBody ArrayList<Comment> comments) {
-    	postgreService.insertManyComment(comments);
+    public void bulkInsertComment(@RequestBody ArrayList<Comment> comments) {
+    	postgreService.insertManyComments(comments);
     }
     
     @DeleteMapping("/comment/delete") 
-    public void delete(@RequestParam int commentId) {
-    	postgreService.deleteComment(commentId);
+    public void deleteComment(@RequestParam int commentId) {
+    	postgreService.deleteComments(commentId);
     }
     
     @DeleteMapping("/comment/deleteMany")
-    public void bulkDelete(@RequestParam int[] commentId ) {
-    	postgreService.deleteManyComment(commentId);
+    public void bulkDeleteComments(@RequestParam int[] commentId ) {
+    	postgreService.deleteManyComments(commentId);
     }
 
-    @GetMapping("/comment/getTransactions")
-    public List<Comment> getTransactionsToProcess() {
-        //Get documents on a certain date then sorted in descending order by comment id
-        return postgreService.getTransactionToProcess();
+    @DeleteMapping("/comment/deleteAll")
+    public void deleteAllComments(){
+        postgreService.deleteAllComments();
+    }
+
+    @GetMapping("/clientTransaction")
+    public List<ClientTransactionsDocument> getAllClientTransactions() {
+        return postgreService.getAllClientTransactions();
+    }
+    
+    @PostMapping("/clientTransaction")
+    public void insertClientTransaction(@RequestBody ClientTransactionsDocument clientTransaction) {
+    	postgreService.insertClientTransaction(clientTransaction);
+    }
+    
+    @PostMapping("/clientTransaction/bulk")
+    public void bulkInsertClientTransactions(@RequestBody ArrayList<ClientTransactionsDocument> clientTransactions) {
+    	postgreService.insertManyClientTransactions(clientTransactions);
+    }
+    
+    @DeleteMapping("/clientTransaction/delete") 
+    public void deleteClientTransaction(@RequestParam int id) {
+    	postgreService.deleteClientTransactions(id);
+    }
+    
+    @DeleteMapping("/clientTransaction/deleteMany")
+    public void bulkDeleteClientTransactions(@RequestParam int[] ids) {
+    	postgreService.deleteManyClientTransactions(ids);
+    }
+
+    @DeleteMapping("/clientTransaction/deleteAll")
+    public void deleteAllClientTransactions(){
+        postgreService.deleteAllClientTransactions();
+    }
+    
+    @GetMapping("/clientTansaction/getTransactions")
+    public List<ClientTransactionsDocument> getTransactionsToProcess() {
+        //Get documents on a certain date then sorted in descending order by clientTransaction id
+        return postgreService.getClientTransactionsToProcess();
 
 //    	List<Bson> filters = Arrays.asList(
 //    			new Document("$match",
@@ -65,9 +101,4 @@ public class PostgreController {
     }
     
     public void updateMappedClientTransPrice() {}
-
-    @DeleteMapping("/comment/deleteAll")
-    public void deleteAll(){
-        postgreService.deleteAll();
-    }
 }
