@@ -36,7 +36,7 @@ CREATE TABLE ClientTransaction
 DROP TABLE IF EXISTS Comment;
 CREATE TABLE Comment
 (
-    CommendId SERIAL PRIMARY KEY,
+    CommentId SERIAL PRIMARY KEY,
     CommentText varchar(50),
     CommentDateTime timestamptz,
     CommentUserId varchar(50)
