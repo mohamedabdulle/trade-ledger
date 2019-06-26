@@ -76,7 +76,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     	HashMap<String,Integer>[] map = new HashMap[tIds.length];
     	for(int i = 0; i < tIds.length;i++){
     	    map[i] = new HashMap<String,Integer>();
-    	    map[i].put("commentId", tIds[i]);
+    	    map[i].put(tableId, tIds[i]);
         }
     	jdbcTemplate.batchUpdate(deleteStatement, map);
     }
