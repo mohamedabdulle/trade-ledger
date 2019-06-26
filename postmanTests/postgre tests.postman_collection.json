@@ -268,10 +268,10 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
+							"raw": "[\n  {\n        \"actualPostingDate\": \"2019-06-26\",\n        \"agentForFirm\": \"Sanjula\",\n        \"anticipatedPostingDate\": \"2019-06-26\",\n        \"bin\": \"bin\",\n        \"branch\": \"branch\",\n        \"clearingFirmNumber\": 123,\n        \"countryCode\": \"Canada\",\n        \"currencyIndicator\": \"CAD\",\n        \"dealerFirmNumber\": 123,\n        \"effectOnBalance\": \"big\",\n        \"fund_id\": \"no you\",\n        \"moneyAmount\": \"a lot\",\n        \"omnibusTransaction_Id\": \"abc\",\n        \"price\": 123,\n        \"representativeName\": \"me\",\n        \"representativeNumber\": 123,\n        \"securityId\": \"no\",\n        \"sequenceId\": \"no\",\n        \"shareQuantity\": \"no\",\n        \"stateOfSale\": \"ON\",\n        \"submissionDate\": \"2019-06-26\",\n        \"symbol\": \"the raptors logo\",\n        \"tradeDate\": \"2019-06-26\",\n        \"transactionCategory\": \"no\",\n        \"transactionSource\": \"no\",\n        \"transactionStatus\": \"bo\",\n        \"transactionSubType\": \"woah\",\n        \"transactionType\": \"ionType\",\n        \"transactionUserId\": \"erId\"\n    },\n  {\n        \"actualPostingDate\": \"2019-06-26\",\n        \"agentForFirm\": \"Nirmal\",\n        \"anticipatedPostingDate\": \"2019-06-26\",\n        \"bin\": \"bin\",\n        \"branch\": \"branchyMcBranchFace\",\n        \"clearingFirmNumber\": 123,\n        \"countryCode\": \"Canada\",\n        \"currencyIndicator\": \"CAD\",\n        \"dealerFirmNumber\": 123,\n        \"effectOnBalance\": \"big\",\n        \"fund_id\": \"no you\",\n        \"moneyAmount\": \"a lot\",\n        \"omnibusTransaction_Id\": \"abc\",\n        \"price\": 123,\n        \"representativeName\": \"me\",\n        \"representativeNumber\": 123,\n        \"securityId\": \"no\",\n        \"sequenceId\": \"no\",\n        \"shareQuantity\": \"no\",\n        \"stateOfSale\": \"ON\",\n        \"submissionDate\": \"2019-06-26\",\n        \"symbol\": \"the raptors logo\",\n        \"tradeDate\": \"2019-06-26\",\n        \"transactionCategory\": \"no\",\n        \"transactionSource\": \"no\",\n        \"transactionStatus\": \"bo\",\n        \"transactionSubType\": \"woah\",\n        \"transactionType\": \"ionType\",\n        \"transactionUserId\": \"erId\"\n    }\n]"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/bulk/",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -279,7 +279,7 @@
 							"port": "{{port}}",
 							"path": [
 								"postgre",
-								"comment",
+								"clientTransaction",
 								"bulk",
 								""
 							]
@@ -338,7 +338,7 @@
 							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
 						},
 						"url": {
-							"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/delete?id=2",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -346,12 +346,12 @@
 							"port": "{{port}}",
 							"path": [
 								"postgre",
-								"comment",
+								"clientTransaction",
 								"delete"
 							],
 							"query": [
 								{
-									"key": "commentId",
+									"key": "id",
 									"value": "2"
 								}
 							]
@@ -365,7 +365,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/postgre/comment/deleteMany?commentId=3&commentId=4",
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/deleteMany?id=3&id=4",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -373,16 +373,16 @@
 							"port": "{{port}}",
 							"path": [
 								"postgre",
-								"comment",
+								"clientTransaction",
 								"deleteMany"
 							],
 							"query": [
 								{
-									"key": "commentId",
+									"key": "id",
 									"value": "3"
 								},
 								{
-									"key": "commentId",
+									"key": "id",
 									"value": "4"
 								}
 							]
@@ -396,7 +396,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:{{port}}/postgre/comment/deleteAll",
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/deleteAll",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -404,7 +404,7 @@
 							"port": "{{port}}",
 							"path": [
 								"postgre",
-								"comment",
+								"clientTransaction",
 								"deleteAll"
 							]
 						}
