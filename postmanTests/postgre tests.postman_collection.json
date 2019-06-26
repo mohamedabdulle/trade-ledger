@@ -1,218 +1,460 @@
 {
 	"info": {
-		"_postman_id": "be7aa986-ba79-48de-8f1a-3699062cd344",
+		"_postman_id": "d190a479-7a99-46d0-a5e5-16670d056610",
 		"name": "postgre tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "insert",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "insert bulk",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment",
-						"bulk",
-						""
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "get all",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
-				},
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment",
-						"delete"
-					],
-					"query": [
-						{
-							"key": "commentId",
-							"value": "2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "delete Bulk",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment/deleteMany?commentId=3&commentId=4",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment",
-						"deleteMany"
-					],
-					"query": [
-						{
-							"key": "commentId",
-							"value": "3"
+			"name": "comment",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
 						},
-						{
-							"key": "commentId",
-							"value": "4"
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "insert bulk",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"bulk",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "commentId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Bulk",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/deleteMany?commentId=3&commentId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"deleteMany"
+							],
+							"query": [
+								{
+									"key": "commentId",
+									"value": "3"
+								},
+								{
+									"key": "commentId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/deleteAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"deleteAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/getTransactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"getTransactions"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "deleteAll",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment/deleteAll",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment",
-						"deleteAll"
-					]
+			"name": "client transaction (WIP)",
+			"item": [
+				{
+					"name": "insert",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id\": null,\n        \"actualPostingDate\": \"2019-06-26\",\n        \"agentForFirm\": \"Sahan\",\n        \"anticipatedPostingDate\": \"2019-06-26\",\n        \"bin\": \"binnyMcBinFace\",\n        \"branch\": \"ahhhhhh\",\n        \"clearingFirmNumber\": 123,\n        \"countryCode\": \"Canada\",\n        \"currencyIndicator\": \"CAD\",\n        \"dealerFirmNumber\": 123,\n        \"effectOnBalance\": \"big\",\n        \"fund_id\": \"no you\",\n        \"moneyAmount\": \"a lot\",\n        \"omnibusTransaction_Id\": \"abc\",\n        \"price\": 123,\n        \"representativeName\": \"me\",\n        \"representativeNumber\": 123,\n        \"securityId\": \"no\",\n        \"sequenceId\": \"no\",\n        \"shareQuantity\": \"no\",\n        \"stateOfSale\": \"ON\",\n        \"submissionDate\": \"2019-06-26\",\n        \"symbol\": \"the raptors logo\",\n        \"tradeDate\": \"2019-06-26\",\n        \"transactionCategory\": \"no\",\n        \"transactionSource\": \"no\",\n        \"transactionStatus\": \"bo\",\n        \"transactionSubType\": \"woah\",\n        \"transactionType\": \"ionType\",\n        \"transactionUserId\": \"erId\"\n    }"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"clientTransaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "insert bulk",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "[\n\t{\n    \t\"commentId\": 3,\n    \t\"commentText\": \"text2\",\n    \t\"commentDateTime\": \"2019-06-24\",\n    \t\"commentUserId\": \"sahan\"\n\t},\n\t{\n    \"commentId\": 4,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n\t}\n]"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/bulk/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"bulk",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/clientTransaction",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"clientTransaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"commentId\": 2,\n    \"commentText\": \"text2\",\n    \"commentDateTime\": \"2019-06-24\",\n    \"commentUserId\": \"sahan\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/delete?commentId=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "commentId",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete Bulk",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/deleteMany?commentId=3&commentId=4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"deleteMany"
+							],
+							"query": [
+								{
+									"key": "commentId",
+									"value": "3"
+								},
+								{
+									"key": "commentId",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAll",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/deleteAll",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"deleteAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:{{port}}/postgre/comment/getTransactions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "{{port}}",
+							"path": [
+								"postgre",
+								"comment",
+								"getTransactions"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Transactions",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:{{port}}/postgre/comment/getTransactions",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "{{port}}",
-					"path": [
-						"postgre",
-						"comment",
-						"getTransactions"
-					]
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "079481c7-a52e-430f-a593-7f442581fb1b",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "71e5d5e9-422f-4b0d-89b8-a88a3341aed4",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
-			},
-			"response": []
+			]
 		}
 	]
 }
