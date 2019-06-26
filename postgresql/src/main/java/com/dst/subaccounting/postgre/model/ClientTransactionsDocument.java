@@ -1,12 +1,14 @@
 package com.dst.subaccounting.postgre.model;
 
+import java.sql.Date;
+
 import lombok.Data;
 
 @Data
 public class ClientTransactionsDocument {
 
     private String id;
-    private Long actualPostingDate;
+    private Date actualPostingDate;
     private String agentForFirm;
     private String anticipatedPostingDate;
     private String bin;
@@ -26,9 +28,9 @@ public class ClientTransactionsDocument {
     private String sequenceId;
     private String shareQuantity;
     private String stateOfSale;
-    private String submissionDate;
+    private Date submissionDate;
     private String symbol;
-    private String tradeDate; // Would be date field
+    private Date tradeDate; // Would be date field
     private String transactionCategory;
     private String transactionSource;
     private String transactionStatus;
