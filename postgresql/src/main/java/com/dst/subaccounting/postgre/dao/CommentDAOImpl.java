@@ -9,7 +9,7 @@ import com.dst.subaccounting.postgre.model.Comment;
 public class CommentDAOImpl extends GenericDAOImpl<Comment> {
 	
 	public CommentDAOImpl() {
-		super("commentId", "Comment", new Comment().getClass(), new CommentMapper());
+		super("id", "Comment", new Comment().getClass(), new CommentMapper());
 	}
 	
 }

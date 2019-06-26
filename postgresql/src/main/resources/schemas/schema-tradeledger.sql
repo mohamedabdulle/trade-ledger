@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS ClientTransaction;
 CREATE TABLE ClientTransaction
 (
-    ClientTransactionId SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     ActualPostingDate timestamptz,
     AgentForFirm varchar(50),
     AnticipatedPostingDate timestamptz,
@@ -36,7 +36,7 @@ CREATE TABLE ClientTransaction
 DROP TABLE IF EXISTS Comment;
 CREATE TABLE Comment
 (
-    CommentId SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     CommentText varchar(50),
     CommentDateTime timestamptz,
     CommentUserId varchar(50)
