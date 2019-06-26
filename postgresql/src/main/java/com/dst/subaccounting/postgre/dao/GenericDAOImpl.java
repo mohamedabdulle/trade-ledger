@@ -22,13 +22,13 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     @Autowired
     NamedParameterJdbcTemplate jdbcTemplate;
 
-    private String tableName;
-    private String tableId;
-    private String insertStatement;
-    private String deleteStatement;
-    private String deleteAllStatement;
+    protected String tableName;
+    protected String tableId;
+    protected String insertStatement;
+    protected String deleteStatement;
+    protected String deleteAllStatement;
     
-    private RowMapper<T> rowMapper;
+    protected RowMapper<T> rowMapper;
     
     public GenericDAOImpl(String _tableId, String _tableName, Class<? extends T> cls, RowMapper<T> _rowMapper) {
     	tableId = _tableId;
@@ -84,11 +84,6 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     public void deleteAll(){
         HashMap<String,Object> map = new HashMap<String,Object>();
         jdbcTemplate.update(deleteAllStatement,map);
-    }
-
-    public List<T> getTransactionToProcess(){
-        //Need to change hard coded sql statement to something that is not hardcoded
-         return jdbcTemplate.query("select * from "+ tableName +" WHERE CommentDateTime = '2019-06-23' ORDER BY CommentId DESC", rowMapper);
     }
     
     @Override
