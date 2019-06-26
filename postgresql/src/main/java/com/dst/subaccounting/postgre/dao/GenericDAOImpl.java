@@ -9,8 +9,10 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.lang.reflect.*;
@@ -73,12 +75,16 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     
     
     public void bulkDelete(int[] tIds) {
-    	HashMap<String,Integer>[] map = new HashMap[tIds.length];
-    	for(int i = 0; i < tIds.length;i++){
-    	    map[i] = new HashMap<String,Integer>();
-    	    map[i].put("commentId", tIds[i]);
+        List<Map<String,Integer>> map = new ArrayList<Map<String,Integer>>();
+
+        //HashMap<String,Integer>[] map = new HashMap[tIds.length];
+        for(int i = 0; i < tIds.length;i++){
+            Map<String,Integer> innerMap = new HashMap<String,Integer>();
+            innerMap.put(tableId, tIds[i]);
+            map.add(i,innerMap);
         }
-    	jdbcTemplate.batchUpdate(deleteStatement, map);
+        Object[] mapArray = map.toArray();
+        jdbcTemplate.batchUpdate(deleteStatement, SqlParameterSourceUtils.createBatch(mapArray));
     }
 
     public void deleteAll(){
