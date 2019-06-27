@@ -263,7 +263,8 @@ public final class ClientTransactionsDocumentExtractor implements ResultSetExtra
 
 		RejectDialog rd = new RejectDialog();
 
-		Integer rejectDialogId = rs.getInteger("rejectDialogId");
+		Integer rejectDialogId = rs.getInt("rejectDialogId");
+		rd.setRejectDialogId(rejectDialogId);
 		String rejectId = rs.getString("rejectId");
 		rd.setRejectId(rejectId);
 		String rejectCode = rs.getString("rejectCode");
