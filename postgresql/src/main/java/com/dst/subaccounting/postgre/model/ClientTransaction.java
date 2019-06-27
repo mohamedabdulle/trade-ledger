@@ -25,8 +25,8 @@ public class ClientTransaction {
     private double price;
     private String distributionEventType;
     private String distributionRecordDate;
-    private Date tradeDate; // Would be date field
-    private Date submissionDate;
+    private String tradeDate; // Would be date field
+    private String submissionDate;
     private String transactionRecievedDate;
     private String transactionRecievedTime;
     private String anticipatedSettlementDate;

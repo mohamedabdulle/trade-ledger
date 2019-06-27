@@ -21,7 +21,7 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 		Map<Integer, ClientTransaction> ctMap = new HashMap<>();
 
 		while (rs.next()) {
-			Integer ctId = rs.getInt("clientTransactionsDocumentId");
+			Integer ctId = rs.getInt("clientTransactionId");
 
 			ClientTransaction ctDoc = ctMap.get(ctId);
 
@@ -42,7 +42,7 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 	// TO DO
 	private ClientTransaction makeClientTransaction(ResultSet rs) throws SQLException {
 		ClientTransaction ct = new ClientTransaction();
-		Integer id = rs.getInt("clientTransactionsDocumentId");
+		Integer id = rs.getInt("clientTransactionId");
 		ct.setClientTransactionId(id);
 
 		int clearingFirmNumber = rs.getInt("clearingFirmNumber");
@@ -71,9 +71,9 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 		ct.setDistributionEventType(distributionEventType);
 		String distributionRecordDate = rs.getString("distributionRecordDate");
 		ct.setDistributionRecordDate(distributionRecordDate);
-		Date tradeDate = rs.getDate("tradeDate"); // Would be date field
+		String tradeDate = rs.getString("tradeDate"); // Would be date field
 		ct.setTradeDate(tradeDate);
-		Date submissionDate = rs.getDate("submissionDate");
+		String submissionDate = rs.getString("submissionDate");
 		ct.setSubmissionDate(submissionDate);
 		String transactionRecievedDate = rs.getString("transactionRecievedDate");
 		ct.setTransactionRecievedDate(transactionRecievedDate);
