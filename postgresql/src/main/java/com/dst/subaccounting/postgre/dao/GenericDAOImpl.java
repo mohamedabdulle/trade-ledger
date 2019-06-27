@@ -30,10 +30,10 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     
     protected RowMapper<T> rowMapper;
     
-    public GenericDAOImpl(String _tableId, String _tableName, Class<? extends T> cls, RowMapper<T> _rowMapper) {
-    	tableId = _tableId;
-    	tableName = _tableName;
-    	rowMapper = _rowMapper;
+    public GenericDAOImpl(String tableId, String tableName, Class<? extends T> cls, RowMapper<T> rowMapper) {
+    	this.tableId = tableId;
+    	this.tableName = tableName;
+    	this.rowMapper = rowMapper;
     	
     	List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).filter(f -> f != tableId).collect(Collectors.toList());
     	generateInsertStatement(fieldNames);

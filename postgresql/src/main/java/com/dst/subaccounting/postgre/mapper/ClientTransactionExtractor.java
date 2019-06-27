@@ -3,33 +3,31 @@ package com.dst.subaccounting.postgre.mapper;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
-import com.dst.subaccounting.postgre.model.ClientTransactionsDocument;
+import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.RejectDialog;
 import com.dst.subaccounting.postgre.model.TransactionDialog;
 
-public final class ClientTransactionsDocumentExtractor implements ResultSetExtractor<List<ClientTransactionsDocument>> {
+public final class ClientTransactionExtractor implements ResultSetExtractor<List<ClientTransaction>> {
 
 	@Override
-	public List<ClientTransactionsDocument> extractData(ResultSet rs) throws SQLException {
-		Map<Integer, ClientTransactionsDocument> ctMap = new HashMap<>();
+	public List<ClientTransaction> extractData(ResultSet rs) throws SQLException {
+		Map<Integer, ClientTransaction> ctMap = new HashMap<>();
 
 		while (rs.next()) {
 			Integer ctId = rs.getInt("clientTransactionsDocumentId");
 
-			ClientTransactionsDocument ctDoc = ctMap.get(ctId);
+			ClientTransaction ctDoc = ctMap.get(ctId);
 
 			// initialize new doc if it doesn't exist
 			if (ctDoc == null) {
-				ctDoc = makeClientTransactionsDocument(rs);
+				ctDoc = makeClientTransaction(rs);
 				ctMap.put(ctId, ctDoc);
 			}
 
@@ -42,10 +40,10 @@ public final class ClientTransactionsDocumentExtractor implements ResultSetExtra
 	}
 
 	// TO DO
-	private ClientTransactionsDocument makeClientTransactionsDocument(ResultSet rs) throws SQLException {
-		ClientTransactionsDocument ct = new ClientTransactionsDocument();
+	private ClientTransaction makeClientTransaction(ResultSet rs) throws SQLException {
+		ClientTransaction ct = new ClientTransaction();
 		Integer id = rs.getInt("clientTransactionsDocumentId");
-		ct.setClientTransactionsDocumentId(id);
+		ct.setClientTransactionId(id);
 
 		int clearingFirmNumber = rs.getInt("clearingFirmNumber");
 		ct.setClearingFirmNumber(clearingFirmNumber);

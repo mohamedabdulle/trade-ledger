@@ -17,7 +17,7 @@ import lombok.Data;
 @Data
 public class TransactionDialog {
    
-	public static final String tableName = "transactionDialog";
+	public static final String tableName = "TransactionDialog";
 	
 	private Integer transactionDialogId;
     private String transmissionReceivedDateTime;
