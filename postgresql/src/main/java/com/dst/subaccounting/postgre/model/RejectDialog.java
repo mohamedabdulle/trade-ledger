@@ -12,38 +12,17 @@
  */
 package com.dst.subaccounting.postgre.model;
 
-public class RejectDialog {
+import lombok.Data;
 
+@Data
+public class RejectDialog {
+	
+	public static final String tableName = "rejectDialog";
+	
+	private Integer rejectDialogId;
     private String rejectId;
     private String rejectCode;
     private String rejectDescription;
-    
-    
-    public String getRejectId() {
-        return rejectId;
-    }
-    public void setRejectId(String rejectId) {
-        this.rejectId = rejectId;
-    }
-    public String getRejectCode() {
-        return rejectCode;
-    }
-    public void setRejectCode(String rejectCode) {
-        this.rejectCode = rejectCode;
-    }
-    public String getRejectDescription() {
-        return rejectDescription;
-    }
-    public void setRejectDescription(String rejectDescription) {
-        this.rejectDescription = rejectDescription;
-    }
-    @Override
-    public String toString() {
-	return "RejectDialog [rejectId=" + rejectId + ", rejectCode=" + rejectCode + ", rejectDescription="
-		+ rejectDescription + "]";
-    }
-    
-    
     
 }
 
