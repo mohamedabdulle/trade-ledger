@@ -3,8 +3,6 @@ package com.dst.subaccounting.postgre.model;
 import java.sql.Date;
 import java.util.List;
 
-import com.dstsystems.brokerage.sa.ingester.entity.ClientTransaction.RejectDialog;
-import com.dstsystems.brokerage.sa.ingester.entity.ClientTransaction.TransactionDialog;
 
 import lombok.Data;
 
