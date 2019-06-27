@@ -7,11 +7,11 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ClientTransactionsDocument {
+public class ClientTransaction {
 	
-	public static final String tableName = "clientTransaction";
-	
-	private Integer clientTransactionsDocumentId;
+	public static final String tableName = "ClientTransaction";
+
+	private Integer clientTransactionId;
     private int clearingFirmNumber;
     private int dealerFirmNumber;
     private String agentForFirm;

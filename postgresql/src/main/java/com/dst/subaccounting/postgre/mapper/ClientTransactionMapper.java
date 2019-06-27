@@ -8,7 +8,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ClientTransactionsDocumentMapper implements RowMapper<ClientTransaction> {
+public class ClientTransactionMapper implements RowMapper<ClientTransaction> {
 
 	@Override
 	public ClientTransaction mapRow(ResultSet resultSet, int i) throws SQLException {

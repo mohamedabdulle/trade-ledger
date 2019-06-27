@@ -15,7 +15,7 @@ import com.dst.subaccounting.postgre.model.ClientTransactionsDocument;
 import com.dst.subaccounting.postgre.model.RejectDialog;
 import com.dst.subaccounting.postgre.model.TransactionDialog;
 
-public final class ClientTransactionsDocumentExtractor implements ResultSetExtractor<List<ClientTransactionsDocument>> {
+public final class ClientTransactionExtractor implements ResultSetExtractor<List<ClientTransactionsDocument>> {
 
 	@Override
 	public List<ClientTransactionsDocument> extractData(ResultSet rs) throws SQLException {

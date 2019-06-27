@@ -1,8 +1,9 @@
 DROP TABLE IF EXISTS ClientTransaction;
 CREATE TABLE ClientTransaction
 (
-    id SERIAL PRIMARY KEY,
-    ActualPostingDate timestamptz
+    ClientTransactionId SERIAL PRIMARY KEY,
+    ClearingFirmNumber int
+--     ActualPostingDate timestamptz
 --     AgentForFirm varchar(50),
 --     AnticipatedPostingDate timestamptz,
 --     Bin varchar(50),
@@ -35,14 +36,14 @@ CREATE TABLE ClientTransaction
 
 CREATE TABLE TransactionDialog
 (
-    id SERIAL PRIMARY KEY,
+    TransactionDialogId SERIAL PRIMARY KEY,
     TransmissionReceivedDateTime timestamptz
 );
 
 CREATE TABLE RejectionDialog
 (
-    id SERIAL PRIMARY KEY,
-
+    RejectDialogId SERIAL PRIMARY KEY,
+    RejectId int
 );
 
 
@@ -57,7 +58,7 @@ CREATE TABLE RejectionDialog
 
 
 
--- DROP TABLE IF EXISTS Comment;
+DROP TABLE IF EXISTS Comment;
 -- CREATE TABLE Comment
 -- (
 --     id SERIAL PRIMARY KEY,

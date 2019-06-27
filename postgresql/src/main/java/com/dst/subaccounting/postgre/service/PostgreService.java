@@ -1,6 +1,6 @@
 package com.dst.subaccounting.postgre.service;
 
-import com.dst.subaccounting.postgre.dao.ClientTransactionsDocumentDAOImpl;
+import com.dst.subaccounting.postgre.dao.ClientTransactionDAOImpl;
 import com.dst.subaccounting.postgre.dao.CommentDAOImpl;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.Comment;
@@ -16,7 +16,7 @@ public class PostgreService {
     private CommentDAOImpl commentDAO;
     
     @Autowired
-	private ClientTransactionsDocumentDAOImpl clientTransactionDAO;
+	private ClientTransactionDAOImpl clientTransactionDAO;
 
     public List<Comment> getAllComments() {
        return commentDAO.getAll();
