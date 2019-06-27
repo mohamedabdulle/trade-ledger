@@ -82,6 +82,6 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     
     @Override
     public List<ClientTransaction> getAll() {
-        return  jdbcTemplate.query("select * from " + tableName, clientTransactionExtractor);
+        return  jdbcTemplate.query("select * from ClientTransaction join TransactionDialog on TransactionDialog.TransactionDialogId = Any(ClientTransaction.TransactionDialogIds)" , clientTransactionExtractor);
     }
 }

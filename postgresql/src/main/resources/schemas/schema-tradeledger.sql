@@ -82,7 +82,9 @@ CREATE TABLE ClientTransaction
     DestinationAccountOmnibusIndicator varchar(50),
     AsofPaymentDate varchar(50),
     NsccRegistrationStatusCode varchar(50),
-    NsccRequestStatusCode varchar(50)
+    NsccRequestStatusCode varchar(50),
+    TransactionDialogIds int[]
+--     RejectDialogIds int[]
 );
 
 DROP TABLE IF EXISTS TransactionDialog;

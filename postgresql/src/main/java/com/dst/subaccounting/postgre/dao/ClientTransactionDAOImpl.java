@@ -18,7 +18,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	}
 
 	public List<ClientTransaction> getTransactionToProcess(){
-		return jdbcTemplate.query("select * from "+ tableName +" join "+ TransactionDialog.tableName + " on TransactionDialog.id in transactionDialogId WHERE price IS NOT NULL AND transactionStatus != 'C' ORDER BY tradeDate DESC", clientTransactionExtractor);
+		return jdbcTemplate.query("select " + tableName + ", "  + TransactionDialog.tableName +" from "+ tableName +" join "+ TransactionDialog.tableName + " on TransactionDialog.transactionDialogId in transactionDialogIds WHERE price IS NOT NULL AND transactionStatus != 'C' ORDER BY tradeDate DESC", clientTransactionExtractor);
 	}
 
 	public void generateInsertStatement(List<String> fieldNames) {

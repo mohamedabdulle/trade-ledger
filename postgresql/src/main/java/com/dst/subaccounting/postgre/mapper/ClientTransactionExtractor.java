@@ -2,6 +2,7 @@ package com.dst.subaccounting.postgre.mapper;
 
 import java.sql.Date;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
@@ -18,6 +19,11 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 
 	@Override
 	public List<ClientTransaction> extractData(ResultSet rs) throws SQLException {
+		ResultSetMetaData rsmd = rs.getMetaData();
+		for(int i = 1; i <= rsmd.getColumnCount(); ++i) {
+			System.out.println(rsmd.getColumnName(i));
+		}
+
 		Map<Integer, ClientTransaction> ctMap = new HashMap<>();
 
 		while (rs.next()) {

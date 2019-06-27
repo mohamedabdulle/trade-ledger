@@ -1,3 +1,57 @@
+INSERT INTO TransactionDialog
+    (
+        TransmissionReceivedDateTime,
+        TransmissionId1,
+        TransmissionId2,
+        TransmissionTransactionId,
+        DialogSeqNumber,
+        DialogDirection,
+        NsccRecordType,
+        TransmissionRecordType,
+        UnformattedRecordType,
+        ShareQuantity,
+        GrossMoneyAmount,
+        NetMoneyAmount,
+        Price,
+        ExchangeToShareQuantity,
+        ExchangeToGrossMoneyAmount,
+        ExchangeToNetMoneyAmount,
+        ExchangeToPrice
+    )
+VALUES
+    (
+        NOW(),
+        '1',
+        '2',
+        'transaction1',
+        'seq',
+        'north',
+        'cd',
+        'radio',
+        'oral',
+        3.4,
+        5.6,
+        7.8,
+        9.10,
+        11.12,
+        13.14,
+        15.16,
+        17.18
+    );
+
+INSERT INTO RejectionDialog
+    (
+        RejectId,
+        RejectCode,
+        RejectDescription
+    )
+VALUES
+    (
+        '1',
+        'code',
+        'rejected'
+    );
+
 INSERT INTO ClientTransaction
     (
         ClearingFirmNumber,
@@ -80,7 +134,8 @@ INSERT INTO ClientTransaction
         DestinationAccountOmnibusIndicator,
         AsofPaymentDate,
         NsccRegistrationStatusCode,
-        NsccRequestStatusCode
+        NsccRequestStatusCode,
+        TransactionDialogIds
     )
 VALUES
     (
@@ -164,59 +219,6 @@ VALUES
         'brampton bus',
         'friday',
         'registered',
-        'completed'
-    );
-
-INSERT INTO TransactionDialog
-    (
-        TransmissionReceivedDateTime,
-        TransmissionId1,
-        TransmissionId2,
-        TransmissionTransactionId,
-        DialogSeqNumber,
-        DialogDirection,
-        NsccRecordType,
-        TransmissionRecordType,
-        UnformattedRecordType,
-        ShareQuantity,
-        GrossMoneyAmount,
-        NetMoneyAmount,
-        Price,
-        ExchangeToShareQuantity,
-        ExchangeToGrossMoneyAmount,
-        ExchangeToNetMoneyAmount,
-        ExchangeToPrice
-    )
-VALUES
-    (
-        NOW(),
-        '1',
-        '2',
-        'transaction1',
-        'seq',
-        'north',
-        'cd',
-        'radio',
-        'oral',
-        3.4,
-        5.6,
-        7.8,
-        9.10,
-        11.12,
-        13.14,
-        15.16,
-        17.18
-    );
-
-INSERT INTO RejectionDialog
-    (
-        RejectId,
-        RejectCode,
-        RejectDescription
-    )
-VALUES
-    (
-        '1',
-        'code',
-        'rejected'
+        'completed',
+        '{1}'
     );
