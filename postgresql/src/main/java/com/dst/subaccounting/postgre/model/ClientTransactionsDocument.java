@@ -8,7 +8,10 @@ import lombok.Data;
 
 @Data
 public class ClientTransactionsDocument {
-
+	
+	public static final String tableName = "clientTransaction";
+	
+	private Integer clientTransactionsDocumentId;
     private int clearingFirmNumber;
     private int dealerFirmNumber;
     private String agentForFirm;
@@ -91,6 +94,6 @@ public class ClientTransactionsDocument {
     private String 	nsccRegistrationStatusCode;
     private String 	nsccRequestStatusCode;
     
-//    private List<TransactionDialog> transactionDialogs;
-//    private List<RejectDialog> rejectDialogs;
+    private List<TransactionDialog> transactionDialogs;
+    private List<RejectDialog> rejectDialogs;
 }
