@@ -1,6 +1,10 @@
 package com.dst.subaccounting.postgre.model;
 
 import java.sql.Date;
+import java.util.List;
+
+import com.dstsystems.brokerage.sa.ingester.entity.ClientTransaction.RejectDialog;
+import com.dstsystems.brokerage.sa.ingester.entity.ClientTransaction.TransactionDialog;
 
 import lombok.Data;
 
@@ -88,6 +92,7 @@ public class ClientTransactionsDocument {
     private String 	asofPaymentDate;
     private String 	nsccRegistrationStatusCode;
     private String 	nsccRequestStatusCode;
-//    private DistributionTransactions distributionTransactions;
-//    private Comment comment;
+    
+//    private List<TransactionDialog> transactionDialogs;
+//    private List<RejectDialog> rejectDialogs;
 }
