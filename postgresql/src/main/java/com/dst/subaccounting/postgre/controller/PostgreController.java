@@ -23,6 +23,7 @@ public class PostgreController {
     @Autowired
     PostgreService postgreService;
 
+    /*
     @GetMapping("/comment")
     public List<Comment> getAllComments() {
         return postgreService.getAllComments();
@@ -53,6 +54,7 @@ public class PostgreController {
         postgreService.deleteAllComments();
     }
 
+    */
     @GetMapping("/clientTransaction")
     public List<ClientTransaction> getAllClientTransactions() {
         return postgreService.getAllClientTransactions();

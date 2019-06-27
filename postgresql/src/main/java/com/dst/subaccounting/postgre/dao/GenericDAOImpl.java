@@ -1,6 +1,8 @@
 package com.dst.subaccounting.postgre.dao;
 
 import com.dst.subaccounting.postgre.DAO;
+import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
+import com.dst.subaccounting.postgre.model.ClientTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -28,32 +30,24 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     protected String deleteStatement;
     protected String deleteAllStatement;
     
-    protected RowMapper<T> rowMapper;
+    protected ClientTransactionExtractor clientTransactionExtractor;
     
-    public GenericDAOImpl(String tableId, String tableName, Class<? extends T> cls, RowMapper<T> rowMapper) {
+    public GenericDAOImpl(String tableId, String tableName, Class<? extends T> cls, ClientTransactionExtractor clientTransactionExtractor) {
     	this.tableId = tableId;
     	this.tableName = tableName;
-    	this.rowMapper = rowMapper;
+    	this.clientTransactionExtractor = clientTransactionExtractor;
     	
     	List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).filter(f -> f != tableId).collect(Collectors.toList());
     	generateInsertStatement(fieldNames);
     	generateDeleteStatement();
     	generateDeleteAllStatement();
     }
-    
-    private void generateInsertStatement(List<String> fieldNames) {
-    	insertStatement = "INSERT INTO " + tableName + 
-    			"(" + fieldNames.stream().collect(Collectors.joining(", ")) + 
-    			") values(" + fieldNames.stream().map(f -> ":" + f).collect(Collectors.joining(", ")) + ")";
-    }
-    
-    private void generateDeleteStatement() {
-    	deleteStatement = "DELETE FROM " + tableName + " WHERE " + tableName + "." + tableId + " = :" + tableId;
-    }
-    
-    private void generateDeleteAllStatement( ) {
-    	deleteAllStatement = "DELETE FROM " + tableName;
-    }
+
+    protected abstract void generateInsertStatement(List<String> fieldNames);
+
+    protected abstract void generateDeleteStatement();
+
+    protected abstract void generateDeleteAllStatement( );
     
     @Override
     public void insert(T t) {
@@ -87,7 +81,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
     }
     
     @Override
-    public List<T> getAll() {
-        return jdbcTemplate.query("select * from " + tableName, rowMapper);
+    public List<ClientTransaction> getAll() {
+        return  jdbcTemplate.query("select * from " + tableName, clientTransactionExtractor);
     }
 }

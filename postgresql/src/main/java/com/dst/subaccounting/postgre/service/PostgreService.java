@@ -1,7 +1,6 @@
 package com.dst.subaccounting.postgre.service;
 
 import com.dst.subaccounting.postgre.dao.ClientTransactionDAOImpl;
-import com.dst.subaccounting.postgre.dao.CommentDAOImpl;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +10,11 @@ import java.util.List;
 
 @Service
 public class PostgreService {
-
-    @Autowired
-    private CommentDAOImpl commentDAO;
     
     @Autowired
 	private ClientTransactionDAOImpl clientTransactionDAO;
 
+    /*
     public List<Comment> getAllComments() {
        return commentDAO.getAll();
     }
@@ -41,7 +38,7 @@ public class PostgreService {
     public void deleteAllComments(){
         commentDAO.deleteAll();
     }
-
+*/
     public List<ClientTransaction> getAllClientTransactions() {
         return clientTransactionDAO.getAll();
      }
