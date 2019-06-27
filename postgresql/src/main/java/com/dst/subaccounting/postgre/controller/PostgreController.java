@@ -1,6 +1,6 @@
 package com.dst.subaccounting.postgre.controller;
 
-import com.dst.subaccounting.postgre.model.ClientTransactionsDocument;
+import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.Comment;
 import com.dst.subaccounting.postgre.service.PostgreService;
 
@@ -54,17 +54,17 @@ public class PostgreController {
     }
 
     @GetMapping("/clientTransaction")
-    public List<ClientTransactionsDocument> getAllClientTransactions() {
+    public List<ClientTransaction> getAllClientTransactions() {
         return postgreService.getAllClientTransactions();
     }
     
     @PostMapping("/clientTransaction")
-    public void insertClientTransaction(@RequestBody ClientTransactionsDocument clientTransaction) {
+    public void insertClientTransaction(@RequestBody ClientTransaction clientTransaction) {
     	postgreService.insertClientTransaction(clientTransaction);
     }
     
     @PostMapping("/clientTransaction/bulk")
-    public void bulkInsertClientTransactions(@RequestBody ArrayList<ClientTransactionsDocument> clientTransactions) {
+    public void bulkInsertClientTransactions(@RequestBody ArrayList<ClientTransaction> clientTransactions) {
     	postgreService.insertManyClientTransactions(clientTransactions);
     }
     
@@ -84,7 +84,7 @@ public class PostgreController {
     }
     
     @GetMapping("/clientTansaction/getTransactions")
-    public List<ClientTransactionsDocument> getTransactionsToProcess() {
+    public List<ClientTransaction> getTransactionsToProcess() {
         //Get documents on a certain date then sorted in descending order by clientTransaction id
         return postgreService.getClientTransactionsToProcess();
 

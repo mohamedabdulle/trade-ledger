@@ -2,7 +2,7 @@ package com.dst.subaccounting.postgre.service;
 
 import com.dst.subaccounting.postgre.dao.ClientTransactionsDocumentDAOImpl;
 import com.dst.subaccounting.postgre.dao.CommentDAOImpl;
-import com.dst.subaccounting.postgre.model.ClientTransactionsDocument;
+import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,15 +42,15 @@ public class PostgreService {
         commentDAO.deleteAll();
     }
 
-    public List<ClientTransactionsDocument> getAllClientTransactions() {
+    public List<ClientTransaction> getAllClientTransactions() {
         return clientTransactionDAO.getAll();
      }
      
-     public void insertClientTransaction(ClientTransactionsDocument clientTransaction) {
+     public void insertClientTransaction(ClientTransaction clientTransaction) {
      	clientTransactionDAO.insert(clientTransaction);
      }
      
-     public void insertManyClientTransactions(List<ClientTransactionsDocument> clientTransactions) {
+     public void insertManyClientTransactions(List<ClientTransaction> clientTransactions) {
      	clientTransactionDAO.bulkInsert(clientTransactions);
      }
      
@@ -66,7 +66,7 @@ public class PostgreService {
          clientTransactionDAO.deleteAll();
      }
 
-     public List<ClientTransactionsDocument> getClientTransactionsToProcess(){
+     public List<ClientTransaction> getClientTransactionsToProcess(){
          return clientTransactionDAO.getTransactionToProcess();
      }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ClientTransactionsDocument {
+public class ClientTransaction {
 
     private int clearingFirmNumber;
     private int dealerFirmNumber;
