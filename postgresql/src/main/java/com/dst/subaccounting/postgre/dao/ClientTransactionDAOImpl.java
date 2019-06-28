@@ -21,7 +21,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		return jdbcTemplate.query("select " + ClientTransaction.getTableName() + ", "  + TransactionDialog.getTableName() +" from "+ tableName +" join "+ TransactionDialog.getTableName() + " on TransactionDialog.transactionDialogId in transactionDialogIds WHERE price IS NOT NULL AND transactionStatus != 'C' ORDER BY tradeDate DESC", clientTransactionExtractor);
 	}
 
-	public void generateInsertStatement(List<String> fieldNames) {
+	protected void generateInsertStatement(List<String> fieldNames) {
 
 		insertStatement = "INSERT INTO " + ClientTransaction.getTableName() +
 				"(" + fieldNames.stream().collect(Collectors.joining(", ")) +
@@ -29,11 +29,11 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		System.out.println(insertStatement);
 	}
 
-	public void generateDeleteStatement(){
+	protected void generateDeleteStatement(){
 		deleteStatement = "DELETE FROM " + ClientTransaction.getTableName() + " WHERE " + ClientTransaction.getTableName() + "." + tableId + " = :" + tableId;
 	}
 
-	public void generateDeleteAllStatement() {
+	protected void generateDeleteAllStatement() {
 		deleteAllStatement = "DELETE FROM " + ClientTransaction.getTableName();
 	}
 }

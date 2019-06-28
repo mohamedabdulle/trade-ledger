@@ -21,7 +21,7 @@ import java.lang.reflect.*;
 abstract public class GenericDAOImpl<T> implements DAO<T> {
 
 	@Autowired
-	NamedParameterJdbcTemplate jdbcTemplate;
+	protected NamedParameterJdbcTemplate jdbcTemplate;
 
 	protected String tableName;
 	protected String tableId;
