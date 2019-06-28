@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,16 +37,24 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 				ctDoc = makeClientTransaction(rs);
 				ctMap.put(ctId, ctDoc);
 			}
-
-			// add dialogs to existing client Transaction doc
-			ctDoc.getTransactionDialogs().add(makeTransactionDialog(rs));
-			ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
+			
+			try {
+				ctDoc.getTransactionDialogs().add(makeTransactionDialog(rs));
+			}
+			catch(Exception e){
+				
+			}
+//			try {
+//				ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
+//			}
+//			catch(Exception e){
+//				
+//			}
 		}
 
 		return ctMap.values().stream().collect(Collectors.toList());
 	}
 
-	// TO DO
 	private ClientTransaction makeClientTransaction(ResultSet rs) throws SQLException {
 		ClientTransaction ct = new ClientTransaction();
 		Integer id = rs.getInt("clientTransactionId");
@@ -215,7 +224,9 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 		ct.setNsccRegistrationStatusCode(nsccRegistrationStatusCode);
 		String nsccRequestStatusCode = rs.getString("nsccRequestStatusCode");
 		ct.setNsccRequestStatusCode(nsccRequestStatusCode);
-
+		
+		ct.setTransactionDialogs(new ArrayList<TransactionDialog>());
+		ct.setRejectDialogs(new ArrayList<RejectDialog>());
 		return ct;
 	}
 
@@ -262,7 +273,6 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 		return td;
 	}
 
-	// TO DO
 	private RejectDialog makeRejectDialog(ResultSet rs) throws SQLException {
 
 		RejectDialog rd = new RejectDialog();
