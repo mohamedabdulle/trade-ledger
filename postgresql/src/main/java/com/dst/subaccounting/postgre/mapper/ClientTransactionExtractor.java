@@ -44,12 +44,12 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 			catch(Exception e){
 				
 			}
-//			try {
-//				ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
-//			}
-//			catch(Exception e){
-//				
-//			}
+			try {
+				ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
+			}
+			catch(Exception e){
+				
+			}
 		}
 
 		return ctMap.values().stream().collect(Collectors.toList());

@@ -83,8 +83,8 @@ CREATE TABLE ClientTransaction
     AsofPaymentDate varchar(50),
     NsccRegistrationStatusCode varchar(50),
     NsccRequestStatusCode varchar(50),
-    TransactionDialogIds int[]
---     RejectDialogIds int[]
+    TransactionDialogIds int[],
+    RejectDialogIds int[]
 );
 
 DROP TABLE IF EXISTS TransactionDialog;
@@ -110,8 +110,8 @@ CREATE TABLE TransactionDialog
     ExchangeToPrice float
 );
 
-DROP TABLE IF EXISTS RejectionDialog;
-CREATE TABLE RejectionDialog
+DROP TABLE IF EXISTS RejectDialog;
+CREATE TABLE RejectDialog
 (
     RejectDialogId SERIAL PRIMARY KEY,
     RejectId varchar(50),

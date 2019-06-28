@@ -39,7 +39,7 @@ VALUES
         17.18
     );
 
-INSERT INTO RejectionDialog
+INSERT INTO RejectDialog
     (
         RejectId,
         RejectCode,
@@ -135,7 +135,8 @@ INSERT INTO ClientTransaction
         AsofPaymentDate,
         NsccRegistrationStatusCode,
         NsccRequestStatusCode,
-        TransactionDialogIds
+        TransactionDialogIds,
+        RejectDialogIds
     )
 VALUES
     (
@@ -220,5 +221,6 @@ VALUES
         'friday',
         'registered',
         'completed',
+        '{1}',
         '{1}'
     );
