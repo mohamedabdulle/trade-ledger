@@ -17,7 +17,9 @@ import lombok.Data;
 @Data
 public class RejectDialog {
 	
-	public static final String tableName = "RejectDialog";
+	public static String getTableName() {
+		return "RejectDialog";
+	}
 	
 	private Integer rejectDialogId;
     private String rejectId;

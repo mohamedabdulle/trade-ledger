@@ -37,7 +37,9 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 		this.tableName = tableName;
 		this.clientTransactionExtractor = clientTransactionExtractor;
 
-		List<String> fieldNames = Stream.of(cls.getDeclaredFields()).map(Field::getName).filter(f -> f != tableId)
+		List<String> fieldNames = Stream.of(cls.getDeclaredFields())
+				.filter(f-> f.getType() != List.class)
+				.map(Field::getName).filter(f -> f != tableId)
 				.collect(Collectors.toList());
 		generateInsertStatement(fieldNames);
 		generateDeleteStatement();
@@ -82,9 +84,9 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 
 	@Override
 	public List<ClientTransaction> getAll() {
-		return jdbcTemplate.query("select * from ClientTransaction "
-				+ "join TransactionDialog on TransactionDialog.TransactionDialogId = Any(ClientTransaction.TransactionDialogIds)"
-				+ " join RejectDialog on RejectDialog.RejectDialogId = Any(ClientTransaction.RejectDialogIds)",
-				clientTransactionExtractor);
+		String getAllStatement = "select * from ClientTransaction "
+				+ "left join TransactionDialog on TransactionDialog.TransactionDialogId = Any(ClientTransaction.TransactionDialogIds)"
+				+ "left join RejectDialog on RejectDialog.RejectDialogId = Any(ClientTransaction.RejectDialogIds)";
+		return jdbcTemplate.query(getAllStatement, clientTransactionExtractor);
 	}
 }

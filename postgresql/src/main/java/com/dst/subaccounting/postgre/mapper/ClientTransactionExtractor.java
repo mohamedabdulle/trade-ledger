@@ -39,13 +39,17 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 			}
 			
 			try {
-				ctDoc.getTransactionDialogs().add(makeTransactionDialog(rs));
+				if(rs.getInt("TransactionDialogId") != 0) {
+					ctDoc.getTransactionDialogs().add(makeTransactionDialog(rs));					
+				}
 			}
 			catch(Exception e){
 				
 			}
 			try {
-				ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
+				if(rs.getInt("RejectDialogId") != 0) {
+					ctDoc.getRejectDialogs().add(makeRejectDialog(rs));
+				}
 			}
 			catch(Exception e){
 				

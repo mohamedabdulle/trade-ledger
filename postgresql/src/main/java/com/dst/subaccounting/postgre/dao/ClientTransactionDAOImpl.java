@@ -14,25 +14,26 @@ import java.util.stream.Collectors;
 public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction> {
 	
 	public ClientTransactionDAOImpl() {
-		super("id", "ClientTransaction", new ClientTransaction().getClass(), new ClientTransactionExtractor());
+		super("clientTransactionId", ClientTransaction.getTableName(), new ClientTransaction().getClass(), new ClientTransactionExtractor());
 	}
 
 	public List<ClientTransaction> getTransactionToProcess(){
-		return jdbcTemplate.query("select " + tableName + ", "  + TransactionDialog.tableName +" from "+ tableName +" join "+ TransactionDialog.tableName + " on TransactionDialog.transactionDialogId in transactionDialogIds WHERE price IS NOT NULL AND transactionStatus != 'C' ORDER BY tradeDate DESC", clientTransactionExtractor);
+		return jdbcTemplate.query("select " + ClientTransaction.getTableName() + ", "  + TransactionDialog.getTableName() +" from "+ tableName +" join "+ TransactionDialog.getTableName() + " on TransactionDialog.transactionDialogId in transactionDialogIds WHERE price IS NOT NULL AND transactionStatus != 'C' ORDER BY tradeDate DESC", clientTransactionExtractor);
 	}
 
 	public void generateInsertStatement(List<String> fieldNames) {
 
-		insertStatement = "INSERT INTO " + tableName +
+		insertStatement = "INSERT INTO " + ClientTransaction.getTableName() +
 				"(" + fieldNames.stream().collect(Collectors.joining(", ")) +
 				") values(" + fieldNames.stream().map(f -> ":" + f).collect(Collectors.joining(", ")) + ")";
+		System.out.println(insertStatement);
 	}
 
 	public void generateDeleteStatement(){
-		deleteStatement = "DELETE FROM " + tableName + " WHERE " + tableName + "." + tableId + " = :" + tableId;
+		deleteStatement = "DELETE FROM " + ClientTransaction.getTableName() + " WHERE " + ClientTransaction.getTableName() + "." + tableId + " = :" + tableId;
 	}
 
 	public void generateDeleteAllStatement() {
-		deleteAllStatement = "DELETE FROM " + tableName;
+		deleteAllStatement = "DELETE FROM " + ClientTransaction.getTableName();
 	}
 }

@@ -9,8 +9,10 @@ import lombok.Data;
 @Data
 public class ClientTransaction {
 	
-	public static final String tableName = "ClientTransaction";
-
+	public static String getTableName() {
+		return "ClientTransaction";
+	}
+	
 	private Integer clientTransactionId;
     private int clearingFirmNumber;
     private int dealerFirmNumber;
