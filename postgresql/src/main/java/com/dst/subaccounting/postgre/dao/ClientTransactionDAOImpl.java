@@ -90,19 +90,25 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		jdbcTemplate.update(insertStatement, namedParameters, keyHolder);
 		Integer ctId = (Integer)keyHolder.getKeys().get(tableId.toLowerCase());
 		
-		List<FileDataTransactionDialog> tdList = ct.getTransactionDialogs().parallelStream().map(td -> new FileDataTransactionDialog(td, ctId)).collect(Collectors.toList());
-		insertDialogs(tdList, ctId, tdInsertStatement);
-	
-		List<FileDataRejectDialog> rdList = ct.getRejectDialogs().parallelStream().map(rd -> new FileDataRejectDialog(rd, ctId)).collect(Collectors.toList());
-		insertDialogs(rdList, ctId, rdInsertStatement);
+		List<TransactionDialog> tdList = ct.getTransactionDialogs();
+		if(tdList != null && tdList.size() != 0) {
+			List<FileDataTransactionDialog> fdtdList = tdList.parallelStream().map(td -> new FileDataTransactionDialog(td, ctId)).collect(Collectors.toList());
+			insertDialogs(fdtdList, ctId, tdInsertStatement);			
+		}
+		
+		List<RejectDialog> rdList = ct.getRejectDialogs();
+		if(rdList != null && rdList.size() != 0 ) {
+			List<FileDataRejectDialog> fdrdList = rdList.parallelStream().map(rd -> new FileDataRejectDialog(rd, ctId)).collect(Collectors.toList());
+			insertDialogs(fdrdList, ctId, rdInsertStatement);			
+		}
 	}
 	
 	/**
-	 * insert transaction dialogs
+	 * insert TransactionDialog(s) or RejectDialog(s) into their table
 	 * @param tdList the list of transaction dialogs to insert
 	 * @param ctId the id of the client transaction associated with the transaction dialogs to insert
 	 */
-	private void insertDialogs(List<?> dialogList, Integer ctId, String insertStatement) {
+	private void insertDialogs(List<? extends FileData> dialogList, Integer ctId, String insertStatement) {
 		if(dialogList.size() == 1) {
 			BeanPropertySqlParameterSource namedParameters = new BeanPropertySqlParameterSource(dialogList.get(0));
 		

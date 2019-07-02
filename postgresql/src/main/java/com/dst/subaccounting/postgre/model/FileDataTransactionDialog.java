@@ -12,10 +12,12 @@
  */
 package com.dst.subaccounting.postgre.model;
 
+import com.dst.subaccounting.postgre.dao.FileData;
+
 import lombok.Data;
 
 @Data
-public class FileDataTransactionDialog {
+public class FileDataTransactionDialog implements FileData {
    
 	public static String getTableName() {
 		return "TransactionDialog";
