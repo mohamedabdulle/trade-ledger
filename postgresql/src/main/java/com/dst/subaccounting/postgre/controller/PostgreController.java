@@ -21,39 +21,7 @@ public class PostgreController {
 
     @Autowired
     PostgreService postgreService;
-
-    /*
-    @GetMapping("/comment")
-    public List<Comment> getAllComments() {
-        return postgreService.getAllComments();
-    }
     
-    @PostMapping("/comment")
-    public void insertComment(@RequestBody Comment comment) {
-    	postgreService.insertComment(comment);
-    }
-    
-    @PostMapping("/comment/bulk")
-    public void bulkInsertComment(@RequestBody ArrayList<Comment> comments) {
-    	postgreService.insertManyComments(comments);
-    }
-    
-    @DeleteMapping("/comment/delete") 
-    public void deleteComment(@RequestParam int commentId) {
-    	postgreService.deleteComments(commentId);
-    }
-    
-    @DeleteMapping("/comment/deleteMany")
-    public void bulkDeleteComments(@RequestParam int[] commentId ) {
-    	postgreService.deleteManyComments(commentId);
-    }
-
-    @DeleteMapping("/comment/deleteAll")
-    public void deleteAllComments(){
-        postgreService.deleteAllComments();
-    }
-
-    */
     @GetMapping("/clientTransaction")
     public List<ClientTransaction> getAllClientTransactions() {
         return postgreService.getAllClientTransactions();
@@ -89,16 +57,6 @@ public class PostgreController {
         //Get documents on a certain date then sorted in descending order by clientTransaction id
         return postgreService.getClientTransactionsToProcess();
 
-//    	List<Bson> filters = Arrays.asList(
-//    			new Document("$match",
-//    					new Document("transactionRecievedDate", "0001-01-01")
-//    					.append("transactionStatus", new Document("$ne", "C"))
-//    					.append("price", 0L)),
-//    			new Document("$project", new Document("_id", 0)),
-//    			new Document("$sort", new Document("cusip", 1L)
-//    						.append("tradeDate", 1L)));
-   
-    //get all documents with default TransactionReceivedDate, default price, and transactionStatus is not "C". return id, sorted by (cusip, date)
     }
     
     public void updateMappedClientTransPrice() {}
