@@ -20,10 +20,6 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 
 	@Override
 	public List<ClientTransaction> extractData(ResultSet rs) throws SQLException {
-		ResultSetMetaData rsmd = rs.getMetaData();
-		for(int i = 1; i <= rsmd.getColumnCount(); ++i) {
-			System.out.println(rsmd.getColumnName(i));
-		}
 
 		Map<Integer, ClientTransaction> ctMap = new HashMap<>();
 
