@@ -91,7 +91,7 @@ DROP TABLE IF EXISTS TransactionDialog;
 CREATE TABLE TransactionDialog
 (
     TransactionDialogId SERIAL PRIMARY KEY,
-    TransmissionReceivedDateTime timestamptz,
+    TransmissionReceivedDateTime varchar(50),
     TransmissionId1 varchar(50),
     TransmissionId2 varchar(50),
     TransmissionTransactionId varchar(50),
