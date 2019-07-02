@@ -31,22 +31,17 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 
 	protected ClientTransactionExtractor clientTransactionExtractor;
 
-	public GenericDAOImpl(String tableId, String tableName, Class<? extends T> cls,
-			ClientTransactionExtractor clientTransactionExtractor) {
+	public GenericDAOImpl(String tableId, String tableName, ClientTransactionExtractor clientTransactionExtractor) {
 		this.tableId = tableId;
 		this.tableName = tableName;
 		this.clientTransactionExtractor = clientTransactionExtractor;
 
-		List<String> fieldNames = Stream.of(cls.getDeclaredFields())
-				.filter(f-> f.getType() != List.class)
-				.map(Field::getName).filter(f -> f != tableId)
-				.collect(Collectors.toList());
-		generateInsertStatement(fieldNames);
+		generateInsertStatement();
 		generateDeleteStatement();
 		generateDeleteAllStatement();
 	}
 
-	protected abstract void generateInsertStatement(List<String> fieldNames);
+	protected abstract void generateInsertStatement();
 
 	protected abstract void generateDeleteStatement();
 
