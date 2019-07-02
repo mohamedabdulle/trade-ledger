@@ -16,7 +16,8 @@ INSERT INTO TransactionDialog
         ExchangeToShareQuantity,
         ExchangeToGrossMoneyAmount,
         ExchangeToNetMoneyAmount,
-        ExchangeToPrice
+        ExchangeToPrice,
+        ClientTransactionId
     )
 VALUES
     (
@@ -36,20 +37,23 @@ VALUES
         11.12,
         13.14,
         15.16,
-        17.18
+        17.18,
+        1
     );
 
 INSERT INTO RejectDialog
     (
         RejectId,
         RejectCode,
-        RejectDescription
+        RejectDescription,
+        ClientTransactionId
     )
 VALUES
     (
         '1',
         'code',
-        'rejected'
+        'rejected',
+        1
     );
 
 INSERT INTO ClientTransaction
@@ -134,9 +138,9 @@ INSERT INTO ClientTransaction
         DestinationAccountOmnibusIndicator,
         AsofPaymentDate,
         NsccRegistrationStatusCode,
-        NsccRequestStatusCode,
-        TransactionDialogIds,
-        RejectDialogIds
+        NsccRequestStatusCode
+--        TransactionDialogIds,
+--        RejectDialogIds
     )
 VALUES
     (
@@ -220,7 +224,7 @@ VALUES
         'brampton bus',
         'friday',
         'registered',
-        'completed',
-        '{1}',
-        '{1}'
+        'completed'
+--        '{1}',
+--        '{1}'
     );

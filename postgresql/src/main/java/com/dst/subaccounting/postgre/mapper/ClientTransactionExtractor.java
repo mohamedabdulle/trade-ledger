@@ -20,7 +20,9 @@ public final class ClientTransactionExtractor implements ResultSetExtractor<List
 
 	@Override
 	public List<ClientTransaction> extractData(ResultSet rs) throws SQLException {
-
+		
+		System.out.println("extractor syasrt");
+		
 		Map<Integer, ClientTransaction> ctMap = new HashMap<>();
 
 		while (rs.next()) {

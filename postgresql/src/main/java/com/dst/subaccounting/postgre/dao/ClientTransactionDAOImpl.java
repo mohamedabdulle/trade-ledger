@@ -6,10 +6,13 @@ import org.springframework.stereotype.Repository;
 import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.FileDataClientTransaction;
+import com.dst.subaccounting.postgre.model.FileDataRejectDialog;
+import com.dst.subaccounting.postgre.model.FileDataTransactionDialog;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 
@@ -42,7 +45,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	}
 
 	private void generateTdInsertStatement() {
-		List<String> fieldNames = generateFieldNames(new TransactionDialog().getClass(), "transactionDialogId");
+		List<String> fieldNames = generateFieldNames(new FileDataTransactionDialog().getClass(), "transactionDialogId");
 		tdInsertStatement = generateInsertStatement(TransactionDialog.getTableName(), fieldNames); 
 	}
 	
@@ -57,6 +60,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		return "INSERT INTO " + tableName + "(" + fieldNames.stream().collect(Collectors.joining(", ")) + ") values (" + 
 				fieldNames.stream().map(f -> ":" + f).collect(Collectors.joining(", ")) + ")";
 	}
+	
 	protected void generateDeleteStatement() {
 		deleteStatement = "DELETE FROM " + ClientTransaction.getTableName() + " WHERE " + ClientTransaction.getTableName() + "." + tableId + " = :" + tableId;
 	}
@@ -65,35 +69,37 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		deleteAllStatement = "DELETE FROM " + ClientTransaction.getTableName();
 	}
 
+	protected void generateGetAllStatement() {
+		getAllStatement = "select * from ClientTransaction"
+				+ " left join TransactionDialog on TransactionDialog.ClientTransactionId = ClientTransaction.ClientTransactionId"
+				+ " left join RejectDialog on RejectDialog.ClientTransactionId = ClientTransaction.ClientTransactionId";
+	}
 	@Override
 	public void insert(ClientTransaction ct) {
+		FileDataClientTransaction fdct = new FileDataClientTransaction(ct);
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(fdct);
+		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+		jdbcTemplate.update(insertStatement, namedParameters, keyHolder);
+				
 		List<TransactionDialog> tdList = ct.getTransactionDialogs();
-		System.out.println(tdList);
-		Integer tdId = insertTransactionDialog(tdList.get(0));
-		
-		System.out.println(tdId);
-		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(ct);
-		
-		List<Integer> tdIdList = new ArrayList<Integer>();
-		tdIdList.add(tdId);
-		
-		FileDataClientTransaction fdct = new FileDataClientTransaction(ct, tdIdList, null);
-		namedParameters = new BeanPropertySqlParameterSource(fdct);
-		
-		jdbcTemplate.update(insertStatement, namedParameters);
+		insertTransactionDialogs(tdList, (String)keyHolder.getKeys().get(tableId.toLowerCase()));
+	
+//		List<RejectDialog> rdList = ct.getRejectDialogs();
 	}
 	
 	/**
-	 * insert a transaction dialog
-	 * @param td
-	 * @return the id of the transaction dialog inserted
+	 * insert transaction dialogs
+	 * @param tdList the list of transaction dialogs to insert
+	 * @param ctId the id of the client transaction associated with the transaction dialogs to insert
 	 */
-	private Integer insertTransactionDialog(TransactionDialog td) { 
-		KeyHolder keyHolder = new GeneratedKeyHolder();
-		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(td);
-		
-		jdbcTemplate.update(tdInsertStatement, namedParameters, keyHolder);
-	
-		return (Integer) keyHolder.getKeyList().get(0).get("TransactionDialogId".toLowerCase());
+	private void insertTransactionDialogs(List<TransactionDialog> tdList, String ctId) {
+		if(tdList.size() == 1) {
+			SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(tdList.get(0));			
+			jdbcTemplate.update(tdInsertStatement, namedParameters);
+		}
+		else {
+			SqlParameterSource[] namedParameterList = SqlParameterSourceUtils.createBatch(tdList);
+			jdbcTemplate.batchUpdate(tdInsertStatement, namedParameterList);
+		}
 	}
 }

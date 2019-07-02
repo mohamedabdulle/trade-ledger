@@ -82,9 +82,9 @@ CREATE TABLE ClientTransaction
     DestinationAccountOmnibusIndicator varchar(50),
     AsofPaymentDate varchar(50),
     NsccRegistrationStatusCode varchar(50),
-    NsccRequestStatusCode varchar(50),
-    TransactionDialogIds int[],
-    RejectDialogIds int[]
+    NsccRequestStatusCode varchar(50)
+--    TransactionDialogIds int[],
+--    RejectDialogIds int[]
 );
 
 DROP TABLE IF EXISTS TransactionDialog;
@@ -107,7 +107,9 @@ CREATE TABLE TransactionDialog
     ExchangeToShareQuantity float,
     ExchangeToGrossMoneyAmount float,
     ExchangeToNetMoneyAmount float,
-    ExchangeToPrice float
+    ExchangeToPrice float,
+	
+    ClientTransactionId int
 );
 
 DROP TABLE IF EXISTS RejectDialog;
@@ -116,7 +118,8 @@ CREATE TABLE RejectDialog
     RejectDialogId SERIAL PRIMARY KEY,
     RejectId varchar(50),
     RejectCode varchar(50),
-    RejectDescription varchar(50)
+    RejectDescription varchar(50),
+	ClientTransactionId int
 );
 
 DROP TABLE IF EXISTS Comment;

@@ -28,6 +28,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 	protected String insertStatement;
 	protected String deleteStatement;
 	protected String deleteAllStatement;
+	protected String getAllStatement;
 
 	protected ClientTransactionExtractor clientTransactionExtractor;
 
@@ -39,6 +40,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 		generateInsertStatement();
 		generateDeleteStatement();
 		generateDeleteAllStatement();
+		generateGetAllStatement();
 	}
 
 	protected abstract void generateInsertStatement();
@@ -46,6 +48,8 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 	protected abstract void generateDeleteStatement();
 
 	protected abstract void generateDeleteAllStatement();
+	
+	protected abstract void generateGetAllStatement();
 
 	@Override
 	public void insert(T t) {
@@ -79,9 +83,6 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 
 	@Override
 	public List<ClientTransaction> getAll() {
-		String getAllStatement = "select * from ClientTransaction "
-				+ "left join TransactionDialog on TransactionDialog.TransactionDialogId = Any(ClientTransaction.TransactionDialogIds)"
-				+ "left join RejectDialog on RejectDialog.RejectDialogId = Any(ClientTransaction.RejectDialogIds)";
 		return jdbcTemplate.query(getAllStatement, clientTransactionExtractor);
 	}
 }
