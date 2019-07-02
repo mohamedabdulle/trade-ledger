@@ -1,11 +1,10 @@
 package com.dst.subaccounting.postgre;
 
-import com.dst.subaccounting.postgre.model.ClientTransaction;
 
 import java.util.List;
 
 public interface DAO<T> {
     void insert(T t);
     void bulkInsert(List<T> t);
-    List<ClientTransaction> getAll();
+    List<T> getAll();
 }

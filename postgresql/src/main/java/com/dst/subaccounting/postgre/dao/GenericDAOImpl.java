@@ -1,9 +1,8 @@
 package com.dst.subaccounting.postgre.dao;
 
 import com.dst.subaccounting.postgre.DAO;
-import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
-import com.dst.subaccounting.postgre.model.ClientTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -26,12 +25,12 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 	protected String deleteAllStatement;
 	protected String getAllStatement;
 
-	protected ClientTransactionExtractor clientTransactionExtractor;
+	protected ResultSetExtractor<List<T>> resultSetExtractor;
 
-	public GenericDAOImpl(String tableId, String tableName, ClientTransactionExtractor clientTransactionExtractor) {
+	public GenericDAOImpl(String tableId, String tableName, ResultSetExtractor<List<T>> resultSetExtractor) {
 		this.tableId = tableId;
 		this.tableName = tableName;
-		this.clientTransactionExtractor = clientTransactionExtractor;
+		this.resultSetExtractor = resultSetExtractor;
 
 		generateInsertStatement();
 		generateDeleteStatement();
@@ -78,7 +77,7 @@ abstract public class GenericDAOImpl<T> implements DAO<T> {
 	}
 
 	@Override
-	public List<ClientTransaction> getAll() {
-		return jdbcTemplate.query(getAllStatement, clientTransactionExtractor);
+	public List<T> getAll() {
+		return jdbcTemplate.query(getAllStatement, resultSetExtractor);
 	}
 }
