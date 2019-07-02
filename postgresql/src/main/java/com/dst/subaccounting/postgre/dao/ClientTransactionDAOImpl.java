@@ -3,6 +3,7 @@ package com.dst.subaccounting.postgre.dao;
 import com.dst.subaccounting.postgre.model.TransactionDialog;
 import org.springframework.stereotype.Repository;
 
+import com.dst.subaccounting.postgre.FileData;
 import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.FileDataClientTransaction;

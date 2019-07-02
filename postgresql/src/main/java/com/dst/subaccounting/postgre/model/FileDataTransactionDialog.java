@@ -12,7 +12,7 @@
  */
 package com.dst.subaccounting.postgre.model;
 
-import com.dst.subaccounting.postgre.dao.FileData;
+import com.dst.subaccounting.postgre.FileData;
 
 import lombok.Data;
 
