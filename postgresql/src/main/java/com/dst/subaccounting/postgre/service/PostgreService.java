@@ -2,7 +2,6 @@ package com.dst.subaccounting.postgre.service;
 
 import com.dst.subaccounting.postgre.dao.ClientTransactionDAOImpl;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
-import com.dst.subaccounting.postgre.model.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

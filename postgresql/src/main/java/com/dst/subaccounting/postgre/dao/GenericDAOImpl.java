@@ -4,7 +4,6 @@ import com.dst.subaccounting.postgre.DAO;
 import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
@@ -13,9 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-import java.lang.reflect.*;
 
 @Repository
 abstract public class GenericDAOImpl<T> implements DAO<T> {

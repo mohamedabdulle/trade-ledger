@@ -1,7 +1,6 @@
 package com.dst.subaccounting.postgre.controller;
 
 import com.dst.subaccounting.postgre.model.ClientTransaction;
-import com.dst.subaccounting.postgre.model.Comment;
 import com.dst.subaccounting.postgre.service.PostgreService;
 
 import org.springframework.beans.factory.annotation.Autowired;

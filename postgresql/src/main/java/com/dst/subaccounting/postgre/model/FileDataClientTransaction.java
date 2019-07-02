@@ -1,6 +1,5 @@
 package com.dst.subaccounting.postgre.model;
 
-import java.util.List;
 
 import com.dst.subaccounting.postgre.dao.FileData;
 
