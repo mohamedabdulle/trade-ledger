@@ -54,6 +54,30 @@ public class FileDataTransactionDialog {
 		+ ", exchangeToGrossMoneyAmount=" + exchangeToGrossMoneyAmount + ", exchangeToNetMoneyAmount="
 		+ exchangeToNetMoneyAmount + ", echangeToPrice=" + exchangeToPrice + "]";
     }
+
+    public FileDataTransactionDialog() {}
+    
+	public FileDataTransactionDialog(TransactionDialog td, Integer ctId) {
+		setTransmissionReceivedDateTime(td.getTransmissionReceivedDateTime());
+	    setTransmissionId1(td.getTransmissionId1());
+	    setTransmissionId2(td.getTransmissionId2());
+	    setTransmissionTransactionId(td.getTransmissionTransactionId());
+	    setDialogSeqNumber(td.getDialogSeqNumber());
+	    setDialogDirection(td.getDialogDirection());
+	    setNsccRecordType(td.getNsccRecordType());
+	    setTransmissionRecordType(td.getTransmissionRecordType());
+	    setUnformattedRecordType(td.getUnformattedRecordType());
+	    setShareQuantity(td.getShareQuantity());
+	    setGrossMoneyAmount(td.getGrossMoneyAmount());
+	    setNetMoneyAmount(td.getNetMoneyAmount());
+	    setPrice(td.getPrice());
+	    setExchangeToShareQuantity(td.getExchangeToShareQuantity());
+	    setExchangeToGrossMoneyAmount(td.getExchangeToGrossMoneyAmount());
+	    setExchangeToNetMoneyAmount(td.getExchangeToNetMoneyAmount());
+	    setExchangeToPrice(td.getExchangeToPrice());
+	    
+	    setClientTransactionId(ctId);	
+	}
     
     
 }

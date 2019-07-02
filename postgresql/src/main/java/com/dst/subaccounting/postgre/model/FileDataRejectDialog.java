@@ -16,16 +16,26 @@ import lombok.Data;
 
 @Data
 public class FileDataRejectDialog {
-	
+
 	public static String getTableName() {
 		return "RejectDialog";
 	}
-	
-	private Integer rejectDialogId;
-    private String rejectId;
-    private String rejectCode;
-    private String rejectDescription;
-    private Integer clientTransactionId;
-    
-}
 
+	public FileDataRejectDialog() {}
+	
+	public FileDataRejectDialog(RejectDialog rd, Integer ctId) {
+		setRejectDialogId(rd.getRejectDialogId());
+		setRejectId(rd.getRejectId());
+		setRejectCode(rd.getRejectCode());
+		setRejectDescription(rd.getRejectDescription());
+		setClientTransactionId(ctId);
+
+	}
+
+	private Integer rejectDialogId;
+	private String rejectId;
+	private String rejectCode;
+	private String rejectDescription;
+	private Integer clientTransactionId;
+
+}

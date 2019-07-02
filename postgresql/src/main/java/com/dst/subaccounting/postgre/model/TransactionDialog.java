@@ -12,6 +12,8 @@
  */
 package com.dst.subaccounting.postgre.model;
 
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+
 import lombok.Data;
 
 @Data

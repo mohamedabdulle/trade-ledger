@@ -8,6 +8,7 @@ import com.dst.subaccounting.postgre.model.ClientTransaction;
 import com.dst.subaccounting.postgre.model.FileDataClientTransaction;
 import com.dst.subaccounting.postgre.model.FileDataRejectDialog;
 import com.dst.subaccounting.postgre.model.FileDataTransactionDialog;
+import com.dst.subaccounting.postgre.model.RejectDialog;
 
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -26,6 +27,7 @@ import java.util.stream.Stream;
 public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction> {
 	
 	private String tdInsertStatement;
+	private String rdInsertStatement;
 	
 	public ClientTransactionDAOImpl() {
 		super("clientTransactionId", ClientTransaction.getTableName(), new ClientTransactionExtractor());
@@ -41,12 +43,17 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		insertStatement = generateInsertStatement(ClientTransaction.getTableName(), fieldNames);
 		
 		generateTdInsertStatement();
-		System.out.println(insertStatement);
+		generateRdInsertStatement();
 	}
 
 	private void generateTdInsertStatement() {
 		List<String> fieldNames = generateFieldNames(new FileDataTransactionDialog().getClass(), "transactionDialogId");
 		tdInsertStatement = generateInsertStatement(TransactionDialog.getTableName(), fieldNames); 
+	}
+	
+	private void generateRdInsertStatement() { 
+		List<String> fieldNames = generateFieldNames(new FileDataRejectDialog().getClass(), "rejectDialogId");
+		rdInsertStatement = generateInsertStatement(RejectDialog.getTableName(), fieldNames);
 	}
 	
 	private List<String> generateFieldNames(Class<?> cls, String id) {
@@ -79,12 +86,15 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		FileDataClientTransaction fdct = new FileDataClientTransaction(ct);
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(fdct);
 		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+		
 		jdbcTemplate.update(insertStatement, namedParameters, keyHolder);
-				
-		List<TransactionDialog> tdList = ct.getTransactionDialogs();
-		insertTransactionDialogs(tdList, (String)keyHolder.getKeys().get(tableId.toLowerCase()));
+		Integer ctId = (Integer)keyHolder.getKeys().get(tableId.toLowerCase());
+		
+		List<FileDataTransactionDialog> tdList = ct.getTransactionDialogs().parallelStream().map(td -> new FileDataTransactionDialog(td, ctId)).collect(Collectors.toList());
+		insertDialogs(tdList, ctId, tdInsertStatement);
 	
-//		List<RejectDialog> rdList = ct.getRejectDialogs();
+		List<FileDataRejectDialog> rdList = ct.getRejectDialogs().parallelStream().map(rd -> new FileDataRejectDialog(rd, ctId)).collect(Collectors.toList());
+		insertDialogs(rdList, ctId, rdInsertStatement);
 	}
 	
 	/**
@@ -92,14 +102,15 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	 * @param tdList the list of transaction dialogs to insert
 	 * @param ctId the id of the client transaction associated with the transaction dialogs to insert
 	 */
-	private void insertTransactionDialogs(List<TransactionDialog> tdList, String ctId) {
-		if(tdList.size() == 1) {
-			SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(tdList.get(0));			
-			jdbcTemplate.update(tdInsertStatement, namedParameters);
+	private void insertDialogs(List<?> dialogList, Integer ctId, String insertStatement) {
+		if(dialogList.size() == 1) {
+			BeanPropertySqlParameterSource namedParameters = new BeanPropertySqlParameterSource(dialogList.get(0));
+		
+			jdbcTemplate.update(insertStatement, namedParameters);
 		}
 		else {
-			SqlParameterSource[] namedParameterList = SqlParameterSourceUtils.createBatch(tdList);
-			jdbcTemplate.batchUpdate(tdInsertStatement, namedParameterList);
+			SqlParameterSource[] namedParameterList = SqlParameterSourceUtils.createBatch(dialogList);
+			jdbcTemplate.batchUpdate(insertStatement, namedParameterList);
 		}
 	}
 }
