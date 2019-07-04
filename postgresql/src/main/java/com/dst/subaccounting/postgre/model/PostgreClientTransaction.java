@@ -1,18 +1,18 @@
 package com.dst.subaccounting.postgre.model;
 
 
-import com.dst.subaccounting.postgre.FileData;
+import com.dst.subaccounting.postgre.PostgreRow;
 
 import lombok.Data;
 
 @Data
-public class FileDataClientTransaction implements FileData {
+public class PostgreClientTransaction implements PostgreRow {
 	
 	public static String getTableName() {
 		return "ClientTransaction";
 	}
 	
-	public FileDataClientTransaction(ClientTransaction ct) {
+	public PostgreClientTransaction(ClientTransaction ct) {
 	    setClearingFirmNumber(ct.getClearingFirmNumber());
 	    setDealerFirmNumber(ct.getDealerFirmNumber());
 	    setAgentForFirm(ct.getAgentForFirm());
@@ -96,7 +96,7 @@ public class FileDataClientTransaction implements FileData {
 	    setNsccRequestStatusCode(ct.getNsccRequestStatusCode());
 	}
 
-	public FileDataClientTransaction() {
+	public PostgreClientTransaction() {
 	}
 
 	private Integer clientTransactionId;

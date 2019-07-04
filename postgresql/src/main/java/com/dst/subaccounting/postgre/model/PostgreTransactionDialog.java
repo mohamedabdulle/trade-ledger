@@ -12,12 +12,12 @@
  */
 package com.dst.subaccounting.postgre.model;
 
-import com.dst.subaccounting.postgre.FileData;
+import com.dst.subaccounting.postgre.PostgreRow;
 
 import lombok.Data;
 
 @Data
-public class FileDataTransactionDialog implements FileData {
+public class PostgreTransactionDialog implements PostgreRow {
    
 	public static String getTableName() {
 		return "TransactionDialog";
@@ -57,9 +57,9 @@ public class FileDataTransactionDialog implements FileData {
 		+ exchangeToNetMoneyAmount + ", echangeToPrice=" + exchangeToPrice + "]";
     }
 
-    public FileDataTransactionDialog() {}
+    public PostgreTransactionDialog() {}
     
-	public FileDataTransactionDialog(TransactionDialog td, Integer ctId) {
+	public PostgreTransactionDialog(TransactionDialog td, Integer ctId) {
 		setTransmissionReceivedDateTime(td.getTransmissionReceivedDateTime());
 	    setTransmissionId1(td.getTransmissionId1());
 	    setTransmissionId2(td.getTransmissionId2());

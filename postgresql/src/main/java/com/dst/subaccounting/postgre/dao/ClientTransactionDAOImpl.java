@@ -3,12 +3,12 @@ package com.dst.subaccounting.postgre.dao;
 import com.dst.subaccounting.postgre.model.TransactionDialog;
 import org.springframework.stereotype.Repository;
 
-import com.dst.subaccounting.postgre.FileData;
+import com.dst.subaccounting.postgre.PostgreRow;
 import com.dst.subaccounting.postgre.mapper.ClientTransactionExtractor;
 import com.dst.subaccounting.postgre.model.ClientTransaction;
-import com.dst.subaccounting.postgre.model.FileDataClientTransaction;
-import com.dst.subaccounting.postgre.model.FileDataRejectDialog;
-import com.dst.subaccounting.postgre.model.FileDataTransactionDialog;
+import com.dst.subaccounting.postgre.model.PostgreClientTransaction;
+import com.dst.subaccounting.postgre.model.PostgreRejectDialog;
+import com.dst.subaccounting.postgre.model.PostgreTransactionDialog;
 import com.dst.subaccounting.postgre.model.RejectDialog;
 
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -37,7 +37,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	}
 
 	protected void generateInsertStatement() {
-		List<String> fieldNames = generateFieldNames(new FileDataClientTransaction().getClass(), tableId);
+		List<String> fieldNames = generateFieldNames(new PostgreClientTransaction().getClass(), tableId);
 		insertStatement = generateInsertStatement(ClientTransaction.getTableName(), fieldNames);
 		
 		generateTdInsertStatement();
@@ -45,12 +45,12 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	}
 
 	private void generateTdInsertStatement() {
-		List<String> fieldNames = generateFieldNames(new FileDataTransactionDialog().getClass(), "transactionDialogId");
+		List<String> fieldNames = generateFieldNames(new PostgreTransactionDialog().getClass(), "transactionDialogId");
 		tdInsertStatement = generateInsertStatement(TransactionDialog.getTableName(), fieldNames); 
 	}
 	
 	private void generateRdInsertStatement() { 
-		List<String> fieldNames = generateFieldNames(new FileDataRejectDialog().getClass(), "rejectDialogId");
+		List<String> fieldNames = generateFieldNames(new PostgreRejectDialog().getClass(), "rejectDialogId");
 		rdInsertStatement = generateInsertStatement(RejectDialog.getTableName(), fieldNames);
 	}
 	
@@ -81,7 +81,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	}
 	@Override
 	public void insert(ClientTransaction ct) {
-		FileDataClientTransaction fdct = new FileDataClientTransaction(ct);
+		PostgreClientTransaction fdct = new PostgreClientTransaction(ct);
 		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(fdct);
 		GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
 		
@@ -90,13 +90,13 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 		
 		List<TransactionDialog> tdList = ct.getTransactionDialogs();
 		if(tdList != null && tdList.size() != 0) {
-			List<FileDataTransactionDialog> fdtdList = tdList.parallelStream().map(td -> new FileDataTransactionDialog(td, ctId)).collect(Collectors.toList());
+			List<PostgreTransactionDialog> fdtdList = tdList.parallelStream().map(td -> new PostgreTransactionDialog(td, ctId)).collect(Collectors.toList());
 			insertDialogs(fdtdList, ctId, tdInsertStatement);			
 		}
 		
 		List<RejectDialog> rdList = ct.getRejectDialogs();
 		if(rdList != null && rdList.size() != 0 ) {
-			List<FileDataRejectDialog> fdrdList = rdList.parallelStream().map(rd -> new FileDataRejectDialog(rd, ctId)).collect(Collectors.toList());
+			List<PostgreRejectDialog> fdrdList = rdList.parallelStream().map(rd -> new PostgreRejectDialog(rd, ctId)).collect(Collectors.toList());
 			insertDialogs(fdrdList, ctId, rdInsertStatement);			
 		}
 	}
@@ -106,7 +106,7 @@ public class ClientTransactionDAOImpl extends GenericDAOImpl <ClientTransaction>
 	 * @param tdList the list of transaction dialogs to insert
 	 * @param ctId the id of the client transaction associated with the transaction dialogs to insert
 	 */
-	private void insertDialogs(List<? extends FileData> dialogList, Integer ctId, String insertStatement) {
+	private void insertDialogs(List<? extends PostgreRow> dialogList, Integer ctId, String insertStatement) {
 		if(dialogList.size() == 1) {
 			BeanPropertySqlParameterSource namedParameters = new BeanPropertySqlParameterSource(dialogList.get(0));
 		

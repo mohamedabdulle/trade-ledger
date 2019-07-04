@@ -12,20 +12,20 @@
  */
 package com.dst.subaccounting.postgre.model;
 
-import com.dst.subaccounting.postgre.FileData;
+import com.dst.subaccounting.postgre.PostgreRow;
 
 import lombok.Data;
 
 @Data
-public class FileDataRejectDialog implements FileData {
+public class PostgreRejectDialog implements PostgreRow {
 
 	public static String getTableName() {
 		return "RejectDialog";
 	}
 
-	public FileDataRejectDialog() {}
+	public PostgreRejectDialog() {}
 	
-	public FileDataRejectDialog(RejectDialog rd, Integer ctId) {
+	public PostgreRejectDialog(RejectDialog rd, Integer ctId) {
 		setRejectDialogId(rd.getRejectDialogId());
 		setRejectId(rd.getRejectId());
 		setRejectCode(rd.getRejectCode());
